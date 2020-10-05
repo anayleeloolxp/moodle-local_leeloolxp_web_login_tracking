@@ -447,185 +447,108 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 check_counts(mousekeycounttime,userstillworkingsetting);
                             },  (60*1000)*userstillworkingsetting);
                         }
-	                    function still_working_cancel() {
-                         	window.location.href = '<?php echo $logouturl; ?>';
+                        function still_working_cancel() {
+                            window.location.href = '<?php echo $logouturl; ?>';
                         }
                         function still_working_okay() {
-                        	location.reload(true);
+                            location.reload(true);
                         }
                         function logout_after_set_time() {
-                        	window.location.href = '<?php echo $logouturl; ?>';
+                            window.location.href = '<?php echo $logouturl; ?>';
                         }
-
                         function check_counts(myVar,user_still_working_setting) {
                             var forpopupcanceled = localStorage.getItem('tracked_cancel');
                             if(forpopupcanceled=='1') {
                                 return false;
                             }
-
-                            	
-                                if(userstillworkingsetting!='454544') {
-
-                                	var keycountss = parseInt(document.getElementById('key_count').value);
-
-                                	var mousecountss = parseInt(document.getElementById('mouse_count').value);
-
+                            if(userstillworkingsetting!='454544') {
+                                var keycountss = parseInt(document.getElementById('key_count').value);
+                                var mousecountss = parseInt(document.getElementById('mouse_count').value);
                                 if(keycountss <=1 && mousecountss <= 1) {
-
                                     clearInterval(myVar);
-
                                     document.getElementById('dialog-modal-stillworking').style.display = 'block';
-
                                     setInterval(function() {
-                                    	if(forpopupcanceled=='1') {
-
-                                    	} else {
-                                        	logout_after_set_time();
+                                        if(forpopupcanceled=='1') {}
+                                        else {
+                                            logout_after_set_time();
                                         }
-                                    },  (60*1000)*logoutsettimemin);
-
-                                } else {
-                                    document.getElementById('key_count').value = '1';
-                                    document.getElementById('mouse_count').value = '1';
+                                    },(60*1000)*logoutsettimemin);
+                                    } else {
+                                        document.getElementById('key_count').value = '1';
+                                        document.getElementById('mouse_count').value = '1';
+                                    }
                                 }
-
                             }
-
                         }
-					}
-
-				} else {
-
-					function loadDoc_once(user_id,time) {
-                        var xhttp = new XMLHttpRequest();
-                        xhttp.onreadystatechange = function() {
-                        	if (this.readyState == 4 && this.status == 200) {
-
-                        	}
-                        };
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+user_id, false);
-                        xhttp.send();
+                    } else {
+                        function loadDoc_once(user_id,time) {
+                            var xhttp = new XMLHttpRequest();
+                            xhttp.onreadystatechange = function() {
+                                if (this.readyState == 4 && this.status == 200) {}
+                            };
+                            xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+user_id, false);xhttp.send();
+                        }
+                        function loadDoc_every_two_m(user_id,time) {
+                            var xhttp = new XMLHttpRequest();
+                            xhttp.onreadystatechange = function() {
+                                if (this.readyState == 4 && this.status == 200) {}
+                            };
+                            xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+user_id, true);
+                            xhttp.send();
+                        }
+                    loadDoc_once(user_id,60*1000);
+                    setInterval(function() {
+                        loadDoc_every_two_m(user_id,60*1000);
+                        }, 60*1000);
                     }
-
-
-
-					function loadDoc_every_two_m(user_id,time) {
-						var xhttp = new XMLHttpRequest();
-						xhttp.onreadystatechange = function() {
-							if (this.readyState == 4 && this.status == 200) {}
-						};
-						xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+user_id, true);
-						xhttp.send();
-					}
-
-
-					loadDoc_once(user_id,60*1000);
-
-					setInterval(function() {
-							loadDoc_every_two_m(user_id,60*1000);
-						}, 60*1000);
-					}
-
-					var mouse_key_count_time = setInterval(function() {
-
-
-                        },  60*1000);
-
-                        var mouse_count = 1;
-
-                        document.body.addEventListener("click", function(){
-
-                            mouse_count++;
-
-                            document.getElementById('mouse_count').value = mouse_count;
-
-                        });
-                        var logoutsettimemin  = '<?php echo $logoutsettimemin; ?>';
-
-
-                        var key_count = 1;
-
-                        document.body.addEventListener("keydown", function(){
-
-                            key_count++;
-
-                            document.getElementById('key_count').value = key_count;
-
-
-
-                        });
-
-                        var user_still_working_setting = '<?php echo $usersettings->user_data->student_still_working_pop_up; ?>';
-
-                        if(user_still_working_setting!='454544')
-                        {
-
-                            setInterval(function() {
-                            	if(is_popup!='1') {
-                                	check_counts_for_popup_disabled(mouse_key_count_time,user_still_working_setting);
-                            	}
-                            },  (60*1000)*user_still_working_setting);
-                        }
-
-                        function still_working_cancel() {
-                            window.location.href = '<?php echo $logouturl; ?>';
-                        }
-
-                        function still_working_okay() {
-
-                            location.reload(true);
-
-                        }
-
-                        function logout_after_set_time() {
-
-                            window.location.href = '<?php echo $logouturl; ?>';
-
-                        }
-
-                        function check_counts_for_popup_disabled(myVar,user_still_working_setting) {
-
-
-                                
-                                if(user_still_working_setting!='454544') {
-
-                                var key_countss = parseInt(document.getElementById('key_count').value);
-
-                                var mouse_countss = parseInt(document.getElementById('mouse_count').value);
-
-
-
-                                if(key_countss <=1 && mouse_countss <= 1) {
-
-                                    clearInterval(myVar);
-
-                                    document.getElementById('dialog-modal-stillworking').style.display = 'block';
-
-
-
-                                    setInterval(function() {
-
-                                        logout_after_set_time();
-
+                    var mouse_key_count_time = setInterval(function() {},  60*1000);
+                    var mouse_count = 1;
+                    document.body.addEventListener("click", function(){
+                        mouse_count++;
+                        document.getElementById('mouse_count').value = mouse_count;
+                    });
+                    var logoutsettimemin  = '<?php echo $logoutsettimemin; ?>';
+                    var key_count = 1;
+                    document.body.addEventListener("keydown", function(){
+                        key_count++;
+                        document.getElementById('key_count').value = key_count;
+                    });
+                    var user_still_working_setting = '<?php echo $usersettings->user_data->student_still_working_pop_up; ?>';
+                    if(user_still_working_setting!='454544') {
+                        setInterval(function() {
+                            if(is_popup!='1') {
+                                check_counts_for_popup_disabled(mouse_key_count_time,user_still_working_setting);
+                            }
+                        }, (60*1000)*user_still_working_setting);
+                    }
+                    function still_working_cancel() {
+                        window.location.href = '<?php echo $logouturl; ?>';
+                    }
+                    function still_working_okay() {
+                        location.reload(true);
+                    }
+                    function logout_after_set_time() {
+                        window.location.href = '<?php echo $logouturl; ?>';
+                    }
+                    function check_counts_for_popup_disabled(myVar,user_still_working_setting) {
+                        if(user_still_working_setting!='454544') {
+                            var key_countss = parseInt(document.getElementById('key_count').value);
+                            var mouse_countss = parseInt(document.getElementById('mouse_count').value);
+                            if(key_countss <=1 && mouse_countss <= 1) {
+                                clearInterval(myVar);
+                                document.getElementById('dialog-modal-stillworking').style.display = 'block';
+                                setInterval(function() {
+                                    logout_after_set_time();
                                     },  (60*1000)*logoutsettimemin);
-
-
-
                                 } else {
                                     document.getElementById('key_count').value = '1';
                                     document.getElementById('mouse_count').value = '1';
                                 }
-
                             }
-
                         }
-
-			</script>
-
-
-			<?php
-
-            if ($PAGE->pagetype == 'mod-wespher-conference' || $PAGE->pagetype == 'mod-wespher-view' || $PAGE->pagetype == 'mod-resource-view' || $PAGE->pagetype == 'mod-regularvideo-view' || $PAGE->pagetype == 'mod-forum-view' || $PAGE->pagetype == 'mod-book-view' || $PAGE->pagetype == 'mod-assign-view' || $PAGE->pagetype == 'mod-survey-view' || $PAGE->pagetype == 'mod-page-view' || $PAGE->pagetype == 'mod-quiz-view' || $PAGE->pagetype == 'mod-quiz-attempt' || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-chat-view' || $PAGE->pagetype == 'mod-choice-view' || $PAGE->pagetype == 'mod-lti-view' || $PAGE->pagetype == 'mod-feedback-view' || $PAGE->pagetype == 'mod-data-view' || $PAGE->pagetype == 'mod-forum-view' || $PAGE->pagetype == 'mod-glossary-view' || $PAGE->pagetype == 'mod-scorm-view' || $PAGE->pagetype == 'mod-wiki-view' || $PAGE->pagetype == 'mod-workshop-view' || $PAGE->pagetype == 'mod-folder-view' || $PAGE->pagetype == 'mod-imscp-view' || $PAGE->pagetype == 'mod-label-view' || $PAGE->pagetype == 'mod-url-view') {
+                    </script>
+                <?php
+                if ($PAGE->pagetype == 'mod-wespher-conference' || $PAGE->pagetype == 'mod-wespher-view' || $PAGE->pagetype == 'mod-resource-view' || $PAGE->pagetype == 'mod-regularvideo-view' || $PAGE->pagetype == 'mod-forum-view' || $PAGE->pagetype == 'mod-book-view' || $PAGE->pagetype == 'mod-assign-view' || $PAGE->pagetype == 'mod-survey-view' || $PAGE->pagetype == 'mod-page-view' || $PAGE->pagetype == 'mod-quiz-view' || $PAGE->pagetype == 'mod-quiz-attempt' || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-chat-view' || $PAGE->pagetype == 'mod-choice-view' || $PAGE->pagetype == 'mod-lti-view' || $PAGE->pagetype == 'mod-feedback-view' || $PAGE->pagetype == 'mod-data-view' || $PAGE->pagetype == 'mod-forum-view' || $PAGE->pagetype == 'mod-glossary-view' || $PAGE->pagetype == 'mod-scorm-view' || $PAGE->pagetype == 'mod-wiki-view' || $PAGE->pagetype == 'mod-workshop-view' || $PAGE->pagetype == 'mod-folder-view' || $PAGE->pagetype == 'mod-imscp-view' || $PAGE->pagetype == 'mod-label-view' || $PAGE->pagetype == 'mod-url-view') {
                 $page_s = '';
             } else {?>
 					  	<script type="text/javascript">
@@ -635,18 +558,15 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 								if(tracking_on=='1') {
 									var xhttp = new XMLHttpRequest();
 									xhttp.onreadystatechange = function() {
-										
-										if (this.readyState == 4 && this.status == 200) {
-
-										}
+                                        if (this.readyState == 4 && this.status == 200) {}
 									};
-									xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_on_task_update/"+user_id, true);
+                                    xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_on_task_update/"+user_id, true);
 									xhttp.send();
 								}
 							};
 	                   	</script>
-				  <?php }
-        }
+                  <?php }
+                }
     } else {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
             $useremail = $_COOKIE['popuptlt'];
