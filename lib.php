@@ -378,8 +378,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     if(forpopup != '1') {
                         if(checkfirst=='0') {
                             var idofbody  = document.getElementsByTagName("body")[0].id;
-							var d1 = document.getElementById(idofbody);
-							d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" 
+                            var d1 = document.getElementById(idofbody);
+                            d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" 
                             id="dialog-modal-clockin-start" style="">
                             <div class="dialog-modal-inn">
                             <div id="dialog" ><h4>
@@ -406,44 +406,34 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 btn_no_clockin_start() {localStorage.setItem('tracked', '0');localStorage.setItem
                                 ('tracked_cancel','1');document.getElementById('dialog-modal-clockin-start').style.display = 
                                 'none';<script>";
-								d1.insertAdjacentHTML('afterend',script);
-						}
-
-						function loadDoc_once(userid,time) {
-							var xhttp = new XMLHttpRequest();
-							xhttp.onreadystatechange = function() {
-								if (this.readyState == 4 && this.status == 200) {}
-							};
-							xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid, false);
-							xhttp.send();
-						}
-						function loadDoc_every_two_m(userid,time) {
-							var xhttp = new XMLHttpRequest();
-							xhttp.onreadystatechange = function() {
-								if (this.readyState == 4 && this.status == 200) {
-
-								}
-							};
-							xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+userid, true);
-							xhttp.send();
-						}
-
-						var mousekeycounttime = setInterval(function() {
-
-                        var  forpopupcanceledsetagain  = localStorage.getItem('tracked_cancel');
-                                if(forpopupcanceledsetagain=='1') {
-                                    localStorage.setItem("tracked_cancel",'1');
-                                }
+                                d1.insertAdjacentHTML('afterend',script);
+                            }
+                        function loadDoc_once(userid,time) {
+                            var xhttp = new XMLHttpRequest();
+                            xhttp.onreadystatechange = function() {
+                                if (this.readyState == 4 && this.status == 200) {}
+                            };
+                            xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid, false);
+                            xhttp.send();
+                        }
+                        function loadDoc_every_two_m(userid,time) {
+                            var xhttp = new XMLHttpRequest();
+                            xhttp.onreadystatechange = function() {
+                                if (this.readyState == 4 && this.status == 200) {}
+                            };
+                            xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+userid, true);
+                            xhttp.send();
+                        }
+                        var mousekeycounttime = setInterval(function() {
+                            var  forpopupcanceledsetagain  = localStorage.getItem('tracked_cancel');
+                            if(forpopupcanceledsetagain=='1') {
+                                localStorage.setItem("tracked_cancel",'1');
+                            }
                         },  60*1000);
-
-						var mousecount = 1;
-
+                        var mousecount = 1;
                         document.body.addEventListener("click", function(){
-
                             mouse_count++;
-
                             document.getElementById('mouse_count').value = mousecount;
-
                         });
                         var logoutsettimemin  = '<?php echo $logoutsettimemin; ?>';
                         var keycount = 1;
@@ -452,12 +442,11 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             document.getElementById('key_count').value = keycount;
                         });
                         var userstillworkingsetting = '<?php echo $usersettings->user_data->student_still_working_pop_up; ?>';
-                        if(userstillworkingsetting!='454544')
-                        {
-                        	setInterval(function() {
-	                        	check_counts(mousekeycounttime,userstillworkingsetting);
-	                        },  (60*1000)*userstillworkingsetting);
-	                    }
+                        if(userstillworkingsetting!='454544') {
+                            setInterval(function() {
+                                check_counts(mousekeycounttime,userstillworkingsetting);
+                            },  (60*1000)*userstillworkingsetting);
+                        }
 	                    function still_working_cancel() {
                          	window.location.href = '<?php echo $logouturl; ?>';
                         }
