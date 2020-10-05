@@ -581,9 +581,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             }
                         };
                     </script>
-                    <?php   }
-                    }
-        } else {
+                    <?php  }
+                }
+    } else {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
             $useremail = $_COOKIE['popuptlt'];
             $liacnsekey = $configleeloolxpweblogintracking->teamnio_web_license;
