@@ -215,8 +215,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 .anymore-link a{color:#74cfd0;font-size:17px}#page-wrapper{z-index:-1!important}
                 </style>
             <?php
-
-          
             if (is_siteadmin()) {
                 $isadmin = '1';
             } else {
@@ -261,19 +259,16 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $userid = curl_exec($ch);
             curl_close($ch);
-            $url = $teamniourl . '/login_api/get_shift_details_api/' . $user_id;
+            $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid;
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HEADER, false);
             $output = curl_exec($ch);
-            if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
-            }
-
             curl_close($ch);
 
-            $Shiftdetails = $output;
+            $shiftdetails = $output;
 
-            $sdetail = json_decode($Shiftdetails);
+            $sdetail = json_decode($shiftdetails);
 
             $url = $teamniourl . '/admin/sync_moodle_course/get_timezone/';
 
@@ -285,14 +280,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             $outputtimezone = curl_exec($ch);
 
-            if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
-            }
+            
 
             curl_close($ch);
 
             date_default_timezone_set($outputtimezone);
 
-            $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid; // get task id from teamnio
+            $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid;
 
             $ch = curl_init($url);
 
@@ -302,8 +296,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             $output = curl_exec($ch);
 
-            if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
-            }
+            
 
             curl_close($ch);
 
@@ -714,7 +707,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
             $useremail = $_COOKIE['popuptlt'];
             $liacnsekey = $configleeloolxpweblogintracking->teamnio_web_license;
-            $postData = '&license_key=' . $liacnsekey;
+            $postdata = '&license_key=' . $liacnsekey;
             $ch = curl_init();
             $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -723,9 +716,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             curl_setopt($ch, CURLOPT_HEADER, false);
 
-            curl_setopt($ch, CURLOPT_POST, count($postData));
+            curl_setopt($ch, CURLOPT_POST, count($postdata));
 
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
 
             $output = curl_exec($ch);
 
@@ -733,7 +726,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             $infoteamnio = json_decode($output);
 
-            if ($info_teamnio->status != 'false') {
+            if ($infoteamnio->status != 'false') {
                 $teamniourl = $infoteamnio->data->install_url;
             } else {
                 return true;
@@ -744,16 +737,14 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HEADER, false);
             $outputtimezone = curl_exec($ch);
-            if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
-            }
+           
             curl_close($ch);
             date_default_timezone_set($outputtimezone);
             $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail;
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $output = curl_exec($ch);
-            if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
-            }
+            
 
             curl_close($ch);
 
@@ -770,8 +761,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             $output = curl_exec($ch);
 
-            if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
-            }
+          
 
             curl_close($ch);
 
@@ -813,7 +803,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     }
                 }
 
-                $postData = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
+                $postdata = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
 
                 $ch = curl_init();
 
@@ -825,9 +815,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                 curl_setopt($ch, CURLOPT_HEADER, false);
 
-                curl_setopt($ch, CURLOPT_POST, count($postData));
+                curl_setopt($ch, CURLOPT_POST, count($postdata));
 
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
 
                 curl_exec($ch);
 
