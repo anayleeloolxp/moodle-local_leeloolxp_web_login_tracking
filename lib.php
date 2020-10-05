@@ -331,9 +331,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                 curl_close($ch);
             }
-
-           
-            $url = $teamniourl . '/admin/sync_moodle_course/get_user_settings_tct_tat/' . $userid; // get task id from teamnio
+            $url = $teamniourl . '/admin/sync_moodle_course/get_user_settings_tct_tat/' . $userid;
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $output = curl_exec($ch);
@@ -344,8 +342,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             function btn_yes_clockin_start() {
                 localStorage.setItem("tracked", "1");
                 document.getElementById('dialog-modal-clockin-start').style.display = 'none';
-					
-					setTimeout(function(){
+                setTimeout(function(){
 						var trackingon = localStorage.getItem("tracked");
 						if(trackingon=='1') {
 							loadDoc_once(userid,60*1000);
@@ -655,6 +652,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 			<?php
 
             if ($PAGE->pagetype == 'mod-wespher-conference' || $PAGE->pagetype == 'mod-wespher-view' || $PAGE->pagetype == 'mod-resource-view' || $PAGE->pagetype == 'mod-regularvideo-view' || $PAGE->pagetype == 'mod-forum-view' || $PAGE->pagetype == 'mod-book-view' || $PAGE->pagetype == 'mod-assign-view' || $PAGE->pagetype == 'mod-survey-view' || $PAGE->pagetype == 'mod-page-view' || $PAGE->pagetype == 'mod-quiz-view' || $PAGE->pagetype == 'mod-quiz-attempt' || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-chat-view' || $PAGE->pagetype == 'mod-choice-view' || $PAGE->pagetype == 'mod-lti-view' || $PAGE->pagetype == 'mod-feedback-view' || $PAGE->pagetype == 'mod-data-view' || $PAGE->pagetype == 'mod-forum-view' || $PAGE->pagetype == 'mod-glossary-view' || $PAGE->pagetype == 'mod-scorm-view' || $PAGE->pagetype == 'mod-wiki-view' || $PAGE->pagetype == 'mod-workshop-view' || $PAGE->pagetype == 'mod-folder-view' || $PAGE->pagetype == 'mod-imscp-view' || $PAGE->pagetype == 'mod-label-view' || $PAGE->pagetype == 'mod-url-view') {
+                $page_s = '';
             } else {?>
 					  	<script type="text/javascript">
 						  	window.onbeforeunload = function (e) {
