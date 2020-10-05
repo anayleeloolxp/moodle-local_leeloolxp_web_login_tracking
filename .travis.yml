@@ -67,7 +67,7 @@ before_install:
   - nvm install 8.9
 
   - nvm use 8.9
-  - make init
+  
   - cd ../..
 
   - composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^2
