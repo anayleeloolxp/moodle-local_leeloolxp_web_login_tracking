@@ -494,7 +494,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             xhttp.onreadystatechange = function() {
                                 if (this.readyState == 4 && this.status == 200) {}
                             };
-                            xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+user_id, true);
+                            xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+user_id, 
+                            true);
                             xhttp.send();
                         }
                     loadDoc_once(user_id,60*1000);
@@ -549,7 +550,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         }
                     </script>
                 <?php
-                if ($PAGE->pagetype == 'mod-wespher-conference' 
+                if ($PAGE->pagetype == 'mod-wespher-conference'
                 || $PAGE->pagetype == 'mod-wespher-view' || $PAGE->pagetype == 'mod-resource-view'
                 || $PAGE->pagetype == 'mod-regularvideo-view' || $PAGE->pagetype == 'mod-forum-view'
                 || $PAGE->pagetype == 'mod-book-view' || $PAGE->pagetype == 'mod-assign-view'
@@ -564,7 +565,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 || $PAGE->pagetype == 'mod-folder-view' || $PAGE->pagetype == 'mod-imscp-view'
                 || $PAGE->pagetype == 'mod-label-view' || $PAGE->pagetype == 'mod-url-view') {
                     $pages = '';
-                    } else {?>
+                } else {?>
                     <script type="text/javascript">
                         window.onbeforeunload = function (e) {
                             console.log("clockin time update on reload");
@@ -574,14 +575,15 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_on_task_update/"+user_id, true);
+                                xhttp.open("GET", teamniourl+"
+                                /admin/sync_moodle_course/update_clockin_on_task_update/"+user_id, true);
                                 xhttp.send();
                             }
                         };
                     </script>
-                  <?php }
-                }
-    } else {
+                    <?php   }
+                    }
+        } else {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
             $useremail = $_COOKIE['popuptlt'];
             $liacnsekey = $configleeloolxpweblogintracking->teamnio_web_license;
@@ -673,7 +675,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     <div id="dialog" >
                         <h4><?php echo $trackerstop; ?></h4>
                         <div class="sure-btn">
-                            <button data_id = "" onclick="btn_yes_clockin_logout_hide();" class="btn btn_yes_activityunsync" >Ok</button>
+                            <button data_id = "" onclick="btn_yes_clockin_logout_hide();"
+                            class="btn btn_yes_activityunsync" >Ok</button>
                         </div>
                     </div>
                 </div>
@@ -765,7 +768,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             justify-content: center;}.dialog-modal-inn {background: #fff;max-width: 750px;padding:
                             50px;text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;transform:
                             translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size:
-                            25px;}.dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;
+                            25px;}.dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;
+                            background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;
                             outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog {font-size:
                             17px;}.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;
                             font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px
