@@ -549,23 +549,36 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         }
                     </script>
                 <?php
-                if ($PAGE->pagetype == 'mod-wespher-conference' || $PAGE->pagetype == 'mod-wespher-view' || $PAGE->pagetype == 'mod-resource-view' || $PAGE->pagetype == 'mod-regularvideo-view' || $PAGE->pagetype == 'mod-forum-view' || $PAGE->pagetype == 'mod-book-view' || $PAGE->pagetype == 'mod-assign-view' || $PAGE->pagetype == 'mod-survey-view' || $PAGE->pagetype == 'mod-page-view' || $PAGE->pagetype == 'mod-quiz-view' || $PAGE->pagetype == 'mod-quiz-attempt' || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-chat-view' || $PAGE->pagetype == 'mod-choice-view' || $PAGE->pagetype == 'mod-lti-view' || $PAGE->pagetype == 'mod-feedback-view' || $PAGE->pagetype == 'mod-data-view' || $PAGE->pagetype == 'mod-forum-view' || $PAGE->pagetype == 'mod-glossary-view' || $PAGE->pagetype == 'mod-scorm-view' || $PAGE->pagetype == 'mod-wiki-view' || $PAGE->pagetype == 'mod-workshop-view' || $PAGE->pagetype == 'mod-folder-view' || $PAGE->pagetype == 'mod-imscp-view' || $PAGE->pagetype == 'mod-label-view' || $PAGE->pagetype == 'mod-url-view') {
-                $page_s = '';
-            } else {?>
-					  	<script type="text/javascript">
-						  	window.onbeforeunload = function (e) {
-							  	console.log("clockin time update on reload");
-			                    var tracking_on = localStorage.getItem("tracked");
-								if(tracking_on=='1') {
-									var xhttp = new XMLHttpRequest();
-									xhttp.onreadystatechange = function() {
-                                        if (this.readyState == 4 && this.status == 200) {}
-									};
-                                    xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_on_task_update/"+user_id, true);
-									xhttp.send();
-								}
-							};
-	                   	</script>
+                if ($PAGE->pagetype == 'mod-wespher-conference' 
+                || $PAGE->pagetype == 'mod-wespher-view' || $PAGE->pagetype == 'mod-resource-view'
+                || $PAGE->pagetype == 'mod-regularvideo-view' || $PAGE->pagetype == 'mod-forum-view'
+                || $PAGE->pagetype == 'mod-book-view' || $PAGE->pagetype == 'mod-assign-view'
+                || $PAGE->pagetype == 'mod-survey-view' || $PAGE->pagetype == 'mod-page-view'
+                || $PAGE->pagetype == 'mod-quiz-view' || $PAGE->pagetype == 'mod-quiz-attempt'
+                || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-quiz-summary'
+                || $PAGE->pagetype == 'mod-chat-view' || $PAGE->pagetype == 'mod-choice-view'
+                || $PAGE->pagetype == 'mod-lti-view' || $PAGE->pagetype == 'mod-feedback-view'
+                || $PAGE->pagetype == 'mod-data-view' || $PAGE->pagetype == 'mod-forum-view'
+                || $PAGE->pagetype == 'mod-glossary-view' || $PAGE->pagetype == 'mod-scorm-view'
+                || $PAGE->pagetype == 'mod-wiki-view' || $PAGE->pagetype == 'mod-workshop-view'
+                || $PAGE->pagetype == 'mod-folder-view' || $PAGE->pagetype == 'mod-imscp-view'
+                || $PAGE->pagetype == 'mod-label-view' || $PAGE->pagetype == 'mod-url-view') {
+                    $pages = '';
+                    } else {?>
+                    <script type="text/javascript">
+                        window.onbeforeunload = function (e) {
+                            console.log("clockin time update on reload");
+                            var tracking_on = localStorage.getItem("tracked");
+                            if(tracking_on=='1') {
+                                var xhttp = new XMLHttpRequest();
+                                xhttp.onreadystatechange = function() {
+                                    if (this.readyState == 4 && this.status == 200) {}
+                                };
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_on_task_update/"+user_id, true);
+                                xhttp.send();
+                            }
+                        };
+                    </script>
                   <?php }
                 }
     } else {
@@ -576,21 +589,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $ch = curl_init();
             $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
             curl_setopt($ch, CURLOPT_URL, $url);
-
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
             curl_setopt($ch, CURLOPT_HEADER, false);
-
             curl_setopt($ch, CURLOPT_POST, count($postdata));
-
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-
             $output = curl_exec($ch);
-
             curl_close($ch);
-
             $infoteamnio = json_decode($output);
-
             if ($infoteamnio->status != 'false') {
                 $teamniourl = $infoteamnio->data->install_url;
             } else {
@@ -602,48 +607,30 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HEADER, false);
             $outputtimezone = curl_exec($ch);
-           
             curl_close($ch);
             date_default_timezone_set($outputtimezone);
             $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail;
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $output = curl_exec($ch);
-            
-
             curl_close($ch);
-
             $userid = $output;
-
-            
             $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid;
-
             $ch = curl_init($url);
-
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
             curl_setopt($ch, CURLOPT_HEADER, false);
-
             $output = curl_exec($ch);
-
-          
-
             curl_close($ch);
-
-            $Shiftdetails = $output;
-
-            $sdetail = json_decode($Shiftdetails);
-
+            $shiftdetails = $output;
+            $sdetail = json_decode($shiftdetails);
             if ($sdetail->status == 'true') {
                 $shiftstarttime = strtotime($sdetail->data->start);
                 $shiftendtime = strtotime($sdetail->data->end);
-
                 if ($starttime == '0') {
                     $starttime = date("Y-m-d h:i:s");
                 }
                 $actualstarttime = strtotime(date('h:i A', strtotime($starttime)));
                 $actualendtime = strtotime("now");
-
                 if ($actualstarttime >= $shiftendtime) {
                     $starttimestatus = 'Absent';
                 } else {
@@ -655,7 +642,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         }
                     }
                 }
-
                 if ($starttimestatus == 'Absent') {
                     $endtimestatus = 'Absent';
                 } else {
@@ -667,34 +653,22 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         }
                     }
                 }
-
                 $postdata = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
-
                 $ch = curl_init();
-
                 $url = $teamniourl . '/admin/sync_moodle_course/update_attendance_end_status/';
-
                 curl_setopt($ch, CURLOPT_URL, $url);
-
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
                 curl_setopt($ch, CURLOPT_HEADER, false);
-
                 curl_setopt($ch, CURLOPT_POST, count($postdata));
-
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-
                 curl_exec($ch);
-
                 curl_close($ch);
             }
-
             $loginlogout = $configleeloolxpweblogintracking->web_loginlogout;
-
             $errormessagetrackerstop = get_string('error_message_tracker_stop', 'local_leeloolxp_web_login_tracking');
-
             $trackerstop = get_string('tracker_stop', 'local_leeloolxp_web_login_tracking');?>
-            <div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-logout-old" style="display: none;">
+            <div class="dialog-modal dialog-modal-clockin-start"
+            id="dialog-modal-clockin-logout-old" style="display: none;">
                 <div class="dialog-modal-inn">
                     <div id="dialog" >
                         <h4><?php echo $trackerstop; ?></h4>
