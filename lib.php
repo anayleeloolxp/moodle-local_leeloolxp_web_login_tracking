@@ -694,56 +694,27 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $errormessagetrackerstop = get_string('error_message_tracker_stop', 'local_leeloolxp_web_login_tracking');
 
             $trackerstop = get_string('tracker_stop', 'local_leeloolxp_web_login_tracking');?>
-
-			<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-logout-old" style="display: none;">
-
-				<div class="dialog-modal-inn">
-
-					<div id="dialog" >
-
-						<h4><?php echo $trackerstop; ?></h4>
-
-						<div class="sure-btn">
-
-							<button data_id = "" onclick="btn_yes_clockin_logout_hide();" class="btn btn_yes_activityunsync" >Ok</button>
-
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-
-			<style type="text/css">
-
-				.dialog-modal {
-
-					align-self: center;
-
-				    position: fixed;
-
-				    top: 0;
-
-				    left: 0;
-
-				    width: 100%;
-
-				    height: 100%;
-
-				    z-index: 9999;
-
-				    background: rgba(0,0,0,0.7);
-
-				    display: flex;
-
-				    align-items: center;
-
-				    justify-content: center;
-
-				}
-
-				.dialog-modal-inn {
+            <div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-logout-old" style="display: none;">
+                <div class="dialog-modal-inn">
+                    <div id="dialog" >
+                        <h4><?php echo $trackerstop; ?></h4>
+                        <div class="sure-btn">
+                            <button data_id = "" onclick="btn_yes_clockin_logout_hide();" class="btn btn_yes_activityunsync" >Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style type="text/css">
+            .dialog-modal {
+                align-self: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;height: 100%;z-index: 9999;
+                background: rgba(0,0,0,0.7);display: flex;
+                align-items: center;justify-content: center;
+            }
+            .dialog-modal-inn {
                     background: #fff;
                     max-width: 750px;
                     padding: 50px;
@@ -753,93 +724,50 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-
-				}
-
-				.dialog-modal-inn h4 {
-
-				    font-weight: 400;
-
-				    margin: 0 0 25px;
-
-				    font-size: 25px;
-
-				}
-
-				.dialog-modal-inn .sure-btn button {
-
-				    font-size: 20px;
-
-				    padding: .5rem 3rem;
-
-				    color: #fff;
-
-				    background-color: #74cfd0;
-
-				    border: none;
-
-				    display: inline-block;
-
-				    text-decoration: none;
-
-				    outline: none;
-
-				    box-shadow: none;
-
-				    margin: 10px 0;
-
-				}
-
-				.dialog-modal-inn div#dialog {
-
-				    font-size: 17px;
-
-				}
-
-				.dialog-modal-inn p {
-
-				    font-size: 19px;
-
-				}
-
-				.dialog-modal-inn h3 {
-
-				    font-weight: 500;
-
-				    font-size: 22px;
-
-				    color: #f60000;
-
-				}
-
-				.sure-btn {
-
-				    margin: 50px 0 0;
-
-				}
-
-				.anymore-link {
-
-				    margin: 15px 0 0;
-
-				}
-
-				.anymore-link a {
-
-				    color: #74cfd0;
-
-				    font-size: 17px;
-
-				}
-				#page-wrapper {
-					z-index: -1 !important;
-				}
-			</style>
-
-
-
-			<?php
-
+                }
+                .dialog-modal-inn h4 {
+                    font-weight: 400;
+                    margin: 0 0 25px;
+                    font-size: 25px;
+                }
+                .dialog-modal-inn .sure-btn button {
+                    font-size: 20px;
+                    padding: .5rem 3rem;
+                    color: #fff;
+                    background-color: #74cfd0;
+                    border: none;
+                    display: inline-block;
+                    text-decoration: none;
+                    outline: none;
+                    box-shadow: none;
+                    margin: 10px 0;
+                }
+                .dialog-modal-inn div#dialog {
+                    font-size: 17px;
+                }
+                .dialog-modal-inn p {
+                    font-size: 19px;
+                }
+                .dialog-modal-inn h3 {
+                    font-weight: 500;
+                    font-size: 22px;
+                    color: #f60000;
+                }
+                .sure-btn {
+                    margin: 50px 0 0;
+                }
+                .anymore-link {
+                    margin: 15px 0 0;
+                }
+                .anymore-link a {
+                    color: #74cfd0;
+                    font-size: 17px;
+                }
+                #page-wrapper {
+                    z-index: -1 !important;
+                }
+            </style>
+            <?php
             if ($loginlogout) {
                 ?><script>
                 function btn_yes_clockin_logout_hide() {
