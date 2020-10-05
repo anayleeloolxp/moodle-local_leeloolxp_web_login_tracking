@@ -36,6 +36,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 				$usercreate_flag = 'no';
 			}
 			$username = $USER->username;
+			// Another
 			$user_email =  $USER->email;
 			$user_firstname_last_name =  ucfirst($USER->firstname)." ".ucfirst($USER->lastname);
 			$working_date = date('Y-m-d');
