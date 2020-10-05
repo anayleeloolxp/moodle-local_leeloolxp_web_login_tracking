@@ -23,13 +23,14 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-require_once (dirname(dirname(__DIR__)) . '/config.php');
+require_once(dirname(dirname(__DIR__)) . '/config.php');
 function local_leeloolxp_web_login_tracking_before_footer() {
     $configleeloolxpweblogintracking = get_config('local_leeloolxp_web_login_tracking');
     global $USER;
     global $PAGE;
     global $DB;
     global $CFG;
+    require_login();
     $baseurl = $CFG->wwwroot;
     $sesskey = $USER->sesskey;
     $logoutsettimemin = $configleeloolxpweblogintracking->logout_time_on_activity;
@@ -49,27 +50,22 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 			</script>';
         $loginlogout = $configleeloolxpweblogintracking->web_loginlogout;
-        $createstudentrecord = $DB->get_record_sql("SELECT * FROM {config_plugins} where name =  'web_new_user_student' and `plugin` = 'leeloolxp_tracking_sso'");
-        $usercreateflag = $createstudentrecord->value;
-        $defaultuserdesignationrecord = $DB->get_record_sql("SELECT * FROM {config_plugins} where name =  'default_student_position' and `plugin` = 'leeloolxp_tracking_sso'");
-        $designation = $defaultuserdesignationrecord->value;
+        $configleeloolsso = get_config('leeloolxp_tracking_sso');
+        $usercreateflag = $configleeloolsso->web_new_user_student;
+        $designation = $configleeloolsso->default_student_position;
         if ($usercreateflag) {
             $usercreateflag = 'yes';
         } else {
             $usercreateflag = 'no';
         }
         $username = $USER->username;
-        // Another
         $useremail = $USER->email;
-        
-        
         $rand_num = rand();
         $notloginmessage = get_string('not_login_message', 'local_leeloolxp_web_login_tracking');
         $wannatrackmessage = get_string('wanna_track_message', 'local_leeloolxp_web_login_tracking');
-        $liacnsekey = $configleeloolxpweblogintracking->teamnio_web_license; // get liacnse_key
+        $liacnsekey = $configleeloolxpweblogintracking->teamnio_web_license;
         $popupison = $configleeloolxpweblogintracking->web_loginlogout_popup;
         $postData = '&license_key=' . $liacnsekey;
-        /* get Leelo teamnio url using license_key */
         $ch = curl_init();
         $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
         curl_setopt($ch, CURLOPT_URL, $url);
