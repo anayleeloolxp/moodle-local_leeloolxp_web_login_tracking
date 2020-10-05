@@ -64,14 +64,14 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         $wannatrackmessage = get_string('wanna_track_message', 'local_leeloolxp_web_login_tracking');
         $liacnsekey = $configleeloolxpweblogintracking->teamnio_web_license;
         $popupison = $configleeloolxpweblogintracking->web_loginlogout_popup;
-        $postData = '&license_key=' . $liacnsekey;
+        $postdata = '&license_key=' . $liacnsekey;
         $ch = curl_init();
         $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_POST, count($postData));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        curl_setopt($ch, CURLOPT_POST, count($postdata));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
         $output = curl_exec($ch);
         curl_close($ch);
 
@@ -182,7 +182,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             #page-wrapper {
                 z-index: -1 !important;
             }
-			</style>
+            </style>
             <div class="dialog-modal dialog-modal-stillworking" id="dialog-modal-stillworking" style="display: none;">
                 <div class="dialog-modal-inn">
                     <div id="dialog" >
@@ -193,7 +193,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 'still_learning_yes', 'local_leeloolxp_web_tat'
                                 ); ?></button>
                                 <button data_id = "" onclick="still_working_cancel();"
-                                class="btn btn_yes_activityunsync" ><?php echo get_string('still_learning_no', 
+                                class="btn btn_yes_activityunsync" ><?php echo get_string('still_learning_no',
                                 'local_leeloolxp_web_tat'); ?></button>
                         </div>
                     </div>
@@ -202,7 +202,17 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 <input type = 'hidden' value = '1' id='mouse_count'/>
                 <input type = 'hidden' value = '1' id='key_count'/>
                 <style type="text/css">
-                .dialog-modal-inn{background:#fff;max-width:750px;padding:50px;text-align:center;width:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}.dialog-modal-inn h4{font-weight:400;margin:0 0 25px;font-size:25px}.dialog-modal-inn .sure-btn button{font-size:20px;padding:.5rem 3rem;color:#fff;background-color:#74cfd0;border:none;display:inline-block;text-decoration:none;outline:0;box-shadow:none;margin:10px 0}.dialog-modal-inn div#dialog{font-size:17px}.dialog-modal-inn p{font-size:19px}.dialog-modal-inn h3{font-weight:500;font-size:22px;color:#f60000}.sure-btn{margin:50px 0 0}.anymore-link{margin:15px 0 0}.anymore-link a{color:#74cfd0;font-size:17px}#page-wrapper{z-index:-1!important}
+                .dialog-modal-inn{background:#fff;max-width:750px;
+                padding:50px;text-align:center;width:100%;position:absolute;top:50%;
+                left:50%;transform:translate(-50%,-50%)}.
+                dialog-modal-inn h4{font-weight:400;margin:0 0 25px;font-size:25px}
+                .dialog-modal-inn .sure-btn button{font-size:20px;padding:.5rem 3rem;color:#fff;
+                background-color:#74cfd0;border:none;display:inline-block;
+                text-decoration:none;outline:0;box-shadow:none;margin:10px 0}
+                .dialog-modal-inn div#dialog{font-size:17px}.dialog-modal-inn p{font-size:19px}
+                .dialog-modal-inn h3{font-weight:500;font-size:22px;color:#f60000}
+                .sure-btn{margin:50px 0 0}.anymore-link{margin:15px 0 0}
+                .anymore-link a{color:#74cfd0;font-size:17px}#page-wrapper{z-index:-1!important}
                 </style>
             <?php
 
@@ -232,26 +242,30 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $lastlogin = $lastlogin;
             $lastip = $USER->lastip;
             $description = $USER->description;
-            $description_of_pic = $USER->imagealt;
+            $descriptionofpic = $USER->imagealt;
             $alternatename = $USER->alternatename;
             $webpage = $USER->url;
-            $url = $teamniourl . '/admin/sync_moodle_course/get_create_user/?user_email=' . $useremail . '&username=' . $username . '&name=' . $fullname . "&user_designation=" . $designation . "&is_company_admin=" . $isadmin . "&user_approval=" . $userapproval . "&can_user_create=" . $cancreateuser->value . "&user_type=" . $usertype . "&city=" . $city . "&country=" . $country . "&timezone=" . $timezone . "&skype=" . $skype . "&idnumber=" . $idnumber . "&institution=" . $institution . "&department=" . $department . "&phone=" . $phone . "&moodle_phone=" . $moodlephone . "&adress=" . $adress . "&firstaccess=" . $firstaccess . "&lastaccess=" . $lastaccess . "&lastlogin=" . $lastlogin . "&lastip=" . $lastip . "&user_profile_pic=" . urlencode($moodlepicdata) . "&user_description=" . $description . "&picture_description=" . $descriptionofpic . "&institution=" . $institution . "&alternate_name=" . $alternatename . "&web_page=" . $webpage;
+            $url = $teamniourl . '/admin/sync_moodle_course/get_create_user/?user_email='
+            . $useremail . '&username=' . $username . '&name=' . $fullname . "&user_designation="
+            . $designation . "&is_company_admin=" . $isadmin . "&user_approval="
+            . $userapproval . "&can_user_create=" . $cancreateuser->value . "&user_type="
+            . $usertype . "&city=" . $city . "&country=" . $country . "&timezone=" . $timezone . "&skype="
+            . $skype . "&idnumber=" . $idnumber . "&institution=" . $institution . "&department="
+            . $department . "&phone=" . $phone . "&moodle_phone=" . $moodlephone . "&adress=" . $adress
+            . "&firstaccess=" . $firstaccess . "&lastaccess=" . $lastaccess . "&lastlogin=" . $lastlogin
+            . "&lastip=" . $lastip . "&user_profile_pic=" . urlencode($moodlepicdata)
+            . "&user_description=" . $description . "&picture_description="
+            . $descriptionofpic . "&institution=" . $institution . "&alternate_name="
+            . $alternatename . "&web_page=" . $webpage;
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $userid = curl_exec($ch);
             curl_close($ch);
-            //* Get user and create new one if not exist  *//
-
-            $url = $teamniourl . '/login_api/get_shift_details_api/' . $user_id; // get task id from teamnio
-
+            $url = $teamniourl . '/login_api/get_shift_details_api/' . $user_id;
             $ch = curl_init($url);
-
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
             curl_setopt($ch, CURLOPT_HEADER, false);
-
             $output = curl_exec($ch);
-
             if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
             }
 
@@ -296,8 +310,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $starttime = $output;
 
             if ($sdetail->status == 'true') {
-                $shiftstarttime = strtotime($s_detail->data->start);
-                $shiftendtime = strtotime($s_detail->data->end);
+                $shiftstarttime = strtotime($sdetail->data->start);
+                $shiftendtime = strtotime($sdetail->data->end);
 
                 if ($starttime == '0') {
                     $starttime = date("Y-m-d h:i:s");
@@ -326,7 +340,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         }
                     }
                 }
-                $postData = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
+                $postdata = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
                 $ch = curl_init();
                 $url = $teamniourl . '/admin/sync_moodle_course/update_attendance_status/';
 
@@ -336,28 +350,27 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                 curl_setopt($ch, CURLOPT_HEADER, false);
 
-                curl_setopt($ch, CURLOPT_POST, count($postData));
+                curl_setopt($ch, CURLOPT_POST, count($postdata));
 
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
 
-                $output_status = curl_exec($ch);
+                $outputstatus = curl_exec($ch);
 
                 curl_close($ch);
             }
 
-            /* get user track settings */
+           
             $url = $teamniourl . '/admin/sync_moodle_course/get_user_settings_tct_tat/' . $userid; // get task id from teamnio
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $output = curl_exec($ch);
             $usersettings = json_decode($output);
             curl_close($ch);
-            /*get user track settings close*/
             ?>
             <script>
-            	function btn_yes_clockin_start() {
-					localStorage.setItem("tracked", "1");
-					document.getElementById('dialog-modal-clockin-start').style.display = 'none';
+            function btn_yes_clockin_start() {
+                localStorage.setItem("tracked", "1");
+                document.getElementById('dialog-modal-clockin-start').style.display = 'none';
 					//loadDoc_once(user_id,60*1000);
 					setTimeout(function(){
 						var trackingon = localStorage.getItem("tracked");
@@ -412,10 +425,33 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 						if(checkfirst=='0') {
 							var idofbody  = document.getElementsByTagName("body")[0].id;
 							var d1 = document.getElementById(idofbody);
-							d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-start" style=""><div class="dialog-modal-inn"><div id="dialog" ><h4><?php echo $wannatrackmessage; ?></h4><div class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_start();" class="btn btn_yes_activityunsync" >Yes</button><button data_id = "" onclick="btn_no_clockin_start();" class="btn btn_yes_activityunsync" >No</button></div></div></div></div><style type="text/css"> .dialog-modal { align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.dialog-modal-inn {background: #fff;max-width: 750px;padding: 50px;text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size: 25px;}.dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog {font-size: 17px;}.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px 0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}#page-wrapper { z-index: -1 !important;  } </style>');
-
-							var script = "<script> function btn_yes_clockin_start() {  localStorage.setItem('tracked', '1');document.getElementById('dialog-modal-clockin-start').style.display = 'none';}function btn_no_clockin_start() {localStorage.setItem('tracked', '0');localStorage.setItem('tracked_cancel','1');document.getElementById('dialog-modal-clockin-start').style.display = 'none';<script>";
-									d1.insertAdjacentHTML('afterend',script);
+							d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-start" style="">
+                            <div class="dialog-modal-inn">
+                            <div id="dialog" ><h4>
+                            <?php echo $wannatrackmessage; ?></h4>
+                            <div class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_start();"
+                            class="btn btn_yes_activityunsync" >Yes</button>
+                            <button data_id = "" onclick="btn_no_clockin_start();"
+                            class="btn btn_yes_activityunsync" >No</button></div></div></div>
+                            </div>
+                            <style type="text/css">.dialog-modal {
+                                align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;
+                                background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.
+                                dialog-modal-inn {background: #fff;max-width: 750px;padding: 50px;text-align: center;width: 
+                                100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}.
+                                dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size: 25px;}.dialog-modal-inn .
+                                sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;background-color: #74cfd0;
+                                border: none;display: inline-block;text-decoration: none;outline: none;box-shadow: none;
+                                margin: 10px 0;}.dialog-modal-inn div#dialog {font-size: 17px;}.dialog-modal-inn p 
+                                {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;font-size: 22px;color: #f60000;}.
+                                sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px 0 0;}.anymore-link a {color: #74cfd0;
+                                font-size: 17px;}#page-wrapper { z-index: -1 !important;  } </style>');
+                                var script = "<script> function btn_yes_clockin_start() {  localStorage.setItem('tracked', 
+                                '1');document.getElementById('dialog-modal-clockin-start').style.display = 'none';}function 
+                                btn_no_clockin_start() {localStorage.setItem('tracked', '0');localStorage.setItem
+                                ('tracked_cancel','1');document.getElementById('dialog-modal-clockin-start').style.display = 
+                                'none';<script>";
+								d1.insertAdjacentHTML('afterend',script);
 						}
 
 						function loadDoc_once(userid,time) {
