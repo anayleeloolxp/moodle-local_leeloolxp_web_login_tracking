@@ -343,14 +343,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 localStorage.setItem("tracked", "1");
                 document.getElementById('dialog-modal-clockin-start').style.display = 'none';
                 setTimeout(function(){
-						var trackingon = localStorage.getItem("tracked");
-						if(trackingon=='1') {
-							loadDoc_once(userid,60*1000);
-							setInterval(function() {
-									loadDoc_every_two_m(userid,60*1000);
-								}, 60*1000);
-						}
-						
+                    var trackingon = localStorage.getItem("tracked");
+                    if(trackingon=='1') {
+                        loadDoc_once(userid,60*1000);
+                        setInterval(function() {
+                            loadDoc_every_two_m(userid,60*1000);
+                            }, 60*1000);
+                        }
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
@@ -362,40 +361,26 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         };
                         xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/get_breacks/"+userid, true);
                         xhttp.send();
-                       
                     }, 2000);
-				}
-
-				function btn_no_clockin_start() {
-
-					localStorage.setItem("tracked", "0");
-
-					localStorage.setItem("tracked_cancel",'1');
-
-					document.getElementById('dialog-modal-clockin-start').style.display = 'none';
-
-				}
-
-				var userid = '<?php echo $userid; ?>';
-
-				localStorage.setItem("login_user_id", userid);
-
-				var teamniourl = '<?php echo $teamniourl; ?>';
-
-				var checkfirst =  localStorage.getItem("tracked");
-
-				var forpopup = localStorage.getItem('tracked_cancel');
-
-				var ispopup = '<?php echo $popupison; ?>';
-
-				if(ispopup=='1') {
-
-					if(forpopup != '1') {
-
-						if(checkfirst=='0') {
-							var idofbody  = document.getElementsByTagName("body")[0].id;
+                }
+                function btn_no_clockin_start() {
+                    localStorage.setItem("tracked", "0");
+                    localStorage.setItem("tracked_cancel",'1');
+                    document.getElementById('dialog-modal-clockin-start').style.display = 'none';
+                }
+                var userid = '<?php echo $userid; ?>';
+                localStorage.setItem("login_user_id", userid);
+                var teamniourl = '<?php echo $teamniourl; ?>';
+                var checkfirst =  localStorage.getItem("tracked");
+                var forpopup = localStorage.getItem('tracked_cancel');
+                var ispopup = '<?php echo $popupison; ?>';
+                if(ispopup=='1') {
+                    if(forpopup != '1') {
+                        if(checkfirst=='0') {
+                            var idofbody  = document.getElementsByTagName("body")[0].id;
 							var d1 = document.getElementById(idofbody);
-							d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-start" style="">
+							d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" 
+                            id="dialog-modal-clockin-start" style="">
                             <div class="dialog-modal-inn">
                             <div id="dialog" ><h4>
                             <?php echo $wannatrackmessage; ?></h4>
