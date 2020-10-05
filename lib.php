@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-require_once(dirname(dirname(__DIR__)) . '/config.php');
+require_once (dirname(dirname(__DIR__)) . '/config.php');
 function local_leeloolxp_web_login_tracking_before_footer() {
     $configleeloolxpweblogintracking = get_config('local_leeloolxp_web_login_tracking');
     global $USER;
@@ -908,8 +908,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 curl_close($ch);
             }
 
-           
-
             $loginlogout = $configleeloolxpweblogintracking->web_loginlogout;
 
             $errormessagetrackerstop = get_string('error_message_tracker_stop', 'local_leeloolxp_web_login_tracking');
@@ -1085,7 +1083,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
 						var ca = localStorage.getItem("tracked");
 
-						
+
 
 						if(ca=="1") {
 
@@ -1096,21 +1094,21 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 								if (this.readyState == 4 && this.status == 200) {
 									var d1 = document.getElementById('page-site-index');
 									d1.insertAdjacentHTML('afterend',
-                                    '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-logout" 
-                                    ><div class="dialog-modal-inn"><div id="dialog" ><h4><?php echo $trackerstop; ?></h4><div 
-                                    class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_logout_hide();" class="btn 
+                                    '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-logout"
+                                    ><div class="dialog-modal-inn"><div id="dialog" ><h4><?php echo $trackerstop; ?></h4><div
+                                    class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_logout_hide();" class="btn
                                     btn_yes_activityunsync" >Ok</button></div></div></div></div><style type="text/css"> .
                                     dialog-modal {align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;
                                     z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;
-                                    justify-content: center;}.dialog-modal-inn {background: #fff;max-width: 750px;padding: 
-                                    50px;text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;transform: 
-                                    translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size: 
+                                    justify-content: center;}.dialog-modal-inn {background: #fff;max-width: 750px;padding:
+                                    50px;text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;transform:
+                                    translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size:
                                     25px;}.dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;
                                     background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;
-                                    outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog {font-size: 
+                                    outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog {font-size:
                                     17px;}.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;
-                                    font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px 
-                                    0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}#page-wrapper { z-index: -1 
+                                    font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px
+                                    0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}#page-wrapper { z-index: -1
                                     !important;  } </style>');
 									var script = "<script> function btn_yes_clockin_logout_hide() { document.getElementById
                                     ('dialog-modal-clockin-logout').style.display = 'none';}<script>";
@@ -1124,7 +1122,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         localStorage.setItem("tracked_cancel",'null');
 						localStorage.setItem("tracking_activity_id", "null");
                         </script><?php
-            }
+}
         }
     }
     return true;
