@@ -267,41 +267,21 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             curl_close($ch);
 
             $shiftdetails = $output;
-
             $sdetail = json_decode($shiftdetails);
-
             $url = $teamniourl . '/admin/sync_moodle_course/get_timezone/';
-
             $ch = curl_init($url);
-
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
             curl_setopt($ch, CURLOPT_HEADER, false);
-
             $outputtimezone = curl_exec($ch);
-
-            
-
             curl_close($ch);
-
             date_default_timezone_set($outputtimezone);
-
             $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid;
-
             $ch = curl_init($url);
-
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
             curl_setopt($ch, CURLOPT_HEADER, false);
-
             $output = curl_exec($ch);
-
-            
-
             curl_close($ch);
-
             $starttime = $output;
-
             if ($sdetail->status == 'true') {
                 $shiftstarttime = strtotime($sdetail->data->start);
                 $shiftendtime = strtotime($sdetail->data->end);
@@ -364,16 +344,16 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             function btn_yes_clockin_start() {
                 localStorage.setItem("tracked", "1");
                 document.getElementById('dialog-modal-clockin-start').style.display = 'none';
-					//loadDoc_once(user_id,60*1000);
+					
 					setTimeout(function(){
 						var trackingon = localStorage.getItem("tracked");
 						if(trackingon=='1') {
 							loadDoc_once(userid,60*1000);
 							setInterval(function() {
 									loadDoc_every_two_m(userid,60*1000);
-								}, 60*1000); // 60 * 1000 milsec
+								}, 60*1000);
 						}
-						// fetch break time and appned  //
+						
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
@@ -385,7 +365,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         };
                         xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/get_breacks/"+userid, true);
                         xhttp.send();
-                        // fetch break time and appned  //
+                       
                     }, 2000);
 				}
 
@@ -486,23 +466,15 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         var logoutsettimemin  = '<?php echo $logoutsettimemin; ?>';
                         var keycount = 1;
                         document.body.addEventListener("keydown", function(){
-
                             key_count++;
-
                             document.getElementById('key_count').value = keycount;
-
-
-
                         });
-
                         var userstillworkingsetting = '<?php echo $usersettings->user_data->student_still_working_pop_up; ?>';
-
-                          // in Leleeo for disbaled value is 454544
                         if(userstillworkingsetting!='454544')
                         {
                         	setInterval(function() {
 	                        	check_counts(mousekeycounttime,userstillworkingsetting);
-	                        },  (60*1000)*userstillworkingsetting); // 60 * 1000 milsec
+	                        },  (60*1000)*userstillworkingsetting);
 	                    }
 	                    function still_working_cancel() {
                          	window.location.href = '<?php echo $logouturl; ?>';
@@ -520,7 +492,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 return false;
                             }
 
-                            	// in Leleeo for disbaled value is 454544
+                            	
                                 if(userstillworkingsetting!='454544') {
 
                                 	var keycountss = parseInt(document.getElementById('key_count').value);
@@ -539,7 +511,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                     	} else {
                                         	logout_after_set_time();
                                         }
-                                    },  (60*1000)*logoutsettimemin); // 60 * 1000 milsec
+                                    },  (60*1000)*logoutsettimemin);
 
                                 } else {
                                     document.getElementById('key_count').value = '1';
@@ -580,7 +552,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
 					setInterval(function() {
 							loadDoc_every_two_m(user_id,60*1000);
-						}, 60*1000); // 60 * 1000 milsec
+						}, 60*1000);
 					}
 
 					var mouse_key_count_time = setInterval(function() {
@@ -621,7 +593,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             	if(is_popup!='1') {
                                 	check_counts_for_popup_disabled(mouse_key_count_time,user_still_working_setting);
                             	}
-                            },  (60*1000)*user_still_working_setting); // 60 * 1000 milsec
+                            },  (60*1000)*user_still_working_setting);
                         }
 
                         function still_working_cancel() {
@@ -643,7 +615,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         function check_counts_for_popup_disabled(myVar,user_still_working_setting) {
 
 
-                                // in Leleeo for disbaled value is 454544
+                                
                                 if(user_still_working_setting!='454544') {
 
                                 var key_countss = parseInt(document.getElementById('key_count').value);
@@ -664,7 +636,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                                         logout_after_set_time();
 
-                                    },  (60*1000)*logoutsettimemin); // 60 * 1000 milsec
+                                    },  (60*1000)*logoutsettimemin);
 
 
 
@@ -681,7 +653,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
 
 			<?php
-// check its not activity if these are activity page then we will update clockin time from activity plugin.
+
             if ($PAGE->pagetype == 'mod-wespher-conference' || $PAGE->pagetype == 'mod-wespher-view' || $PAGE->pagetype == 'mod-resource-view' || $PAGE->pagetype == 'mod-regularvideo-view' || $PAGE->pagetype == 'mod-forum-view' || $PAGE->pagetype == 'mod-book-view' || $PAGE->pagetype == 'mod-assign-view' || $PAGE->pagetype == 'mod-survey-view' || $PAGE->pagetype == 'mod-page-view' || $PAGE->pagetype == 'mod-quiz-view' || $PAGE->pagetype == 'mod-quiz-attempt' || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-chat-view' || $PAGE->pagetype == 'mod-choice-view' || $PAGE->pagetype == 'mod-lti-view' || $PAGE->pagetype == 'mod-feedback-view' || $PAGE->pagetype == 'mod-data-view' || $PAGE->pagetype == 'mod-forum-view' || $PAGE->pagetype == 'mod-glossary-view' || $PAGE->pagetype == 'mod-scorm-view' || $PAGE->pagetype == 'mod-wiki-view' || $PAGE->pagetype == 'mod-workshop-view' || $PAGE->pagetype == 'mod-folder-view' || $PAGE->pagetype == 'mod-imscp-view' || $PAGE->pagetype == 'mod-label-view' || $PAGE->pagetype == 'mod-url-view') {
             } else {?>
 					  	<script type="text/javascript">
@@ -691,7 +663,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 								if(tracking_on=='1') {
 									var xhttp = new XMLHttpRequest();
 									xhttp.onreadystatechange = function() {
-										// check ajax state.
+										
 										if (this.readyState == 4 && this.status == 200) {
 
 										}
