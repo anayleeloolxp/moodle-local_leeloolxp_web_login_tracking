@@ -7,7 +7,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 	global $PAGE;
 	global $DB;
 	global $CFG;
-   
 	$baseurl = $CFG->wwwroot;
 	$sesskey = $USER->sesskey;
 	$logoutset_time_min = $config_leeloolxp_web_login_tracking->logout_time_on_activity;
