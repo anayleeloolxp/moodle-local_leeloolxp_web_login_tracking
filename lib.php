@@ -679,7 +679,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                         function logout_after_set_time() {
 
-                            window.location.href = '<?php echo $logout_url; ?>';
+                            window.location.href = '<?php echo $logouturl; ?>';
 
                         }
 
@@ -774,10 +774,10 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             curl_close($ch);
 
-            $info_teamnio = json_decode($output);
+            $infoteamnio = json_decode($output);
 
             if ($info_teamnio->status != 'false') {
-                $teamniourl = $info_teamnio->data->install_url;
+                $teamniourl = $infoteamnio->data->install_url;
             } else {
                 return true;
                 $teamniourl = 'https://leeloolxp.com/dev';
@@ -794,13 +794,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             curl_setopt($ch, CURLOPT_HEADER, false);
 
-            $output_time_zone = curl_exec($ch);
+            $outputtimezone = curl_exec($ch);
 
             if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
             }
 
             curl_close($ch);
-            date_default_timezone_set($output_time_zone);
+            date_default_timezone_set($outputtimezone);
             //* get and set timezone *//
 
             $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail; // get task id from teamnio
@@ -812,10 +812,10 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             curl_close($ch);
 
-            $user_id = $output;
+            $userid = $output;
 
             //* get shift details *//
-            $url = $teamniourl . '/login_api/get_shift_details_api/' . $user_id; // get task id from teamnio
+            $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid; // get task id from teamnio
 
             $ch = curl_init($url);
 
@@ -830,45 +830,45 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             curl_close($ch);
 
-            $Shift_details = $output;
+            $Shiftdetails = $output;
 
-            $s_detail = json_decode($Shift_details);
+            $sdetail = json_decode($Shiftdetails);
 
-            if ($s_detail->status == 'true') {
-                $shift_start_time = strtotime($s_detail->data->start);
-                $shift_end_time = strtotime($s_detail->data->end);
+            if ($sdetail->status == 'true') {
+                $shiftstarttime = strtotime($sdetail->data->start);
+                $shiftendtime = strtotime($sdetail->data->end);
 
-                if ($start_time == '0') {
-                    $start_time = date("Y-m-d h:i:s");
+                if ($starttime == '0') {
+                    $starttime = date("Y-m-d h:i:s");
                 }
-                $actual_start_time = strtotime(date('h:i A', strtotime($start_time)));
-                $actual_end_time = strtotime("now");
+                $actualstarttime = strtotime(date('h:i A', strtotime($starttime)));
+                $actualendtime = strtotime("now");
 
-                if ($actual_start_time >= $shift_end_time) {
-                    $start_time_status = 'Absent';
+                if ($actualstarttime >= $shiftendtime) {
+                    $starttimestatus = 'Absent';
                 } else {
-                    if ($actual_start_time < $shift_start_time) {
-                        $start_time_status = 'On Time';
+                    if ($actualstarttime < $shiftstarttime) {
+                        $starttimestatus = 'On Time';
                     } else {
-                        if ($actual_start_time >= $shift_start_time) {
-                            $start_time_status = 'Late';
+                        if ($actualstarttime >= $shiftstarttime) {
+                            $starttimestatus = 'Late';
                         }
                     }
                 }
 
-                if ($start_time_status == 'Absent') {
-                    $end_time_status = 'Absent';
+                if ($starttimestatus == 'Absent') {
+                    $endtimestatus = 'Absent';
                 } else {
-                    if ($actual_end_time <= $shift_end_time) {
-                        $end_time_status = 'Left Early';
+                    if ($actualendtime <= $shiftendtime) {
+                        $endtimestatus = 'Left Early';
                     } else {
-                        if ($actual_end_time > $shift_end_time) {
-                            $end_time_status = 'On Time';
+                        if ($actualendtime > $shiftendtime) {
+                            $endtimestatus = 'On Time';
                         }
                     }
                 }
 
-                $postData = '&user_id=' . $user_id . '&start_status=' . $start_time_status . '&end_status=' . $end_time_status;
+                $postData = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
 
                 $ch = curl_init();
 
@@ -884,7 +884,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 
-                $output_status = curl_exec($ch);
+                curl_exec($ch);
 
                 curl_close($ch);
             }
@@ -893,9 +893,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             $loginlogout = $configleeloolxpweblogintracking->web_loginlogout;
 
-            $error_message_tracker_stop = get_string('error_message_tracker_stop', 'local_leeloolxp_web_login_tracking');
+            $errormessagetrackerstop = get_string('error_message_tracker_stop', 'local_leeloolxp_web_login_tracking');
 
-            $tracker_stop = get_string('tracker_stop', 'local_leeloolxp_web_login_tracking');?>
+            $trackerstop = get_string('tracker_stop', 'local_leeloolxp_web_login_tracking');?>
 
 			<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-logout-old" style="display: none;">
 
@@ -903,7 +903,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
 					<div id="dialog" >
 
-						<h4><?php echo $tracker_stop; ?></h4>
+						<h4><?php echo $trackerstop; ?></h4>
 
 						<div class="sure-btn">
 
