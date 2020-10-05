@@ -83,7 +83,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             return true;
         }
 
-        $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail; // get task id from teamnio
+        $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail;
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($ch);
@@ -94,7 +94,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 return true;
             }
         }
-        $url = $teamniourl . '/admin/sync_moodle_course/check_user_status_by_email/' . $useremail; // get user status from teamnio
+        $url = $teamniourl . '/admin/sync_moodle_course/check_user_status_by_email/' . $useremail;
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($ch);
@@ -105,42 +105,25 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         }
         if ($loginlogout) {
             ?>
-
-				<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-				<div class="dialog-modal dialog-modal-clockin-startsss" id="dialog-modal-clockin-startsssssssss" style="display: none;">
-
-				    <div class="dialog-modal-inn">
-
-				        <div id="dialog" >
-
-				            <h4><?php echo $wannatrackmessage; ?></h4>
-
-				            <div class="sure-btn">
-
-				                <button data_id = "" onclick="btn_yes_clockin_start();" class="btn btn_yes_activityunsync" >Yes</button>
-
-				                <button data_id = "" onclick="btn_no_clockin_start();" class="btn btn_yes_activityunsync" >No</button>
-
-				            </div>
-
-				        </div>
-
-				    </div>
-
-				</div>
-				<style type="text/css">
-
-				.dialog-modal {
-
-					align-self: center;
-
-				    position: fixed;
-
-				    top: 0;
-
-				    left: 0;
-
-				    width: 100%;
+            <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+			<div class="dialog-modal dialog-modal-clockin-startsss" id="dialog-modal-clockin-startsssssssss" style="display: none;">
+                <div class="dialog-modal-inn">
+                    <div id="dialog" >
+                        <h4><?php echo $wannatrackmessage; ?></h4>
+                        <div class="sure-btn">
+                            <button data_id = "" onclick="btn_yes_clockin_start();" class="btn btn_yes_activityunsync" >Yes</button>
+                            <button data_id = "" onclick="btn_no_clockin_start();" class="btn btn_yes_activityunsync" >No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style type="text/css">
+            .dialog-modal {
+                align-self: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
 
 				    height: 100%;
 
@@ -259,31 +242,21 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 			</style>
 
 			<div class="dialog-modal dialog-modal-stillworking" id="dialog-modal-stillworking" style="display: none;">
-
-                    <div class="dialog-modal-inn">
-
-                        <div id="dialog" >
-
-                            <h4><?php echo get_string('still_learning', 'local_leeloolxp_web_tat'); ?></h4>
-
-                            <div class="sure-btn">
-                            	<button data_id = "" onclick="still_working_okay();" class="btn btn_yes_activityunsync" ><?php echo get_string('still_learning_yes', 'local_leeloolxp_web_tat'); ?></button>
-
-                                <button data_id = "" onclick="still_working_cancel();" class="btn btn_yes_activityunsync" ><?php echo get_string('still_learning_no', 'local_leeloolxp_web_tat'); ?></button>
-                            </div>
-
-
-
+                <div class="dialog-modal-inn">
+                    <div id="dialog" >
+                        <h4><?php echo get_string('still_learning', 'local_leeloolxp_web_tat'); ?></h4>
+                        <div class="sure-btn">
+                            <button data_id = "" onclick="still_working_okay();" class="btn btn_yes_activityunsync" >
+                            <?php echo get_string(
+                                'still_learning_yes', 'local_leeloolxp_web_tat'
+                                ); ?></button>
+                                <button data_id = "" onclick="still_working_cancel();"
+                                class="btn btn_yes_activityunsync" ><?php echo get_string('still_learning_no', 
+                                'local_leeloolxp_web_tat'); ?></button>
                         </div>
-
-
-
                     </div>
-
-
-
                 </div>
-
+            </div>
                 <input type = 'hidden' value = '1' id='mouse_count'/>
 
                 <input type = 'hidden' value = '1' id='key_count'/>
@@ -1121,8 +1094,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         localStorage.setItem("tracked",'0');
                         localStorage.setItem("tracked_cancel",'null');
 						localStorage.setItem("tracking_activity_id", "null");
-                        </script><?php
-}
+                        </script>
+<?php
+            }
         }
     }
     return true;
