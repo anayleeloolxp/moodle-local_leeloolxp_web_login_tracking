@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-require_once (dirname(dirname(__DIR__)) . '/config.php');
+require_once(dirname(dirname(__DIR__)) . '/config.php');
 function local_leeloolxp_web_login_tracking_before_footer() {
     $configleeloolxpweblogintracking = get_config('local_leeloolxp_web_login_tracking');
     global $USER;
@@ -60,7 +60,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         }
         $username = $USER->username;
         $useremail = $USER->email;
-        $rand_num = rand();
         $notloginmessage = get_string('not_login_message', 'local_leeloolxp_web_login_tracking');
         $wannatrackmessage = get_string('wanna_track_message', 'local_leeloolxp_web_login_tracking');
         $liacnsekey = $configleeloolxpweblogintracking->teamnio_web_license;
@@ -106,7 +105,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         if ($loginlogout) {
             ?>
             <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-			<div class="dialog-modal dialog-modal-clockin-startsss" id="dialog-modal-clockin-startsssssssss" style="display: none;">
+            <div class="dialog-modal dialog-modal-clockin-startsss" id="dialog-modal-clockin-startsssssssss" style="display: none;">
                 <div class="dialog-modal-inn">
                     <div id="dialog" >
                         <h4><?php echo $wannatrackmessage; ?></h4>
@@ -124,124 +123,67 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 top: 0;
                 left: 0;
                 width: 100%;
-
-				    height: 100%;
-
-				    z-index: 9999;
-
-				    background: rgba(0,0,0,0.7);
-
-				    display: flex;
-
-				    align-items: center;
-
-				    justify-content: center;
-
-				}
-
-				.dialog-modal-inn {
-
-				    background: #fff;
-
-				    max-width: 750px;
-
-				    padding: 50px;
-
-				    text-align: center;
-
-					width: 100%;
-
-					position: absolute;
-
-					top: 50%;
-
-					left: 50%;
-
-				    transform: translate(-50%, -50%);
-
-				}
-
-				.dialog-modal-inn h4 {
-
-				    font-weight: 400;
-
-				    margin: 0 0 25px;
-
-				    font-size: 25px;
-
-				}
-
-				.dialog-modal-inn .sure-btn button {
-
-				    font-size: 20px;
-
-				    padding: .5rem 3rem;
-
-				    color: #fff;
-
-				    background-color: #74cfd0;
-
-				    border: none;
-
-				    display: inline-block;
-
-				    text-decoration: none;
-
-				    outline: none;
-
-				    box-shadow: none;
-
-				    margin: 10px 0;
-
-				}
-
-				.dialog-modal-inn div#dialog {
-
-				    font-size: 17px;
-
-				}
-
-				.dialog-modal-inn p {
-
-				    font-size: 19px;
-
-				}
-
-				.dialog-modal-inn h3 {
-
-				    font-weight: 500;
-
-				    font-size: 22px;
-
-				    color: #f60000;
-
-				}
-
-				.sure-btn {
-
-				    margin: 50px 0 0;
-
-				}
-
-				.anymore-link {
-
-				    margin: 15px 0 0;
-
-				}
-
-				.anymore-link a {
-
-				    color: #74cfd0;
-
-				    font-size: 17px;
-
-				}
-				#page-wrapper {
-					z-index: -1 !important;
-				}
+                height: 100%;
+                z-index: 9999;
+                background: rgba(0,0,0,0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .dialog-modal-inn {
+                background: #fff;
+                max-width: 750px;
+                padding: 50px;
+                text-align: center;
+                width: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .dialog-modal-inn h4 {
+                font-weight: 400;
+                margin: 0 0 25px;
+                font-size: 25px;
+            }
+            .dialog-modal-inn .sure-btn button {
+                font-size: 20px;
+                padding: .5rem 3rem;
+                color: #fff;
+                background-color: #74cfd0;
+                border: none;
+                display: inline-block;
+                text-decoration: none;
+                outline: none;
+                box-shadow: none;
+                margin: 10px 0;
+            }
+            .dialog-modal-inn div#dialog {
+                font-size: 17px;
+            }
+            .dialog-modal-inn p {
+                font-size: 19px;
+            }
+            .dialog-modal-inn h3 {
+                font-weight: 500;
+                font-size: 22px;
+                color: #f60000;
+            }
+            .sure-btn {
+                margin: 50px 0 0;
+            }
+            .anymore-link {
+                margin: 15px 0 0;
+            }
+            .anymore-link a {
+                color: #74cfd0;
+                font-size: 17px;
+            }
+            #page-wrapper {
+                z-index: -1 !important;
+            }
 			</style>
-
-			<div class="dialog-modal dialog-modal-stillworking" id="dialog-modal-stillworking" style="display: none;">
+            <div class="dialog-modal dialog-modal-stillworking" id="dialog-modal-stillworking" style="display: none;">
                 <div class="dialog-modal-inn">
                     <div id="dialog" >
                         <h4><?php echo get_string('still_learning', 'local_leeloolxp_web_tat'); ?></h4>
@@ -258,19 +200,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 </div>
             </div>
                 <input type = 'hidden' value = '1' id='mouse_count'/>
-
                 <input type = 'hidden' value = '1' id='key_count'/>
-
                 <style type="text/css">
-
-                    .dialog-modal-inn{background:#fff;max-width:750px;padding:50px;text-align:center;width:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}.dialog-modal-inn h4{font-weight:400;margin:0 0 25px;font-size:25px}.dialog-modal-inn .sure-btn button{font-size:20px;padding:.5rem 3rem;color:#fff;background-color:#74cfd0;border:none;display:inline-block;text-decoration:none;outline:0;box-shadow:none;margin:10px 0}.dialog-modal-inn div#dialog{font-size:17px}.dialog-modal-inn p{font-size:19px}.dialog-modal-inn h3{font-weight:500;font-size:22px;color:#f60000}.sure-btn{margin:50px 0 0}.anymore-link{margin:15px 0 0}.anymore-link a{color:#74cfd0;font-size:17px}#page-wrapper{z-index:-1!important}
-
+                .dialog-modal-inn{background:#fff;max-width:750px;padding:50px;text-align:center;width:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}.dialog-modal-inn h4{font-weight:400;margin:0 0 25px;font-size:25px}.dialog-modal-inn .sure-btn button{font-size:20px;padding:.5rem 3rem;color:#fff;background-color:#74cfd0;border:none;display:inline-block;text-decoration:none;outline:0;box-shadow:none;margin:10px 0}.dialog-modal-inn div#dialog{font-size:17px}.dialog-modal-inn p{font-size:19px}.dialog-modal-inn h3{font-weight:500;font-size:22px;color:#f60000}.sure-btn{margin:50px 0 0}.anymore-link{margin:15px 0 0}.anymore-link a{color:#74cfd0;font-size:17px}#page-wrapper{z-index:-1!important}
                 </style>
+            <?php
 
-
-			<?php
-
-            //* Get user and create new one if not exist  *//
+          
             if (is_siteadmin()) {
                 $isadmin = '1';
             } else {
@@ -741,17 +677,10 @@ function local_leeloolxp_web_login_tracking_before_footer() {
     } else {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
             $useremail = $_COOKIE['popuptlt'];
-
-            $rand_num = rand();
-
-            $liacnse_key = $configleeloolxpweblogintracking->teamnio_web_license;
-
-            $postData = '&license_key=' . $liacnse_key;
-
+            $liacnsekey = $configleeloolxpweblogintracking->teamnio_web_license;
+            $postData = '&license_key=' . $liacnsekey;
             $ch = curl_init();
-
             $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
-
             curl_setopt($ch, CURLOPT_URL, $url);
 
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -774,28 +703,16 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 return true;
                 $teamniourl = 'https://leeloolxp.com/dev';
             }
-
-            // update end time for attendance
-            //* get and set timezone *//
-
             $url = $teamniourl . '/admin/sync_moodle_course/get_timezone/';
-
             $ch = curl_init($url);
-
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
             curl_setopt($ch, CURLOPT_HEADER, false);
-
             $outputtimezone = curl_exec($ch);
-
             if (curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200) {
             }
-
             curl_close($ch);
             date_default_timezone_set($outputtimezone);
-            //* get and set timezone *//
-
-            $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail; // get task id from teamnio
+            $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail;
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $output = curl_exec($ch);
@@ -806,8 +723,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             $userid = $output;
 
-            //* get shift details *//
-            $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid; // get task id from teamnio
+            
+            $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid;
 
             $ch = curl_init($url);
 
@@ -936,24 +853,15 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 				}
 
 				.dialog-modal-inn {
-
-				    background: #fff;
-
-				    max-width: 750px;
-
-				    padding: 50px;
-
-				    text-align: center;
-
-					width: 100%;
-
-					position: absolute;
-
-					top: 50%;
-
-					left: 50%;
-
-				    transform: translate(-50%, -50%);
+                    background: #fff;
+                    max-width: 750px;
+                    padding: 50px;
+                    text-align: center;
+                    width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
 
 				}
 
