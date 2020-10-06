@@ -25,15 +25,14 @@
 defined('MOODLE_INTERNAL') || die();
 require_once(dirname(dirname(__DIR__)) . '/config.php');
 function local_leeloolxp_web_login_tracking_before_footer() {
-    $configleeloolxpweblogintracking = get_config('local_leeloolxp_web_login_tracking');
+    $configweblogintrack = get_config('local_leeloolxp_web_login_tracking');
     global $USER;
     global $PAGE;
-    global $DB;
     global $CFG;
     require_login();
     $baseurl = $CFG->wwwroot;
     $sesskey = $USER->sesskey;
-    $logoutsettimemin = $configleeloolxpweblogintracking->logout_time_on_activity;
+    $logoutsettimemin = $configweblogintrack->logout_time_on_activity;
     $logouturl = $baseurl . "/login/logout.php?sesskey=" . $sesskey;
     $useremail = $USER->email;
     $cookiename = "user_email";
@@ -49,7 +48,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 			var expires = "expires="+ d.toUTCString();
 			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 			</script>';
-        $loginlogout = $configleeloolxpweblogintracking->web_loginlogout;
+        $loginlogout = $configweblogintrack->web_loginlogout;
         $configleeloolsso = get_config('leeloolxp_tracking_sso');
         $usercreateflag = $configleeloolsso->web_new_user_student;
         $designation = $configleeloolsso->default_student_position;
@@ -60,10 +59,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         }
         $username = $USER->username;
         $useremail = $USER->email;
-        $notloginmessage = get_string('not_login_message', 'local_leeloolxp_web_login_tracking');
         $wannatrackmessage = get_string('wanna_track_message', 'local_leeloolxp_web_login_tracking');
-        $liacnsekey = $configleeloolxpweblogintracking->teamnio_web_license;
-        $popupison = $configleeloolxpweblogintracking->web_loginlogout_popup;
+        $liacnsekey = $configweblogintrack->teamnio_web_license;
+        $popupison = $configweblogintrack->web_loginlogout_popup;
         $postdata = '&license_key=' . $liacnsekey;
         $ch = curl_init();
         $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
@@ -220,7 +218,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             } else {
                 $isadmin = '';
             }
-
+            $usertype = 'student';
             $ssoconfig = get_config('leeloolxp_tracking_sso');
             $userapproval = $ssoconfig->required_aproval_student;
             $lastlogin = date('Y-m-d h:i:s', $USER->lastlogin);
@@ -246,12 +244,12 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $url = $teamniourl . '/admin/sync_moodle_course/get_create_user/?user_email='
             . $useremail . '&username=' . $username . '&name=' . $fullname . "&user_designation="
             . $designation . "&is_company_admin=" . $isadmin . "&user_approval="
-            . $userapproval . "&can_user_create=" . $cancreateuser->value . "&user_type="
+            . $userapproval . "&can_user_create=1&user_type="
             . $usertype . "&city=" . $city . "&country=" . $country . "&timezone=" . $timezone . "&skype="
             . $skype . "&idnumber=" . $idnumber . "&institution=" . $institution . "&department="
             . $department . "&phone=" . $phone . "&moodle_phone=" . $moodlephone . "&adress=" . $adress
             . "&firstaccess=" . $firstaccess . "&lastaccess=" . $lastaccess . "&lastlogin=" . $lastlogin
-            . "&lastip=" . $lastip . "&user_profile_pic=" . urlencode($moodlepicdata)
+            . "&lastip=" . $lastip
             . "&user_description=" . $description . "&picture_description="
             . $descriptionofpic . "&institution=" . $institution . "&alternate_name="
             . $alternatename . "&web_page=" . $webpage;
@@ -327,7 +325,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
 
-                $outputstatus = curl_exec($ch);
+                curl_exec($ch);
 
                 curl_close($ch);
             }
@@ -550,22 +548,20 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         }
                     </script>
                 <?php
-                if ($PAGE->pagetype == 'mod-wespher-conference'
-                || $PAGE->pagetype == 'mod-wespher-view' || $PAGE->pagetype == 'mod-resource-view'
-                || $PAGE->pagetype == 'mod-regularvideo-view' || $PAGE->pagetype == 'mod-forum-view'
-                || $PAGE->pagetype == 'mod-book-view' || $PAGE->pagetype == 'mod-assign-view'
-                || $PAGE->pagetype == 'mod-survey-view' || $PAGE->pagetype == 'mod-page-view'
-                || $PAGE->pagetype == 'mod-quiz-view' || $PAGE->pagetype == 'mod-quiz-attempt'
-                || $PAGE->pagetype == 'mod-quiz-summary' || $PAGE->pagetype == 'mod-quiz-summary'
-                || $PAGE->pagetype == 'mod-chat-view' || $PAGE->pagetype == 'mod-choice-view'
-                || $PAGE->pagetype == 'mod-lti-view' || $PAGE->pagetype == 'mod-feedback-view'
-                || $PAGE->pagetype == 'mod-data-view' || $PAGE->pagetype == 'mod-forum-view'
-                || $PAGE->pagetype == 'mod-glossary-view' || $PAGE->pagetype == 'mod-scorm-view'
-                || $PAGE->pagetype == 'mod-wiki-view' || $PAGE->pagetype == 'mod-workshop-view'
-                || $PAGE->pagetype == 'mod-folder-view' || $PAGE->pagetype == 'mod-imscp-view'
-                || $PAGE->pagetype == 'mod-label-view' || $PAGE->pagetype == 'mod-url-view') {
-                    $pages = '';
-                } else {?>
+                if ($PAGE->pagetype != 'mod-wespher-conference'
+                || $PAGE->pagetype != 'mod-wespher-view' || $PAGE->pagetype != 'mod-resource-view'
+                || $PAGE->pagetype != 'mod-regularvideo-view' || $PAGE->pagetype != 'mod-forum-view'
+                || $PAGE->pagetype != 'mod-book-view' || $PAGE->pagetype != 'mod-assign-view'
+                || $PAGE->pagetype != 'mod-survey-view' || $PAGE->pagetype != 'mod-page-view'
+                || $PAGE->pagetype != 'mod-quiz-view' || $PAGE->pagetype != 'mod-quiz-attempt'
+                || $PAGE->pagetype != 'mod-quiz-summary' || $PAGE->pagetype != 'mod-quiz-summary'
+                || $PAGE->pagetype != 'mod-chat-view' || $PAGE->pagetype != 'mod-choice-view'
+                || $PAGE->pagetype != 'mod-lti-view' || $PAGE->pagetype != 'mod-feedback-view'
+                || $PAGE->pagetype != 'mod-data-view' || $PAGE->pagetype != 'mod-forum-view'
+                || $PAGE->pagetype != 'mod-glossary-view' || $PAGE->pagetype != 'mod-scorm-view'
+                || $PAGE->pagetype != 'mod-wiki-view' || $PAGE->pagetype != 'mod-workshop-view'
+                || $PAGE->pagetype != 'mod-folder-view' || $PAGE->pagetype != 'mod-imscp-view'
+                || $PAGE->pagetype != 'mod-label-view' || $PAGE->pagetype != 'mod-url-view') {?>
                     <script type="text/javascript">
                         window.onbeforeunload = function (e) {
                             console.log("clockin time update on reload");
@@ -587,7 +583,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
     } else {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
             $useremail = $_COOKIE['popuptlt'];
-            $liacnsekey = $configleeloolxpweblogintracking->teamnio_web_license;
+            $liacnsekey = $configweblogintrack->teamnio_web_license;
             $postdata = '&license_key=' . $liacnsekey;
             $ch = curl_init();
             $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
@@ -667,8 +663,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 curl_exec($ch);
                 curl_close($ch);
             }
-            $loginlogout = $configleeloolxpweblogintracking->web_loginlogout;
-            $errormessagetrackerstop = get_string('error_message_tracker_stop', 'local_leeloolxp_web_login_tracking');
+            $loginlogout = $configweblogintrack->web_loginlogout;
             $trackerstop = get_string('tracker_stop', 'local_leeloolxp_web_login_tracking');?>
             <div class="dialog-modal dialog-modal-clockin-start"
             id="dialog-modal-clockin-logout-old" style="display: none;">
