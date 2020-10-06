@@ -404,8 +404,37 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             if(checkfirst=='0' || checkfirst === null) {
                                 var idofbody  = document.getElementsByTagName("body")[0].id;
                                 var d1 = document.getElementById(idofbody);
-                                d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-start" style=""><div class="dialog-modal-inn"><div id="dialog" ><h4><?php echo $wannatrackmessage; ?></h4><div class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_start();" class="btn btn_yes_activityunsync" >Yes</button><button data_id = "" onclick="btn_no_clockin_start();"class="btn btn_yes_activityunsync" >No</button></div></div></div></div><style type="text/css">.dialog-modal {align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.dialog-modal-inn {background: #fff;max-width: 750px;padding: 50px;text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size: 25px;}.dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog {font-size: 17px;}.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px 0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}#page-wrapper { z-index: -1 !important;  } </style>');
-                                    var script = "<script> function btn_yes_clockin_start() {  localStorage.setItem('tracked', '1');document.getElementById('dialog-modal-clockin-start').style.display = 'none';}function btn_no_clockin_start() {localStorage.setItem('tracked', '0');localStorage.setItem('tracked_cancel','1');document.getElementById('dialog-modal-clockin-start').style.display = 'none';<script>";
+                                var maindiv = '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-start" style="">';
+                                maindiv += '<div class="dialog-modal-inn"><div id="dialog" ><h4>';
+                                maindiv += '<?php echo $wannatrackmessage; ?></h4><div class="sure-btn">';
+                                maindiv += '<button data_id = "" onclick="btn_yes_clockin_start();" class="btn btn_yes_activityunsync" >Yes</button>';
+                                maindiv += '<button data_id = "" onclick="btn_no_clockin_start();"class="btn btn_yes_activityunsync" >No</button>';
+                                maindiv += '</div></div></div></div><style type="text/css">';
+                                maindiv += '.dialog-modal {align-self: center;position: fixed;top: 0;left: 0;';
+                                maindiv += 'width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);';
+                                maindiv += 'display: flex;align-items: center;justify-content: center;}';
+                                maindiv += '.dialog-modal-inn {background: #fff;max-width: 750px;padding: 50px;';
+                                maindiv += 'text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;';
+                                maindiv += 'transform: translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;';
+                                maindiv += 'margin: 0 0 25px;font-size: 25px;}.dialog-modal-inn .sure-btn';
+                                maindiv += 'button {font-size: 20px;padding: .5rem 3rem;color: #fff;';
+                                maindiv += 'background-color: #74cfd0;border: none;display: inline-block;';
+                                maindiv += 'text-decoration: none;outline: none;box-shadow: none;';
+                                maindiv += 'margin: 10px 0;}.dialog-modal-inn div#dialog {font-size: 17px;}';
+                                maindiv += '.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3';
+                                maindiv += '{font-weight: 500;font-size: 22px;color: #f60000;}';
+                                maindiv += '.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px 0 0;}';
+                                maindiv += '.anymore-link a {color: #74cfd0;font-size: 17px;}';
+                                maindiv += '#page-wrapper { z-index: -1 !important;  } </style>';
+                                d1.insertAdjacentHTML('afterend',maindiv);
+                                    var script = "<script> function btn_yes_clockin_start() {";
+                                        script += " localStorage.setItem('tracked', '1');";
+                                        script +=" document.getElementById('dialog-modal-clockin-start').style.display";
+                                        script +=" = 'none';}function btn_no_clockin_start() {";
+                                        script +=" localStorage.setItem('tracked', '0');";
+                                        script +=" localStorage.setItem('tracked_cancel','1');";
+                                        script +=" document.getElementById('dialog-modal-clockin-start').style.display";
+                                        script +=" = 'none';<script>";
                                     d1.insertAdjacentHTML('afterend',script);
                                 }
                             function loadDoc_once(userid,time) {
