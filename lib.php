@@ -581,8 +581,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             }
                         };
                     </script>
-                    <?php  }
+                    <?php  
                 }
+            }
     } else {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
             $useremail = $_COOKIE['popuptlt'];
