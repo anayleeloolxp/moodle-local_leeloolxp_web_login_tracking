@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Admin settings and defaults
+ * Admin settings and defaults.
  *
  * @package local_leeloolxp_web_login_tracking
  * @copyright  2020 Leeloo LXP (https://leeloolxp.com)
