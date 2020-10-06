@@ -419,7 +419,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+userid, true);
+                                xhttp.open("GET", teamniourl+
+                                "/admin/sync_moodle_course/update_clockin_every_m/?user_id="+
+                                userid, true);
                                 xhttp.send();
                             }
                             var mousekeycounttime = setInterval(function() {
@@ -578,9 +580,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         };
                     </script>
                 <?php
+                }
             }
-        }
-    } else {
+        } else {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
             $useremail = $_COOKIE['popuptlt'];
             $liacnsekey = $configweblogintrack->teamnio_web_license;
