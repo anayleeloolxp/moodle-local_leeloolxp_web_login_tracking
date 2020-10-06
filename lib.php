@@ -202,11 +202,11 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         <div class="sure-btn">
                             <button data_id = "" onclick="still_working_okay();" class="btn btn_yes_activityunsync" >
                             <?php echo get_string(
-                'still_learning_yes', 'local_leeloolxp_web_tat'
-            ); ?></button>
+                            'still_learning_yes', 'local_leeloolxp_web_tat'
+                            ); ?></button>
                                 <button data_id = "" onclick="still_working_cancel();"
                                 class="btn btn_yes_activityunsync" ><?php echo get_string('still_learning_no',
-                'local_leeloolxp_web_tat'); ?></button>
+                                'local_leeloolxp_web_tat'); ?></button>
                         </div>
                     </div>
                 </div>
@@ -227,7 +227,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 .anymore-link a{color:#74cfd0;font-size:17px}#page-wrapper{z-index:-1!important}
                 </style>
             <?php
-if (is_siteadmin()) {
+            if (is_siteadmin()) {
                 $isadmin = '1';
             } else {
                 $isadmin = '';
@@ -444,7 +444,8 @@ if (is_siteadmin()) {
                                 document.getElementById('key_count').value = keycount;
                             });
                             var userstillworkingsetting = '<?php echo $usersettings->user_data->student_still_working_pop_up; ?>';
-                            if(userstillworkingsetting !='454544' || userstillworkingsetting !='' || userstillworkingsetting !='0') {
+                            if(userstillworkingsetting !='454544' || 
+                            userstillworkingsetting !='' || userstillworkingsetting !='0') {
                                 setInterval(function() {
                                     check_counts(mousekeycounttime,userstillworkingsetting);
                                 },  (60*1000)*userstillworkingsetting);
@@ -552,7 +553,7 @@ if (is_siteadmin()) {
                         }
                     </script>
                 <?php
-if ($PAGE->pagetype != 'mod-wespher-conference'
+                if ($PAGE->pagetype != 'mod-wespher-conference'
                 || $PAGE->pagetype != 'mod-wespher-view' || $PAGE->pagetype != 'mod-resource-view'
                 || $PAGE->pagetype != 'mod-regularvideo-view' || $PAGE->pagetype != 'mod-forum-view'
                 || $PAGE->pagetype != 'mod-book-view' || $PAGE->pagetype != 'mod-assign-view'
@@ -582,8 +583,8 @@ if ($PAGE->pagetype != 'mod-wespher-conference'
                         };
                     </script>
                 <?php
-}
-        }
+                }
+            }
     } else {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
             $useremail = $_COOKIE['popuptlt'];
@@ -752,7 +753,7 @@ if ($PAGE->pagetype != 'mod-wespher-conference'
                 }
             </style>
             <?php
-if ($loginlogout) {
+            if ($loginlogout) {
                 ?><script>
                 function btn_yes_clockin_logout_hide() {
                     document.getElementById('dialog-modal-clockin-logout').style.display = 'none';
