@@ -405,7 +405,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 var idofbody  = document.getElementsByTagName("body")[0].id;
                                 var d1 = document.getElementById(idofbody);
                                 var maindiv = '<div class="dialog-modal dialog-modal-clockin-start"';
-                                maindiv = ' id="dialog-modal-clockin-start" style="">';
+                                maindiv += ' id="dialog-modal-clockin-start" style="">';
                                 maindiv += '<div class="dialog-modal-inn"><div id="dialog" ><h4>';
                                 maindiv += '<?php echo $wannatrackmessage; ?></h4><div class="sure-btn">';
                                 maindiv += '<button data_id = "" onclick="btn_yes_clockin_start();"';
@@ -609,7 +609,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                         console.log("clockin time updated on reload");
                                     }
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_on_task_update/"+userid,true);
+                                var newurl = teamniourl;
+                                newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/"+userid;
+                                xhttp.open("GET",newurl,true);
                                 xhttp.send();
                             }
                         };
@@ -801,19 +803,26 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             var inhtml = '<div class="dialog-modal dialog-modal-clockin-start"';
                             inhtml += ' id="dialog-modal-clockin-logout"><div class="dialog-modal-inn">';
                             inhtml += '<div id="dialog" ><h4><?php echo $trackerstop; ?></h4>';
-                            inhtml += '<div class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_logout_hide();"';
+                            inhtml += '<div class="sure-btn"><button data_id = ""';
+                            inhtml += ' onclick="btn_yes_clockin_logout_hide();"';
                             inhtml += ' class="btn btn_yes_activityunsync" >Ok</button></div></div></div></div>';
-                            inhtml += '<style type="text/css"> .dialog-modal {align-self: center;position: fixed;top: 0;';inhtml += 'left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);';
+                            inhtml += '<style type="text/css"> .dialog-modal {align-self: center;position: fixed;top: 0;';
+                            inhtml += 'left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);';
                             inhtml += 'display: flex;align-items: center;justify-content: center;}.';
-                            inhtml += 'dialog-modal-inn {background: #fff;max-width: 750px;padding:50px;text-align: center;';inhtml += 'width: 100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}';
+                            inhtml += 'dialog-modal-inn {background: #fff;max-width: 750px;padding:50px;text-align: center;';
+                            inhtml += 'width: 100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}';
                             inhtml += '.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size: 25px;}';
-                            inhtml += 'dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;';inhtml += 'background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;';inhtml += 'outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog';
+                            inhtml += 'dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;';
+                            inhtml += 'background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;';
+                            inhtml += 'outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog';
                             inhtml += '{font-size:17px;}.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3';
                             inhtml += '{font-weight: 500;font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.';
-                            inhtml += 'anymore-link {margin: 15px0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}';inhtml += '#page-wrapper { z-index: -1!important;  } </style>';
+                            inhtml += 'anymore-link {margin: 15px0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}';
+                            inhtml += '#page-wrapper { z-index: -1!important;  } </style>';
                             d1.insertAdjacentHTML('afterend', inhtml);
                             var script = "<script> function btn_yes_clockin_logout_hide() { ";
-                                script += "document.getElementById('dialog-modal-clockin-logout').style.display = 'none';}"; script += "<'\'/script>";
+                            script += "document.getElementById('dialog-modal-clockin-logout').style.display = 'none';}"; 
+                            script += "<'\'/script>";
                             d1.insertAdjacentHTML('afterend',script);
                         }
                     };
