@@ -26,7 +26,9 @@ defined('MOODLE_INTERNAL') || die();
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_leeloolxp_web_login_tracking', 'Leeloo LXP Login and Attendance Integration');
     $ADMIN->add('localplugins', $settings);
-    $settings->add(new admin_setting_configtext('local_leeloolxp_web_login_tracking/teamnio_web_license', get_string('web_teamnio_license_we', 'local_leeloolxp_web_login_tracking'), get_string('web_teamnio_license_we', 'local_leeloolxp_web_login_tracking'), 0));
+    $settings->add(new admin_setting_configtext('local_leeloolxp_web_login_tracking/teamnio_web_license',
+    get_string('web_teamnio_license_we', 'local_leeloolxp_web_login_tracking'),
+    get_string('web_teamnio_license_we', 'local_leeloolxp_web_login_tracking'), 0));
     $settings->add(new admin_setting_configcheckbox('local_leeloolxp_web_login_tracking/web_loginlogout',
     get_string('web_loginlogout', 'local_leeloolxp_web_login_tracking'),
     get_string('web_loginlogoutexplain', 'local_leeloolxp_web_login_tracking'), 1));
