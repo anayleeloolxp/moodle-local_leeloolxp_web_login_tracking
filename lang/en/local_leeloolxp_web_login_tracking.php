@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Admin settings and defaults.
+ * Admin settings and defaults
  *
  * @package local_leeloolxp_web_login_tracking
  * @copyright  2020 Leeloo LXP (https://leeloolxp.com)
@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Leeloo LXP Web Login and Attendance Integration';
 $string['local_leeloolxp_web_login_trackingdescription'] = '<p>Integrate Leeloo LXP Login and
-Attendance to your Moodle and track your students login,
-logout and attendance.</p>';
+Attendance to your Moodle and track your students
+login,logout and attendance.</p>';
 $string['local_leeloolxp_web_login_trackingsettings'] = 'Settings';
 $string['not_login_message'] = 'Please log in the Leeloo LXP Desktop App';
 $string['wanna_track_message'] = 'Do you want to mark your attendance?';
