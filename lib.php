@@ -97,7 +97,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 return true;
             }
         }
-        
         $curl = new curl;
         $options = array(
             'CURLOPT_RETURNTRANSFER' => true,
@@ -346,7 +345,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     'CURLOPT_HEADER' => false,
                     'CURLOPT_POST' => count($postdata),
                 );
-                $curl->post($url, $postdata, $options));
+                $curl->post($url, $postdata, $options);
             }
             $url = $teamniourl . '/admin/sync_moodle_course/get_user_settings_tct_tat/' . $userid;
             $curl = new curl;
@@ -355,7 +354,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     'CURLOPT_HEADER' => false,
                     'CURLOPT_POST' => count($postdata),
                 );
-            $output =   $curl->post($url, $postdata, $options));
+            $output = $curl->post($url, $postdata, $options);
             $usersettings = json_decode($output);
             curl_close($ch);
             ?>
@@ -629,7 +628,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 $teamniourl = 'https://leeloolxp.com/dev';
             }
             $url = $teamniourl . '/admin/sync_moodle_course/get_timezone/';
-           
             $curl = new curl;
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
