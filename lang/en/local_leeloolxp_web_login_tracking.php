@@ -20,7 +20,7 @@
  * @package local_leeloolxp_web_login_tracking
  * @copyright  2020 Leeloo LXP (https://leeloolxp.com)
  * @author Leeloo LXP <info@leeloolxp.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Leeloo LXP Web Login and Attendance Integration';
