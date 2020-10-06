@@ -22,7 +22,6 @@
  * @author Leeloo LXP <info@leeloolxp.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_leeloolxp_web_login_tracking', 'Leeloo LXP Login and Attendance Integration');
