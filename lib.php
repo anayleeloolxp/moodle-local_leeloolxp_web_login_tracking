@@ -786,8 +786,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     localStorage.setItem("tracking_activity_id", "null");
                     </script>
 <?php
-                }
             }
         }
+    }
     return true;
 }
