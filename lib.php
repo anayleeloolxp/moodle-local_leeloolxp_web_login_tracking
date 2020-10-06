@@ -38,6 +38,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
     $logoutsettimemin = $configweblogintrack->logout_time_on_activity;
     $logouturl = $baseurl . "/login/logout.php?sesskey=" . $sesskey;
     $useremail = $USER->email;
+
     $cookiename = "user_email";
     $cookievalue = $useremail;
     setcookie($cookiename, $cookievalue, time() + (86400 * 30), "/");
@@ -95,6 +96,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         if (!$output = $curl->post($url, $postdata, $options)) {
             return true;
         }
+
         if ($output == '0') {
             if ($usercreateflag == 'no') {
                 return true;
@@ -274,6 +276,7 @@ if (is_siteadmin()) {
             if (!$userid = $curl->post($url, $postdata, $options)) {
                 return true;
             }
+
             $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid;
             $curl = new curl;
             $options = array(
@@ -281,7 +284,7 @@ if (is_siteadmin()) {
                 'CURLOPT_HEADER' => false,
                 'CURLOPT_POST' => count($postdata),
             );
-            if (!$userid = $curl->post($url, $postdata, $options)) {
+            if (!$output = $curl->post($url, $postdata, $options)) {
                 return true;
             }
 
@@ -294,9 +297,7 @@ if (is_siteadmin()) {
                 'CURLOPT_HEADER' => false,
                 'CURLOPT_POST' => count($postdata),
             );
-            if (!$outputtimezone = $curl->post($url, $postdata, $options)) {
-                return true;
-            }
+            $outputtimezone = $curl->post($url, $postdata, $options);
             date_default_timezone_set($outputtimezone);
             $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid;
             $curl = new curl;
@@ -305,9 +306,8 @@ if (is_siteadmin()) {
                 'CURLOPT_HEADER' => false,
                 'CURLOPT_POST' => count($postdata),
             );
-            if (!$output = $curl->post($url, $postdata, $options)) {
-                return true;
-            }
+            $output = $curl->post($url, $postdata, $options);
+
             $starttime = $output;
             if ($sdetail->status == 'true') {
                 $shiftstarttime = strtotime($sdetail->data->start);
@@ -340,7 +340,7 @@ if (is_siteadmin()) {
                         }
                     }
                 }
-                $postdata = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
+                $postdata = '&userid=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
                 $url = $teamniourl . '/admin/sync_moodle_course/update_attendance_status/';
                 $curl = new curl;
                 $options = array(
@@ -358,7 +358,9 @@ if (is_siteadmin()) {
                 'CURLOPT_POST' => count($postdata),
             );
             $output = $curl->post($url, $postdata, $options);
+
             $usersettings = json_decode($output);
+
             ?>
             <script>
                     function btn_yes_clockin_start() {
@@ -391,14 +393,15 @@ if (is_siteadmin()) {
                         document.getElementById('dialog-modal-clockin-start').style.display = 'none';
                     }
                     var userid = '<?php echo $userid; ?>';
-                    localStorage.setItem("login_user_id", userid);
+                    localStorage.setItem("login_userid", userid);
                     var teamniourl = '<?php echo $teamniourl; ?>';
                     var checkfirst =  localStorage.getItem("tracked");
                     var forpopup = localStorage.getItem('tracked_cancel');
                     var ispopup = '<?php echo $popupison; ?>';
+
                     if(ispopup=='1') {
                         if(forpopup != '1') {
-                            if(checkfirst=='0') {
+                            if(checkfirst=='0' || checkfirst === null) {
                                 var idofbody  = document.getElementsByTagName("body")[0].id;
                                 var d1 = document.getElementById(idofbody);
                                 d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-start" style=""><div class="dialog-modal-inn"><div id="dialog" ><h4><?php echo $wannatrackmessage; ?></h4><div class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_start();" class="btn btn_yes_activityunsync" >Yes</button><button data_id = "" onclick="btn_no_clockin_start();"class="btn btn_yes_activityunsync" >No</button></div></div></div></div><style type="text/css">.dialog-modal {align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.dialog-modal-inn {background: #fff;max-width: 750px;padding: 50px;text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size: 25px;}.dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog {font-size: 17px;}.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px 0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}#page-wrapper { z-index: -1 !important;  } </style>');
@@ -410,7 +413,7 @@ if (is_siteadmin()) {
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid, false);
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?userid="+userid, false);
                                 xhttp.send();
                             }
                             function loadDoc_every_two_m(userid,time) {
@@ -419,7 +422,7 @@ if (is_siteadmin()) {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
                                 xhttp.open("GET", teamniourl+
-                                "/admin/sync_moodle_course/update_clockin_every_m/?user_id="+
+                                "/admin/sync_moodle_course/update_clockin_every_m/?userid="+
                                 userid, true);
                                 xhttp.send();
                             }
@@ -431,17 +434,17 @@ if (is_siteadmin()) {
                             },  60*1000);
                             var mousecount = 1;
                             document.body.addEventListener("click", function(){
-                                mouse_count++;
+                                mousecount++;
                                 document.getElementById('mouse_count').value = mousecount;
                             });
                             var logoutsettimemin  = '<?php echo $logoutsettimemin; ?>';
                             var keycount = 1;
                             document.body.addEventListener("keydown", function(){
-                                key_count++;
+                                keycount++;
                                 document.getElementById('key_count').value = keycount;
                             });
                             var userstillworkingsetting = '<?php echo $usersettings->user_data->student_still_working_pop_up; ?>';
-                            if(userstillworkingsetting!='454544') {
+                            if(userstillworkingsetting !='454544' || userstillworkingsetting !='' || userstillworkingsetting !='0') {
                                 setInterval(function() {
                                     check_counts(mousekeycounttime,userstillworkingsetting);
                                 },  (60*1000)*userstillworkingsetting);
@@ -480,26 +483,26 @@ if (is_siteadmin()) {
                             }
                         }
                     } else {
-                            function loadDoc_once(user_id,time) {
+                            function loadDoc_once(userid,time) {
                                 var xhttp = new XMLHttpRequest();
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+user_id, false);
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?userid="+userid, false);
                                 xhttp.send();
                             }
-                            function loadDoc_every_two_m(user_id,time) {
+                            function loadDoc_every_two_m(userid,time) {
                                 var xhttp = new XMLHttpRequest();
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+user_id,
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?userid="+userid,
                                 true);
                                 xhttp.send();
                             }
-                        loadDoc_once(user_id,60*1000);
+                        loadDoc_once(userid,60*1000);
                         setInterval(function() {
-                            loadDoc_every_two_m(user_id,60*1000);
+                            loadDoc_every_two_m(userid,60*1000);
                             }, 60*1000);
                         }
                         var mouse_key_count_time = setInterval(function() {},  60*1000);
@@ -517,7 +520,7 @@ if (is_siteadmin()) {
                         var user_still_working_setting = '<?php echo $usersettings->user_data->student_still_working_pop_up; ?>';
                         if(user_still_working_setting!='454544') {
                             setInterval(function() {
-                                if(is_popup!='1') {
+                                if(ispopup!='1') {
                                     check_counts_for_popup_disabled(mouse_key_count_time,user_still_working_setting);
                                 }
                             }, (60*1000)*user_still_working_setting);
@@ -573,7 +576,7 @@ if ($PAGE->pagetype != 'mod-wespher-conference'
                                         console.log("clockin time updated on reload");
                                     }
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_on_task_update/"+user_id,true);
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_on_task_update/"+userid,true);
                                 xhttp.send();
                             }
                         };
@@ -663,7 +666,7 @@ if ($PAGE->pagetype != 'mod-wespher-conference'
                         }
                     }
                 }
-                $postdata = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
+                $postdata = '&userid=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
                 $curl = new curl;
                 $options = array(
                     'CURLOPT_RETURNTRANSFER' => true,
@@ -754,7 +757,7 @@ if ($loginlogout) {
                 function btn_yes_clockin_logout_hide() {
                     document.getElementById('dialog-modal-clockin-logout').style.display = 'none';
                 }
-                var user_id = localStorage.getItem("login_user_id", user_id);
+                var userid = localStorage.getItem("login_userid", userid);
                 var teamniourl = '<?php echo $teamniourl; ?>';
                 var ca = localStorage.getItem("tracked");
                 if(ca=="1") {
@@ -763,11 +766,11 @@ if ($loginlogout) {
                         if (this.readyState == 4 && this.status == 200) {
                             var d1 = document.getElementById('page-site-index');
                             d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-logout"><div class="dialog-modal-inn"><div id="dialog" ><h4><?php echo $trackerstop; ?></h4><div class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_logout_hide();" class="btn btn_yes_activityunsync" >Ok</button></div></div></div></div><style type="text/css"> .dialog-modal {align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.dialog-modal-inn {background: #fff;max-width: 750px;padding:50px;text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size: 25px;}dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog {font-size:17px;}.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}#page-wrapper { z-index: -1!important;  } </style>');
-                            var script = "<script> function btn_yes_clockin_logout_hide() { document.getElementById('dialog-modal-clockin-logout').style.display = 'none';}</script>";
+                            var script = "<script> function btn_yes_clockin_logout_hide() { document.getElementById('dialog-modal-clockin-logout').style.display = 'none';} <'\'/script>";
                             d1.insertAdjacentHTML('afterend',script);
                         }
                     };
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+user_id, false);
+                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?userid="+userid, false);
                         xhttp.send();
                     }
                     localStorage.setItem("tracked",'0');
