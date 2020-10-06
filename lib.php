@@ -356,7 +356,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 );
             $output = $curl->post($url, $postdata, $options);
             $usersettings = json_decode($output);
-            curl_close($ch);
             ?>
             <script>
                     function btn_yes_clockin_start() {
