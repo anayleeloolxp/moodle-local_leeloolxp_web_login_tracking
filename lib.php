@@ -24,6 +24,9 @@
  */
 defined('MOODLE_INTERNAL') || die();
 require_once(dirname(dirname(__DIR__)) . '/config.php');
+/**
+ * Plugin to sync user's attendence and tracking to LeelooLXP account of the Moodle Admin
+ */
 function local_leeloolxp_web_login_tracking_before_footer() {
     $configweblogintrack = get_config('local_leeloolxp_web_login_tracking');
     global $USER;
