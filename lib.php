@@ -63,15 +63,17 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         $liacnsekey = $configweblogintrack->teamnio_web_license;
         $popupison = $configweblogintrack->web_loginlogout_popup;
         $postdata = '&license_key=' . $liacnsekey;
-        $ch = curl_init();
         $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_POST, count($postdata));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-        $output = curl_exec($ch);
-        curl_close($ch);
+        $curl = new curl;
+        $options = array(
+            'CURLOPT_RETURNTRANSFER' => true,
+            'CURLOPT_HEADER' => false,
+            'CURLOPT_POST' => count($postdata),
+        );
+
+        if (!$output = $curl->post($url, $postdata, $options)) {
+            return true;
+        }
 
         $infoteamnio = json_decode($output);
         if ($infoteamnio->status != 'false') {
@@ -81,22 +83,30 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         }
 
         $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail;
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $output = curl_exec($ch);
-        curl_close($ch);
-        $userexistonteamnio = $output;
-        if ($userexistonteamnio == '0') {
+        $curl = new curl;
+        $options = array(
+            'CURLOPT_RETURNTRANSFER' => true,
+            'CURLOPT_HEADER' => false,
+            'CURLOPT_POST' => count($postdata),
+        );
+        if (!$output = $curl->post($url, $postdata, $options)) {
+            return true;
+        }
+        if ($output == '0') {
             if ($usercreateflag == 'no') {
                 return true;
             }
         }
-        $url = $teamniourl . '/admin/sync_moodle_course/check_user_status_by_email/' . $useremail;
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $output = curl_exec($ch);
-        curl_close($ch);
-        $userstatusonteamnio = $output;
+        
+        $curl = new curl;
+        $options = array(
+            'CURLOPT_RETURNTRANSFER' => true,
+            'CURLOPT_HEADER' => false,
+            'CURLOPT_POST' => count($postdata),
+        );
+        if (!$userstatusonteamnio = $curl->post($url, $postdata, $options)) {
+            return true;
+        }
         if ($userstatusonteamnio == 0) {
             return true;
         }
@@ -253,32 +263,49 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             . "&user_description=" . $description . "&picture_description="
             . $descriptionofpic . "&institution=" . $institution . "&alternate_name="
             . $alternatename . "&web_page=" . $webpage;
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $userid = curl_exec($ch);
-            curl_close($ch);
+            $curl = new curl;
+            $options = array(
+                'CURLOPT_RETURNTRANSFER' => true,
+                'CURLOPT_HEADER' => false,
+                'CURLOPT_POST' => count($postdata),
+            );
+            if (!$userid = $curl->post($url, $postdata, $options)) {
+                return true;
+            }
             $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid;
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            $output = curl_exec($ch);
-            curl_close($ch);
+            $curl = new curl;
+            $options = array(
+                'CURLOPT_RETURNTRANSFER' => true,
+                'CURLOPT_HEADER' => false,
+                'CURLOPT_POST' => count($postdata),
+            );
+            if (!$userid = $curl->post($url, $postdata, $options)) {
+                return true;
+            }
 
             $shiftdetails = $output;
             $sdetail = json_decode($shiftdetails);
             $url = $teamniourl . '/admin/sync_moodle_course/get_timezone/';
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            $outputtimezone = curl_exec($ch);
-            curl_close($ch);
+            $curl = new curl;
+            $options = array(
+                'CURLOPT_RETURNTRANSFER' => true,
+                'CURLOPT_HEADER' => false,
+                'CURLOPT_POST' => count($postdata),
+            );
+            if (!$outputtimezone = $curl->post($url, $postdata, $options)) {
+                return true;
+            }
             date_default_timezone_set($outputtimezone);
             $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid;
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            $output = curl_exec($ch);
-            curl_close($ch);
+            $curl = new curl;
+            $options = array(
+                'CURLOPT_RETURNTRANSFER' => true,
+                'CURLOPT_HEADER' => false,
+                'CURLOPT_POST' => count($postdata),
+            );
+            if (!$output = $curl->post($url, $postdata, $options)) {
+                return true;
+            }
             $starttime = $output;
             if ($sdetail->status == 'true') {
                 $shiftstarttime = strtotime($sdetail->data->start);
@@ -312,27 +339,23 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     }
                 }
                 $postdata = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
-                $ch = curl_init();
                 $url = $teamniourl . '/admin/sync_moodle_course/update_attendance_status/';
-
-                curl_setopt($ch, CURLOPT_URL, $url);
-
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-                curl_setopt($ch, CURLOPT_HEADER, false);
-
-                curl_setopt($ch, CURLOPT_POST, count($postdata));
-
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-
-                curl_exec($ch);
-
-                curl_close($ch);
+                $curl = new curl;
+                $options = array(
+                    'CURLOPT_RETURNTRANSFER' => true,
+                    'CURLOPT_HEADER' => false,
+                    'CURLOPT_POST' => count($postdata),
+                );
+                $curl->post($url, $postdata, $options));
             }
             $url = $teamniourl . '/admin/sync_moodle_course/get_user_settings_tct_tat/' . $userid;
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $output = curl_exec($ch);
+            $curl = new curl;
+                $options = array(
+                    'CURLOPT_RETURNTRANSFER' => true,
+                    'CURLOPT_HEADER' => false,
+                    'CURLOPT_POST' => count($postdata),
+                );
+            $output =   $curl->post($url, $postdata, $options));
             $usersettings = json_decode($output);
             curl_close($ch);
             ?>
@@ -587,15 +610,17 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $useremail = $_COOKIE['popuptlt'];
             $liacnsekey = $configweblogintrack->teamnio_web_license;
             $postdata = '&license_key=' . $liacnsekey;
-            $ch = curl_init();
             $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            curl_setopt($ch, CURLOPT_POST, count($postdata));
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-            $output = curl_exec($ch);
-            curl_close($ch);
+            $curl = new curl;
+            $options = array(
+                'CURLOPT_RETURNTRANSFER' => true,
+                'CURLOPT_HEADER' => false,
+                'CURLOPT_POST' => count($postdata),
+            );
+
+            if (!$output = $curl->post($url, $postdata, $options)) {
+                return true;
+            }
             $infoteamnio = json_decode($output);
             if ($infoteamnio->status != 'false') {
                 $teamniourl = $infoteamnio->data->install_url;
@@ -604,24 +629,33 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 $teamniourl = 'https://leeloolxp.com/dev';
             }
             $url = $teamniourl . '/admin/sync_moodle_course/get_timezone/';
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            $outputtimezone = curl_exec($ch);
-            curl_close($ch);
+           
+            $curl = new curl;
+            $options = array(
+                'CURLOPT_RETURNTRANSFER' => true,
+                'CURLOPT_HEADER' => false,
+                'CURLOPT_POST' => count($postdata),
+            );
+            $outputtimezone = $curl->post($url, $postdata, $options);
             date_default_timezone_set($outputtimezone);
             $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail;
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $output = curl_exec($ch);
-            curl_close($ch);
+            $curl = new curl;
+            $options = array(
+                'CURLOPT_RETURNTRANSFER' => true,
+                'CURLOPT_HEADER' => false,
+                'CURLOPT_POST' => count($postdata),
+            );
+            $output = $curl->post($url, $postdata, $options);
             $userid = $output;
             $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid;
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            $output = curl_exec($ch);
-            curl_close($ch);
+            $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail;
+            $curl = new curl;
+            $options = array(
+                'CURLOPT_RETURNTRANSFER' => true,
+                'CURLOPT_HEADER' => false,
+                'CURLOPT_POST' => count($postdata),
+            );
+            $output = $curl->post($url, $postdata, $options);
             $shiftdetails = $output;
             $sdetail = json_decode($shiftdetails);
             if ($sdetail->status == 'true') {
@@ -655,15 +689,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     }
                 }
                 $postdata = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
-                $ch = curl_init();
-                $url = $teamniourl . '/admin/sync_moodle_course/update_attendance_end_status/';
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_HEADER, false);
-                curl_setopt($ch, CURLOPT_POST, count($postdata));
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-                curl_exec($ch);
-                curl_close($ch);
+                $curl = new curl;
+                $options = array(
+                    'CURLOPT_RETURNTRANSFER' => true,
+                    'CURLOPT_HEADER' => false,
+                    'CURLOPT_POST' => count($postdata),
+                );
+                $curl->post($url, $postdata, $options);
             }
             $loginlogout = $configweblogintrack->web_loginlogout;
             $trackerstop = get_string('tracker_stop', 'local_leeloolxp_web_login_tracking');?>
