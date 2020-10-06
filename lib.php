@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-require_once (dirname(dirname(__DIR__)) . '/config.php');
+require_once(dirname(dirname(__DIR__)) . '/config.php');
 /**
  * Plugin to sync user's attendence and tracking to LeelooLXP account of the Moodle Admin
  */
@@ -200,11 +200,11 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         <div class="sure-btn">
                             <button data_id = "" onclick="still_working_okay();" class="btn btn_yes_activityunsync" >
                             <?php echo get_string(
-                'still_learning_yes', 'local_leeloolxp_web_tat'
-            ); ?></button>
+                                'still_learning_yes', 'local_leeloolxp_web_tat'
+                                ); ?></button>
                                 <button data_id = "" onclick="still_working_cancel();"
                                 class="btn btn_yes_activityunsync" ><?php echo get_string('still_learning_no',
-                'local_leeloolxp_web_tat'); ?></button>
+                                'local_leeloolxp_web_tat'); ?></button>
                         </div>
                     </div>
                 </div>
@@ -225,7 +225,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 .anymore-link a{color:#74cfd0;font-size:17px}#page-wrapper{z-index:-1!important}
                 </style>
             <?php
-if (is_siteadmin()) {
+            if (is_siteadmin()) {
                 $isadmin = '1';
             } else {
                 $isadmin = '';
@@ -254,17 +254,17 @@ if (is_siteadmin()) {
             $alternatename = $USER->alternatename;
             $webpage = $USER->url;
             $url = $teamniourl . '/admin/sync_moodle_course/get_create_user/?user_email='
-                . $useremail . '&username=' . $username . '&name=' . $fullname . "&user_designation="
-                . $designation . "&is_company_admin=" . $isadmin . "&user_approval="
-                . $userapproval . "&can_user_create=1&user_type="
-                . $usertype . "&city=" . $city . "&country=" . $country . "&timezone=" . $timezone . "&skype="
-                . $skype . "&idnumber=" . $idnumber . "&institution=" . $institution . "&department="
-                . $department . "&phone=" . $phone . "&moodle_phone=" . $moodlephone . "&adress=" . $adress
-                . "&firstaccess=" . $firstaccess . "&lastaccess=" . $lastaccess . "&lastlogin=" . $lastlogin
-                . "&lastip=" . $lastip
-                . "&user_description=" . $description . "&picture_description="
-                . $descriptionofpic . "&institution=" . $institution . "&alternate_name="
-                . $alternatename . "&web_page=" . $webpage;
+            . $useremail . '&username=' . $username . '&name=' . $fullname . "&user_designation="
+            . $designation . "&is_company_admin=" . $isadmin . "&user_approval="
+            . $userapproval . "&can_user_create=1&user_type="
+            . $usertype . "&city=" . $city . "&country=" . $country . "&timezone=" . $timezone . "&skype="
+            . $skype . "&idnumber=" . $idnumber . "&institution=" . $institution . "&department="
+            . $department . "&phone=" . $phone . "&moodle_phone=" . $moodlephone . "&adress=" . $adress
+            . "&firstaccess=" . $firstaccess . "&lastaccess=" . $lastaccess . "&lastlogin=" . $lastlogin
+            . "&lastip=" . $lastip
+            . "&user_description=" . $description . "&picture_description="
+            . $descriptionofpic . "&institution=" . $institution . "&alternate_name="
+            . $alternatename . "&web_page=" . $webpage;
             $curl = new curl;
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
@@ -352,11 +352,11 @@ if (is_siteadmin()) {
             }
             $url = $teamniourl . '/admin/sync_moodle_course/get_user_settings_tct_tat/' . $userid;
             $curl = new curl;
-            $options = array(
-                'CURLOPT_RETURNTRANSFER' => true,
-                'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => count($postdata),
-            );
+                $options = array(
+                    'CURLOPT_RETURNTRANSFER' => true,
+                    'CURLOPT_HEADER' => false,
+                    'CURLOPT_POST' => count($postdata),
+                );
             $output = $curl->post($url, $postdata, $options);
             $usersettings = json_decode($output);
             ?>
@@ -401,8 +401,33 @@ if (is_siteadmin()) {
                             if(checkfirst=='0') {
                                 var idofbody  = document.getElementsByTagName("body")[0].id;
                                 var d1 = document.getElementById(idofbody);
-                                d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-start" style=""><div class="dialog-modal-inn"><div id="dialog" ><h4><?php echo $wannatrackmessage; ?></h4><div class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_start();" class="btn btn_yes_activityunsync" >Yes</button><button data_id = "" onclick="btn_no_clockin_start();"class="btn btn_yes_activityunsync" >No</button></div></div></div></div><style type="text/css">.dialog-modal {align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.dialog-modal-inn {background: #fff;max-width: 750px;padding: 50px;text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size: 25px;}.dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog {font-size: 17px;}.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px 0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}#page-wrapper { z-index: -1 !important;  } </style>');
-                                    var script = "<script> function btn_yes_clockin_start() {  localStorage.setItem('tracked', '1');document.getElementById('dialog-modal-clockin-start').style.display = 'none';}function btn_no_clockin_start() {localStorage.setItem('tracked', '0');localStorage.setItem('tracked_cancel','1');document.getElementById('dialog-modal-clockin-start').style.display = 'none';<script>";
+                                d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" 
+                                id="dialog-modal-clockin-start" style="">
+                                <div class="dialog-modal-inn">
+                                <div id="dialog" ><h4>
+                                <?php echo $wannatrackmessage; ?></h4>
+                                <div class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_start();"
+                                class="btn btn_yes_activityunsync" >Yes</button>
+                                <button data_id = "" onclick="btn_no_clockin_start();"
+                                class="btn btn_yes_activityunsync" >No</button></div></div></div>
+                                </div>
+                                <style type="text/css">.dialog-modal {
+                                    align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;
+                                    background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.
+                                    dialog-modal-inn {background: #fff;max-width: 750px;padding: 50px;text-align: center;width: 
+                                    100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}.
+                                    dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size: 25px;}.dialog-modal-inn .
+                                    sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;background-color: #74cfd0;
+                                    border: none;display: inline-block;text-decoration: none;outline: none;box-shadow: none;
+                                    margin: 10px 0;}.dialog-modal-inn div#dialog {font-size: 17px;}.dialog-modal-inn p 
+                                    {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;font-size: 22px;color: #f60000;}.
+                                    sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px 0 0;}.anymore-link a {color: #74cfd0;
+                                    font-size: 17px;}#page-wrapper { z-index: -1 !important;  } </style>');
+                                    var script = "<script> function btn_yes_clockin_start() {  localStorage.setItem('tracked', 
+                                    '1');document.getElementById('dialog-modal-clockin-start').style.display = 'none';}function 
+                                    btn_no_clockin_start() {localStorage.setItem('tracked', '0');localStorage.setItem
+                                    ('tracked_cancel','1');document.getElementById('dialog-modal-clockin-start').style.display = 
+                                    'none';<script>";
                                     d1.insertAdjacentHTML('afterend',script);
                                 }
                             function loadDoc_once(userid,time) {
@@ -485,15 +510,15 @@ if (is_siteadmin()) {
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+user_id, false);
-                                xhttp.send();
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/
+                                update_clockin/?user_id="+user_id, false);xhttp.send();
                             }
                             function loadDoc_every_two_m(user_id,time) {
                                 var xhttp = new XMLHttpRequest();
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+user_id,
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+user_id, 
                                 true);
                                 xhttp.send();
                             }
@@ -541,15 +566,15 @@ if (is_siteadmin()) {
                                     setInterval(function() {
                                         logout_after_set_time();
                                         },  (60*1000)*logoutsettimemin);
-                                } else {
-                                    document.getElementById('key_count').value = '1';
-                                    document.getElementById('mouse_count').value = '1';
+                                    } else {
+                                        document.getElementById('key_count').value = '1';
+                                        document.getElementById('mouse_count').value = '1';
+                                    }
                                 }
                             }
-                        }
                     </script>
                 <?php
-if ($PAGE->pagetype != 'mod-wespher-conference'
+                if ($PAGE->pagetype != 'mod-wespher-conference'
                 || $PAGE->pagetype != 'mod-wespher-view' || $PAGE->pagetype != 'mod-resource-view'
                 || $PAGE->pagetype != 'mod-regularvideo-view' || $PAGE->pagetype != 'mod-forum-view'
                 || $PAGE->pagetype != 'mod-book-view' || $PAGE->pagetype != 'mod-assign-view'
@@ -565,21 +590,21 @@ if ($PAGE->pagetype != 'mod-wespher-conference'
                 || $PAGE->pagetype != 'mod-label-view' || $PAGE->pagetype != 'mod-url-view') {?>
                     <script type="text/javascript">
                         window.onbeforeunload = function (e) {
+                            console.log("clockin time update on reload");
                             var tracking_on = localStorage.getItem("tracked");
                             if(tracking_on=='1') {
                                 var xhttp = new XMLHttpRequest();
                                 xhttp.onreadystatechange = function() {
-                                    if (this.readyState == 4 && this.status == 200) {
-                                        console.log("clockin time updated on reload");
-                                    }
+                                    if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_on_task_update/"+user_id,true);
+                                xhttp.open("GET", teamniourl+"
+                                /admin/sync_moodle_course/update_clockin_on_task_update/"+user_id, true);
                                 xhttp.send();
                             }
                         };
                     </script>
                 <?php
-}
+                }
         }
     } else {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
@@ -674,7 +699,8 @@ if ($PAGE->pagetype != 'mod-wespher-conference'
             }
             $loginlogout = $configweblogintrack->web_loginlogout;
             $trackerstop = get_string('tracker_stop', 'local_leeloolxp_web_login_tracking');?>
-            <div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-logout-old" style="display: none;">
+            <div class="dialog-modal dialog-modal-clockin-start"
+            id="dialog-modal-clockin-logout-old" style="display: none;">
                 <div class="dialog-modal-inn">
                     <div id="dialog" >
                         <h4><?php echo $trackerstop; ?></h4>
@@ -749,7 +775,7 @@ if ($PAGE->pagetype != 'mod-wespher-conference'
                 }
             </style>
             <?php
-if ($loginlogout) {
+            if ($loginlogout) {
                 ?><script>
                 function btn_yes_clockin_logout_hide() {
                     document.getElementById('dialog-modal-clockin-logout').style.display = 'none';
@@ -762,11 +788,28 @@ if ($loginlogout) {
                     xhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
                             var d1 = document.getElementById('page-site-index');
-                            d1.insertAdjacentHTML('afterend', '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-logout"><div class="dialog-modal-inn"><div id="dialog" ><h4><?php echo $trackerstop; ?></h4><div class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_logout_hide();" class="btn btn_yes_activityunsync" >Ok</button></div></div></div></div><style type="text/css"> .dialog-modal {align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.dialog-modal-inn {background: #fff;max-width: 750px;padding:50px;text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size: 25px;}dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog {font-size:17px;}.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}#page-wrapper { z-index: -1!important;  } </style>');
-                            var script = "<script> function btn_yes_clockin_logout_hide() { document.getElementById('dialog-modal-clockin-logout').style.display = 'none';}</script>";
+                            d1.insertAdjacentHTML('afterend',
+                            '<div class="dialog-modal dialog-modal-clockin-start" id="dialog-modal-clockin-logout">
+                            <div class="dialog-modal-inn"><div id="dialog" ><h4><?php echo $trackerstop; ?></h4><div
+                            class="sure-btn"><button data_id = "" onclick="btn_yes_clockin_logout_hide();" class="btn
+                            btn_yes_activityunsync" >Ok</button></div></div></div></div><style type="text/css"> .
+                            dialog-modal {align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;
+                            z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;
+                            justify-content: center;}.dialog-modal-inn {background: #fff;max-width: 750px;padding:
+                            50px;text-align: center;width: 100%;position: absolute;top: 50%;left: 50%;transform:
+                            translate(-50%, -50%);}.dialog-modal-inn h4 {font-weight: 400;margin: 0 0 25px;font-size:
+                            25px;}.dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;
+                            background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;
+                            outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog {font-size:
+                            17px;}.dialog-modal-inn p {font-size: 19px;}.dialog-modal-inn h3 {font-weight: 500;
+                            font-size: 22px;color: #f60000;}.sure-btn {margin: 50px 0 0;}.anymore-link {margin: 15px
+                            0 0;}.anymore-link a {color: #74cfd0;font-size: 17px;}#page-wrapper { z-index: -1
+                            !important;  } </style>');
+                            var script = "<script> function btn_yes_clockin_logout_hide() { document.getElementById
+                            ('dialog-modal-clockin-logout').style.display = 'none';}<script>";
                             d1.insertAdjacentHTML('afterend',script);
-                        }
-                    };
+                            }
+                        };
                         xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+user_id, false);
                         xhttp.send();
                     }
@@ -775,7 +818,7 @@ if ($loginlogout) {
                     localStorage.setItem("tracking_activity_id", "null");
                     </script>
 <?php
-}
+            }
         }
     }
     return true;
