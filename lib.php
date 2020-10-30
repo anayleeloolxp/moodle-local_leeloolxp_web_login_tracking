@@ -32,7 +32,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
     global $USER;
     global $PAGE;
     global $CFG;
-    require_login();
     $baseurl = $CFG->wwwroot;
     $sesskey = $USER->sesskey;
     $logoutsettimemin = $configweblogintrack->logout_time_on_activity;
