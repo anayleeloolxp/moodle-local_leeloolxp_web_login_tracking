@@ -101,6 +101,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 return true;
             }
         }
+
+        $url = $teamniourl . '/admin/sync_moodle_course/check_user_status_by_email/' . $useremail;
         $curl = new curl;
         $options = array(
             'CURLOPT_RETURNTRANSFER' => true,
@@ -339,7 +341,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         }
                     }
                 }
-                $postdata = '&userid=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
+                $postdata = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
                 $url = $teamniourl . '/admin/sync_moodle_course/update_attendance_status/';
                 $curl = new curl;
                 $options = array(
@@ -444,7 +446,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?userid="+userid, false);
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid, false);
                                 xhttp.send();
                             }
                             function loadDoc_every_two_m(userid,time) {
@@ -453,7 +455,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
                                 xhttp.open("GET", teamniourl+
-                                "/admin/sync_moodle_course/update_clockin_every_m/?userid="+
+                                "/admin/sync_moodle_course/update_clockin_every_m/?user_id="+
                                 userid, true);
                                 xhttp.send();
                             }
@@ -520,7 +522,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?userid="+userid, false);
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid, false);
                                 xhttp.send();
                             }
                             function loadDoc_every_two_m(userid,time) {
@@ -528,7 +530,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 xhttp.onreadystatechange = function() {
                                     if (this.readyState == 4 && this.status == 200) {}
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?userid="+userid,
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin_every_m/?user_id="+userid,
                                 true);
                                 xhttp.send();
                             }
@@ -825,7 +827,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             d1.insertAdjacentHTML('afterend',script);
                         }
                     };
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?userid="+userid, false);
+                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+userid, false);
                         xhttp.send();
                     }
                     localStorage.setItem("tracked",'0');
