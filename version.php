@@ -28,3 +28,6 @@ $plugin->release = '1.0';
 $plugin->version = 2020050503;
 $plugin->requires = 2019052003;
 $plugin->maturity = MATURITY_STABLE;
+$plugin->dependencies = array(
+    'auth_leeloolxp_tracking_sso' => 2020092601
+);
