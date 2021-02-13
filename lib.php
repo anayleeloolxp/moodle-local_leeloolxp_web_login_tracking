@@ -617,7 +617,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             }
                         };
                     </script>
-                <?php
+                    <?php
                 }
         }
     } else {
@@ -834,7 +834,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     localStorage.setItem("tracked_cancel",'null');
                     localStorage.setItem("tracking_activity_id", "null");
                     </script>
-<?php
+                <?php
             }
         }
     }
