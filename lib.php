@@ -71,7 +71,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         $options = array(
             'CURLOPT_RETURNTRANSFER' => true,
             'CURLOPT_HEADER' => false,
-            'CURLOPT_POST' => count($postdata),
+            'CURLOPT_POST' => 1,
         );
 
         if (!$output = $curl->post($url, $postdata, $options)) {
@@ -90,7 +90,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         $options = array(
             'CURLOPT_RETURNTRANSFER' => true,
             'CURLOPT_HEADER' => false,
-            'CURLOPT_POST' => count($postdata),
+            'CURLOPT_POST' => 1,
         );
         if (!$output = $curl->post($url, $postdata, $options)) {
             return true;
@@ -107,7 +107,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         $options = array(
             'CURLOPT_RETURNTRANSFER' => true,
             'CURLOPT_HEADER' => false,
-            'CURLOPT_POST' => count($postdata),
+            'CURLOPT_POST' => 1,
         );
         if (!$userstatusonteamnio = $curl->post($url, $postdata, $options)) {
             return true;
