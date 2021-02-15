@@ -52,7 +52,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 			</script>';
         $loginlogout = $configweblogintrack->web_loginlogout;
-        $configleeloolsso = get_config('leeloolxp_tracking_sso');
+        $configleeloolsso = get_config('auth_leeloolxp_tracking_sso');
         $usercreateflag = $configleeloolsso->web_new_user_student;
         $designation = $configleeloolsso->default_student_position;
         if ($usercreateflag) {
@@ -234,7 +234,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 $isadmin = '';
             }
             $usertype = 'student';
-            $ssoconfig = get_config('leeloolxp_tracking_sso');
+            $ssoconfig = get_config('auth_leeloolxp_tracking_sso');
             $userapproval = $ssoconfig->required_aproval_student;
             $lastlogin = date('Y-m-d h:i:s', $USER->lastlogin);
             $fullname = ucfirst($USER->firstname) . " " . ucfirst($USER->middlename) . " " . ucfirst($USER->lastname);
