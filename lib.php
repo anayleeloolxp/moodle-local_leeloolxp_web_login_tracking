@@ -40,7 +40,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
     $cookiename = "user_email";
     $cookievalue = $useremail;
-    setcookie($cookiename, $cookievalue, time() + (86400 * 30), "/");
+    //setcookie($cookiename, $cookievalue, time() + (86400 * 30), "/");
     if ($useremail != '' && $useremail != 'root@localhost') {
         echo '<script type="text/javascript">
 			var d = new Date();
