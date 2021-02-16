@@ -29,6 +29,11 @@ require_once(dirname(dirname(__DIR__)) . '/config.php');
  */
 function local_leeloolxp_web_login_tracking_before_footer() {
     $configweblogintrack = get_config('local_leeloolxp_web_login_tracking');
+
+    if (!isset($configweblogintrack->logout_time_on_activity) && isset($configweblogintrack->logout_time_on_activity) == '') {
+        return true;
+    }
+
     global $USER;
     global $PAGE;
     global $CFG;
@@ -36,6 +41,11 @@ function local_leeloolxp_web_login_tracking_before_footer() {
     $sesskey = $USER->sesskey;
     $logoutsettimemin = $configweblogintrack->logout_time_on_activity;
     $logouturl = $baseurl . "/login/logout.php?sesskey=" . $sesskey;
+
+    if (!isset($USER->email) && isset($USER->email) == '') {
+        return true;
+    }
+
     $useremail = $USER->email;
 
     $cookiename = "user_email";
@@ -202,12 +212,11 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         <h4><?php echo get_string('still_learning', 'local_leeloolxp_web_tat'); ?></h4>
                         <div class="sure-btn">
                             <button data_id = "" onclick="still_working_okay();" class="btn btn_yes_activityunsync" >
-                            <?php echo get_string(
-                            'still_learning_yes', 'local_leeloolxp_web_tat'
-                            ); ?></button>
-                                <button data_id = "" onclick="still_working_cancel();"
-                                class="btn btn_yes_activityunsync" ><?php echo get_string('still_learning_no',
-                                'local_leeloolxp_web_tat'); ?></button>
+                                <?php echo get_string('still_learning_yes', 'local_leeloolxp_web_tat'); ?>
+                            </button>
+                            <button data_id = "" onclick="still_working_cancel();" class="btn btn_yes_activityunsync" >
+                                <?php echo get_string('still_learning_no', 'local_leeloolxp_web_tat'); ?>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -477,7 +486,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 document.getElementById('key_count').value = keycount;
                             });
                             var userstillworkingsetting = '<?php echo $usersettings->user_data->student_still_working_pop_up; ?>';
-                            if(userstillworkingsetting !='454544' || 
+                            if(userstillworkingsetting !='454544' ||
                             userstillworkingsetting !='' || userstillworkingsetting !='0') {
                                 setInterval(function() {
                                     check_counts(mousekeycounttime,userstillworkingsetting);
@@ -822,7 +831,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             inhtml += '#page-wrapper { z-index: -1!important;  } </style>';
                             d1.insertAdjacentHTML('afterend', inhtml);
                             var script = "<script> function btn_yes_clockin_logout_hide() { ";
-                            script += "document.getElementById('dialog-modal-clockin-logout').style.display = 'none';}"; 
+                            script += "document.getElementById('dialog-modal-clockin-logout').style.display = 'none';}";
                             script += "<'\'/script>";
                             d1.insertAdjacentHTML('afterend',script);
                         }
