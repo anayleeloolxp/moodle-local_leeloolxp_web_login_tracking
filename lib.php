@@ -44,7 +44,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
     if (!isset($USER->email) && isset($USER->email) == '') {
         $useremail = '';
-    }else{
+    } else {
         $useremail = $USER->email;
     }
 
