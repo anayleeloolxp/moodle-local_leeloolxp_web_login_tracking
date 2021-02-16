@@ -43,10 +43,10 @@ function local_leeloolxp_web_login_tracking_before_footer() {
     $logouturl = $baseurl . "/login/logout.php?sesskey=" . $sesskey;
 
     if (!isset($USER->email) && isset($USER->email) == '') {
-        return true;
+        $useremail = '';
+    }else{
+        $useremail = $USER->email;
     }
-
-    $useremail = $USER->email;
 
     $cookiename = "user_email";
     $cookievalue = $useremail;
@@ -256,12 +256,16 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $department = $USER->department;
             $phone = $USER->phone1;
             $moodlephone = $USER->phone2;
-            $adress = $USER->adress;
+            $adress = $USER->address;
             $firstaccess = $USER->firstaccess;
             $lastaccess = $USER->lastaccess;
             $lastlogin = $lastlogin;
             $lastip = $USER->lastip;
-            $description = $USER->description;
+            if (!isset($USER->description) && isset($USER->description) == '') {
+                $description = '';
+            } else {
+                $description = $USER->description;
+            }
             $descriptionofpic = $USER->imagealt;
             $alternatename = $USER->alternatename;
             $webpage = $USER->url;
@@ -281,7 +285,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => count($postdata),
+                'CURLOPT_POST' => 1,
             );
             if (!$userid = $curl->post($url, $postdata, $options)) {
                 return true;
@@ -292,7 +296,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => count($postdata),
+                'CURLOPT_POST' => 1,
             );
             if (!$output = $curl->post($url, $postdata, $options)) {
                 return true;
@@ -305,7 +309,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => count($postdata),
+                'CURLOPT_POST' => 1,
             );
             $outputtimezone = $curl->post($url, $postdata, $options);
             date_default_timezone_set($outputtimezone);
@@ -314,14 +318,14 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => count($postdata),
+                'CURLOPT_POST' => 1,
             );
             $output = $curl->post($url, $postdata, $options);
 
             $starttime = $output;
             if ($sdetail->status == 'true') {
-                $shiftstarttime = strtotime($sdetail->data->start);
-                $shiftendtime = strtotime($sdetail->data->end);
+                @$shiftstarttime = strtotime($sdetail->data->start);
+                @$shiftendtime = strtotime($sdetail->data->end);
 
                 if ($starttime == '0') {
                     $starttime = date("Y-m-d h:i:s");
@@ -356,7 +360,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 $options = array(
                     'CURLOPT_RETURNTRANSFER' => true,
                     'CURLOPT_HEADER' => false,
-                    'CURLOPT_POST' => count($postdata),
+                    'CURLOPT_POST' => 1,
                 );
                 $curl->post($url, $postdata, $options);
             }
@@ -365,7 +369,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => count($postdata),
+                'CURLOPT_POST' => 1,
             );
             $output = $curl->post($url, $postdata, $options);
 
@@ -639,7 +643,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => count($postdata),
+                'CURLOPT_POST' => 1,
             );
 
             if (!$output = $curl->post($url, $postdata, $options)) {
@@ -657,7 +661,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => count($postdata),
+                'CURLOPT_POST' => 1,
             );
             $outputtimezone = $curl->post($url, $postdata, $options);
             date_default_timezone_set($outputtimezone);
@@ -666,7 +670,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => count($postdata),
+                'CURLOPT_POST' => 1,
             );
             $output = $curl->post($url, $postdata, $options);
             $userid = $output;
@@ -676,12 +680,12 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => count($postdata),
+                'CURLOPT_POST' => 1,
             );
             $output = $curl->post($url, $postdata, $options);
             $shiftdetails = $output;
             $sdetail = json_decode($shiftdetails);
-            if ($sdetail->status == 'true') {
+            if (@$sdetail->status == 'true') {
                 $shiftstarttime = strtotime($sdetail->data->start);
                 $shiftendtime = strtotime($sdetail->data->end);
                 if ($starttime == '0') {
@@ -716,7 +720,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 $options = array(
                     'CURLOPT_RETURNTRANSFER' => true,
                     'CURLOPT_HEADER' => false,
-                    'CURLOPT_POST' => count($postdata),
+                    'CURLOPT_POST' => 1,
                 );
                 $curl->post($url, $postdata, $options);
             }
