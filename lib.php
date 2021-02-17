@@ -75,13 +75,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         $wannatrackmessage = get_string('wanna_track_message', 'local_leeloolxp_web_login_tracking');
         $liacnsekey = $configweblogintrack->teamnio_web_license;
         $popupison = $configweblogintrack->web_loginlogout_popup;
-        $postdata = '&license_key=' . $liacnsekey;
+        $postdata = array('license_key' => $liacnsekey);
         $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
         $curl = new curl;
         $options = array(
             'CURLOPT_RETURNTRANSFER' => true,
             'CURLOPT_HEADER' => false,
-            'CURLOPT_POST' => 1,
+            'CURLOPT_POST' => count($postdata),
         );
 
         if (!$output = $curl->post($url, $postdata, $options)) {
@@ -100,7 +100,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         $options = array(
             'CURLOPT_RETURNTRANSFER' => true,
             'CURLOPT_HEADER' => false,
-            'CURLOPT_POST' => 1,
+            'CURLOPT_POST' => count($postdata),
         );
         if (!$output = $curl->post($url, $postdata, $options)) {
             return true;
@@ -117,7 +117,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         $options = array(
             'CURLOPT_RETURNTRANSFER' => true,
             'CURLOPT_HEADER' => false,
-            'CURLOPT_POST' => 1,
+            'CURLOPT_POST' => count($postdata),
         );
         if (!$userstatusonteamnio = $curl->post($url, $postdata, $options)) {
             return true;
@@ -133,8 +133,12 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     <div id="dialog" >
                         <h4><?php echo $wannatrackmessage; ?></h4>
                         <div class="sure-btn">
-                            <button data_id = "" onclick="btn_yes_clockin_start();" class="btn btn_yes_activityunsync" >Yes</button>
-                            <button data_id = "" onclick="btn_no_clockin_start();" class="btn btn_yes_activityunsync" >No</button>
+                            <button data_id = "" onclick="btn_yes_clockin_start();" class="btn btn_yes_activityunsync" >
+                                <?php echo get_string('yes', 'local_leeloolxp_web_login_tracking'); ?>
+                            </button>
+                            <button data_id = "" onclick="btn_no_clockin_start();" class="btn btn_yes_activityunsync" >
+                                <?php echo get_string('no', 'local_leeloolxp_web_login_tracking'); ?>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -285,7 +289,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => 1,
+                'CURLOPT_POST' => count($postdata),
             );
             if (!$userid = $curl->post($url, $postdata, $options)) {
                 return true;
@@ -296,7 +300,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => 1,
+                'CURLOPT_POST' => count($postdata),
             );
             if (!$output = $curl->post($url, $postdata, $options)) {
                 return true;
@@ -309,7 +313,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => 1,
+                'CURLOPT_POST' => count($postdata),
             );
             $outputtimezone = $curl->post($url, $postdata, $options);
             date_default_timezone_set($outputtimezone);
@@ -318,7 +322,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => 1,
+                'CURLOPT_POST' => count($postdata),
             );
             $output = $curl->post($url, $postdata, $options);
 
@@ -354,13 +358,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         }
                     }
                 }
-                $postdata = '&user_id=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
+                $postdata = array('user_id' => $userid, 'start_status' => $starttimestatus, 'end_status' => $endtimestatus);
                 $url = $teamniourl . '/admin/sync_moodle_course/update_attendance_status/';
                 $curl = new curl;
                 $options = array(
                     'CURLOPT_RETURNTRANSFER' => true,
                     'CURLOPT_HEADER' => false,
-                    'CURLOPT_POST' => 1,
+                    'CURLOPT_POST' => count($postdata),
                 );
                 $curl->post($url, $postdata, $options);
             }
@@ -369,7 +373,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => 1,
+                'CURLOPT_POST' => count($postdata),
             );
             $output = $curl->post($url, $postdata, $options);
 
@@ -423,9 +427,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                                 maindiv += '<div class="dialog-modal-inn"><div id="dialog" ><h4>';
                                 maindiv += '<?php echo $wannatrackmessage; ?></h4><div class="sure-btn">';
                                 maindiv += '<button data_id = "" onclick="btn_yes_clockin_start();"';
-                                maindiv += ' class="btn btn_yes_activityunsync" >Yes</button>';
+                                maindiv += ' class="btn btn_yes_activityunsync" ><?php echo get_string('yes', 'local_leeloolxp_web_login_tracking'); ?></button>';
                                 maindiv += '<button data_id = "" onclick="btn_no_clockin_start();"';
-                                maindiv += ' class="btn btn_yes_activityunsync" >No</button>';
+                                maindiv += ' class="btn btn_yes_activityunsync" ><?php echo get_string('no', 'local_leeloolxp_web_login_tracking'); ?></button>';
                                 maindiv += '</div></div></div></div><style type="text/css">';
                                 maindiv += '.dialog-modal {align-self: center;position: fixed;top: 0;left: 0;';
                                 maindiv += 'width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);';
@@ -637,13 +641,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
             $useremail = $_COOKIE['popuptlt'];
             $liacnsekey = $configweblogintrack->teamnio_web_license;
-            $postdata = '&license_key=' . $liacnsekey;
+            $postdata = array('license_key' => $liacnsekey);
             $url = 'https://leeloolxp.com/api_moodle.php/?action=page_info';
             $curl = new curl;
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => 1,
+                'CURLOPT_POST' => count($postdata),
             );
 
             if (!$output = $curl->post($url, $postdata, $options)) {
@@ -661,7 +665,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => 1,
+                'CURLOPT_POST' => count($postdata),
             );
             $outputtimezone = $curl->post($url, $postdata, $options);
             date_default_timezone_set($outputtimezone);
@@ -670,7 +674,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => 1,
+                'CURLOPT_POST' => count($postdata),
             );
             $output = $curl->post($url, $postdata, $options);
             $userid = $output;
@@ -680,7 +684,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_HEADER' => false,
-                'CURLOPT_POST' => 1,
+                'CURLOPT_POST' => count($postdata),
             );
             $output = $curl->post($url, $postdata, $options);
             $shiftdetails = $output;
@@ -715,12 +719,12 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         }
                     }
                 }
-                $postdata = '&userid=' . $userid . '&start_status=' . $starttimestatus . '&end_status=' . $endtimestatus;
+                $postdata = array('userid' => $userid, 'start_status' => $starttimestatus, 'end_status' => $endtimestatus);
                 $curl = new curl;
                 $options = array(
                     'CURLOPT_RETURNTRANSFER' => true,
                     'CURLOPT_HEADER' => false,
-                    'CURLOPT_POST' => 1,
+                    'CURLOPT_POST' => count($postdata),
                 );
                 $curl->post($url, $postdata, $options);
             }
@@ -732,7 +736,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         <h4><?php echo $trackerstop; ?></h4>
                         <div class="sure-btn">
                             <button data_id = "" onclick="btn_yes_clockin_logout_hide();"
-                            class="btn btn_yes_activityunsync" >Ok</button>
+                            class="btn btn_yes_activityunsync" ><?php echo get_string('ok', 'local_leeloolxp_web_login_tracking'); ?></button>
                         </div>
                     </div>
                 </div>
@@ -819,7 +823,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                             inhtml += '<div id="dialog" ><h4><?php echo $trackerstop; ?></h4>';
                             inhtml += '<div class="sure-btn"><button data_id = ""';
                             inhtml += ' onclick="btn_yes_clockin_logout_hide();"';
-                            inhtml += ' class="btn btn_yes_activityunsync" >Ok</button></div></div></div></div>';
+                            inhtml += ' class="btn btn_yes_activityunsync" ><?php echo get_string('ok', 'local_leeloolxp_web_login_tracking'); ?></button></div></div></div></div>';
                             inhtml += '<style type="text/css"> .dialog-modal {align-self: center;position: fixed;top: 0;';
                             inhtml += 'left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);';
                             inhtml += 'display: flex;align-items: center;justify-content: center;}.';

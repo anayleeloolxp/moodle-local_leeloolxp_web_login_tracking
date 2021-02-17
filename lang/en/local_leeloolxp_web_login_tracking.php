@@ -42,3 +42,6 @@ $string['web_teamnio_license_we'] = 'Leeloo LXP License ID';
 $string['logout_time_on_activity_help_we'] = "Leeloo LXP will first show the idle time
 pop-up if no activity is registered, according to Leeloo LXP backend settings.";
 $string['lable_logout_time_on_activity_we'] = "Idle time auto-logout (in minutes):";
+$string['yes'] = "Yes";
+$string['no'] = "No";
+$string['ok'] = "Ok";
