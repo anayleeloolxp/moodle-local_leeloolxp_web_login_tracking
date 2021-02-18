@@ -183,7 +183,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 text-decoration: none;
                 outline: none;
                 box-shadow: none;
-                margin: 10px 0;
+                margin: 10px;
             }
             .dialog-modal-inn div#dialog {
                 font-size: 17px;
@@ -234,7 +234,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 dialog-modal-inn h4{font-weight:400;margin:0 0 25px;font-size:25px}
                 .dialog-modal-inn .sure-btn button{font-size:20px;padding:.5rem 3rem;color:#fff;
                 background-color:#74cfd0;border:none;display:inline-block;
-                text-decoration:none;outline:0;box-shadow:none;margin:10px 0}
+                text-decoration:none;outline:0;box-shadow:none;margin:10px}
                 .dialog-modal-inn div#dialog{font-size:17px}.dialog-modal-inn p{font-size:19px}
                 .dialog-modal-inn h3{font-weight:500;font-size:22px;color:#f60000}
                 .sure-btn{margin:50px 0 0}.anymore-link{margin:15px 0 0}
@@ -777,7 +777,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     text-decoration: none;
                     outline: none;
                     box-shadow: none;
-                    margin: 10px 0;
+                    margin: 10px;
                 }
                 .dialog-modal-inn div#dialog {
                     font-size: 17px;
