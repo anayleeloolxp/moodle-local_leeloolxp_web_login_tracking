@@ -47,3 +47,18 @@ How it works
 • If the user is not doing anything (idle), (s)he will first see the idle time popup. If (s)he doesn’t confirm, (s)he will be logged out. Both these times are customizable.
 
 • If login/logout popups are enabled, they also get a popup on log out
+
+Note: This plugin depends the Leeloo LXP SSO (auth_leeloolxp_tracking_sso) plugin.
+
+Note: This plugin requires a subscription to Leeloo LXP: https://leeloolxp.com/
+Leeloo LXP offers several free modules to enhance your Moodle LMS.
+
+To subscribe, please go to https://leeloolxp.com/ and follow the steps to register your account.
+You will first create an account and provide your organization information.
+
+We will install the Leeloo LXP Core bundle for you, free of charge.
+
+Once your account is created, you can use your free Leeloo LXP Core, or upgrade to a bigger bundle.
+
+Both the Login & Attendance Tracker and the Learning Activities Tracker are included with the Leeloo LXP ACHIEVE bundle.
+Your institution might be eligible for a free or a discounted upgrade.

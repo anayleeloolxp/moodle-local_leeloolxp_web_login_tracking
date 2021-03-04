@@ -24,10 +24,10 @@
  */
 defined('MOODLE_INTERNAL') || die();
 $plugin->component = 'local_leeloolxp_web_login_tracking';
-$plugin->release = '1.0';
-$plugin->version = 2020050503;
+$plugin->release = '1.1';
+$plugin->version = 2021030101;
 $plugin->requires = 2019052003;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = array(
-    'auth_leeloolxp_tracking_sso' => 2020092601
+    'auth_leeloolxp_tracking_sso' => 2020092601,
 );
