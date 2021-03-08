@@ -45,3 +45,8 @@ $string['lable_logout_time_on_activity_we'] = "Idle time auto-logout (in minutes
 $string['yes'] = "Yes";
 $string['no'] = "No";
 $string['ok'] = "Ok";
+$string['privacy:metadata'] = 'In order to integrate with Leeloo LXP, some user
+data need to be sent to the Leeloo LXP client application (remote system).';
+$string['privacy:metadata:username'] = 'The username is sent to Leeloo LXP to allow a better user experience.';
+$string['privacy:metadata:fullname'] = 'The user\'s full name is sent to Leeloo LXP to allow a better user experience.';
+$string['privacy:metadata:email'] = 'The user\'s email is sent to Leeloo LXP to allow a better user experience.';
