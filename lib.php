@@ -95,7 +95,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             return true;
         }
 
-        $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail;
+        $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . base64_encode($useremail);
         $curl = new curl;
         $options = array(
             'CURLOPT_RETURNTRANSFER' => true,
@@ -112,7 +112,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             }
         }
 
-        $url = $teamniourl . '/admin/sync_moodle_course/check_user_llt_status_by_email/' . $useremail;
+        $url = $teamniourl . '/admin/sync_moodle_course/check_user_llt_status_by_email/' . base64_encode($useremail);
         $curl = new curl;
         $options = array(
             'CURLOPT_RETURNTRANSFER' => true,
@@ -250,7 +250,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $ssoconfig = get_config('auth_leeloolxp_tracking_sso');
             $userapproval = $ssoconfig->required_aproval_student;
             $lastlogin = date('Y-m-d h:i:s', $USER->lastlogin);
-            $fullname = ucfirst($USER->firstname) . " " . ucfirst($USER->middlename) . " " . ucfirst($USER->lastname);
+            $fullname = fullname($USER);
             $city = $USER->city;
             $country = $USER->country;
             $timezone = $USER->timezone;
@@ -274,7 +274,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $alternatename = $USER->alternatename;
             $webpage = $USER->url;
             $url = $teamniourl . '/admin/sync_moodle_course/get_create_user/?user_email='
-                . $useremail . '&username=' . $username . '&name=' . $fullname . "&user_designation="
+                . base64_encode($useremail) . '&username=' . base64_encode($username) . '&name=' . $fullname . "&user_designation="
                 . $designation . "&is_company_admin=" . $isadmin . "&user_approval="
                 . $userapproval . "&can_user_create=1&user_type="
                 . $usertype . "&city=" . $city . "&country=" . $country . "&timezone=" . $timezone . "&skype="
@@ -669,7 +669,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             );
             $outputtimezone = $curl->post($url, $postdata, $options);
             date_default_timezone_set($outputtimezone);
-            $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail;
+            $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . base64_encode($useremail);
             $curl = new curl;
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,
@@ -679,7 +679,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             $output = $curl->post($url, $postdata, $options);
             $userid = $output;
             $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid;
-            $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . $useremail;
+            $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . base64_encode($useremail);
             $curl = new curl;
             $options = array(
                 'CURLOPT_RETURNTRANSFER' => true,

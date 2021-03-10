@@ -45,8 +45,30 @@ $string['lable_logout_time_on_activity_we'] = "Idle time auto-logout (in minutes
 $string['yes'] = "Yes";
 $string['no'] = "No";
 $string['ok'] = "Ok";
+
 $string['privacy:metadata'] = 'In order to integrate with Leeloo LXP, some user
 data need to be sent to the Leeloo LXP client application (remote system).';
-$string['privacy:metadata:username'] = 'The username is sent to Leeloo LXP to allow a better user experience.';
-$string['privacy:metadata:fullname'] = 'The user\'s full name is sent to Leeloo LXP to allow a better user experience.';
+$string['privacy:metadata:leeloolxp_web_login_tracking'] = 'In order to integrate with Leeloo LXP, some user
+data need to be sent to the Leeloo LXP client application (remote system).';
+$string['privacy:metadata:id'] = 'The user ID';
+$string['privacy:metadata:username'] = 'The user\'s username is sent to Leeloo LXP to allow a better user experience.';
 $string['privacy:metadata:email'] = 'The user\'s email is sent to Leeloo LXP to allow a better user experience.';
+$string['privacy:metadata:fullname'] = 'The user\'s full name is sent to Leeloo LXP to allow a better user experience.';
+$string['privacy:metadata:city'] = 'The city of the user.';
+$string['privacy:metadata:country'] = 'The country that the user is in.';
+$string['privacy:metadata:timezone'] = 'The timezone of the user';
+$string['privacy:metadata:skype'] = 'The Skype identifier of the user';
+$string['privacy:metadata:idnumber'] = 'An identification number given by the institution';
+$string['privacy:metadata:institution'] = 'The institution that this user is a member of.';
+$string['privacy:metadata:department'] = 'The department that this user can be found in.';
+$string['privacy:metadata:phone1'] = 'A phone number for the user.';
+$string['privacy:metadata:phone2'] = 'An additional phone number for the user.';
+$string['privacy:metadata:address'] = 'The address of the user.';
+$string['privacy:metadata:firstaccess'] = 'The time that this user first accessed the site.';
+$string['privacy:metadata:lastaccess'] = 'The time that the user last accessed the site.';
+$string['privacy:metadata:lastlogin'] = 'The last login of this user.';
+$string['privacy:metadata:lastip'] = 'The last login ip of this user.';
+$string['privacy:metadata:description'] = 'General details about this user.';
+$string['privacy:metadata:imagealt'] = 'Alternative text for the user\'s image.';
+$string['privacy:metadata:alternatename'] = 'An alternative name for the user.';
+$string['privacy:metadata:url'] = 'A URL related to this user.';
