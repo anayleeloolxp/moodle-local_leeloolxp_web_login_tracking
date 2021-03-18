@@ -166,7 +166,34 @@ function local_leeloolxp_web_login_tracking_checklltstatus($teamniourl, $userema
  *
  * @return mixed user id or no
  */
-function local_leeloolxp_web_login_tracking_getuserid($teamniourl, $useremail, $username, $fullname, $designation, $isadmin, $userapproval, $usertype, $city, $country, $timezone, $skype, $idnumber, $institution, $department, $phone, $moodlephone, $adress, $firstaccess, $lastaccess, $lastlogin, $lastip, $description, $descriptionofpic, $alternatename, $webpage) {
+function local_leeloolxp_web_login_tracking_getuserid(
+    $teamniourl,
+    $useremail,
+    $username,
+    $fullname,
+    $designation,
+    $isadmin,
+    $userapproval,
+    $usertype,
+    $city,
+    $country,
+    $timezone,
+    $skype,
+    $idnumber,
+    $institution,
+    $department,
+    $phone,
+    $moodlephone,
+    $adress,
+    $firstaccess,
+    $lastaccess,
+    $lastlogin,
+    $lastip,
+    $description,
+    $descriptionofpic,
+    $alternatename,
+    $webpage
+) {
 
     global $SESSION;
 
@@ -523,14 +550,14 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
             localStorage.setItem("tracking_activity_id", "null");
 
             var d = new Date();
-			var cname = "popuptlt";
-			var cvalue = "";
-			var exdays = "1";
-			d.setTime(d.getTime() + (exdays*24*60*60*1000));
-			var expires = "expires="+ d.toUTCString();
-			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            var cname = "popuptlt";
+            var cvalue = "";
+            var exdays = "1";
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         </script>
-    <?php
+        <?php
     }
 }
 
@@ -1065,7 +1092,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         }
                     };
                 </script>
-            <?php
+                <?php
             }
     } else {
         local_leeloolxp_web_login_tracking_onlogoutpage();
