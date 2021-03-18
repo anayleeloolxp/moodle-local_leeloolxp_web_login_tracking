@@ -359,6 +359,7 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
         if ($_COOKIE['popuptlt'] == '') {
             return true;
         }
+        $postdata = array();
 
         $configweblogintrack = get_config('local_leeloolxp_web_login_tracking');
 
@@ -376,32 +377,39 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
         }
         date_default_timezone_set($outputtimezone);
 
-        $output = local_leeloolxp_web_login_tracking_checkuser($teamniourl, $useremail);
+        $userid = local_leeloolxp_web_login_tracking_checkuser($teamniourl, $useremail);
 
-        $userid = $output;
+        $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid;
+        $curl = new curl;
+        $options = array(
+            'CURLOPT_RETURNTRANSFER' => true,
+            'CURLOPT_HEADER' => false,
+            'CURLOPT_POST' => count($postdata),
+        );
+        $starttime = $curl->post($url, $postdata, $options);
 
         $shiftdetails = local_leeloolxp_web_login_tracking_shiftdetails($teamniourl, $userid);
         if ($shiftdetails == 'no') {
             return true;
         }
 
-        $sdetail = json_decode($shiftdetails);
-        if (@$sdetail->status == 'true') {
-            if (isset($sdetail->data->start)) {
-                $shiftstarttime = strtotime($sdetail->data->start);
-                $shiftendtime = strtotime($sdetail->data->end);
+        $lgsdetail = json_decode($shiftdetails);
+        if (@$lgsdetail->status == 'true') {
+            if (isset($lgsdetail->data->start)) {
+                $lgshiftstarttime = strtotime($lgsdetail->data->start);
+                $lgshiftendtime = strtotime($lgsdetail->data->end);
                 if ($starttime == '0') {
                     $starttime = date("Y-m-d h:i:s");
                 }
                 $actualstarttime = strtotime(date('h:i A', strtotime($starttime)));
                 $actualendtime = strtotime("now");
-                if ($actualstarttime >= $shiftendtime) {
+                if ($actualstarttime >= $lgshiftendtime) {
                     $starttimestatus = 'Absent';
                 } else {
-                    if ($actualstarttime < $shiftstarttime) {
+                    if ($actualstarttime < $lgshiftstarttime) {
                         $starttimestatus = 'On Time';
                     } else {
-                        if ($actualstarttime >= $shiftstarttime) {
+                        if ($actualstarttime >= $lgshiftstarttime) {
                             $starttimestatus = 'Late';
                         }
                     }
@@ -409,10 +417,10 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
                 if ($starttimestatus == 'Absent') {
                     $endtimestatus = 'Absent';
                 } else {
-                    if ($actualendtime <= $shiftendtime) {
+                    if ($actualendtime <= $lgshiftendtime) {
                         $endtimestatus = 'Left Early';
                     } else {
-                        if ($actualendtime > $shiftendtime) {
+                        if ($actualendtime > $lgshiftendtime) {
                             $endtimestatus = 'On Time';
                         }
                     }
