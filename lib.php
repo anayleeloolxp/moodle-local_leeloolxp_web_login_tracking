@@ -573,6 +573,10 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
  * Plugin to sync user's attendence and tracking to LeelooLXP account of the Moodle Admin
  */
 function local_leeloolxp_web_login_tracking_before_footer() {
+    $configleeloolsso = get_config('auth_leeloolxp_tracking_sso');
+    if (!isset($configleeloolsso->web_new_user_student) && isset($configleeloolsso->web_new_user_student) == '') {
+        return true;
+    }
     $configweblogintrack = get_config('local_leeloolxp_web_login_tracking');
 
     if (!isset($configweblogintrack->logout_time_on_activity) && isset($configweblogintrack->logout_time_on_activity) == '') {
@@ -615,7 +619,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 			var expires = "expires="+ d.toUTCString();
 			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 			</script>';
-        $configleeloolsso = get_config('auth_leeloolxp_tracking_sso');
         $usercreateflag = $configleeloolsso->web_new_user_student;
         $designation = $configleeloolsso->default_student_position;
         if ($usercreateflag) {
