@@ -29,10 +29,10 @@ Attendance to your Moodle and track your students
 login,logout and attendance.</p>';
 $string['local_leeloolxp_web_login_trackingsettings'] = 'Settings';
 $string['not_login_message'] = 'Please log in the Leeloo LXP Desktop App';
-$string['wanna_track_message'] = 'Do you want to mark your attendance?';
+$string['wanna_track_message'] = 'Vous voulez marquer votre présence ?';
 $string['error_message_tracker_stop'] = "Leeloo LXP client didn\'t stop due to a
 technical issue. Please stop the tracker manually.";
-$string['tracker_stop'] = "You’re now logged out, your attendance has been registered.";
+$string['tracker_stop'] = "Vous êtes maintenant déconnecté, votre présence a été enregistrée";
 $string['web_loginlogout'] = 'Enable Leeloo LXP Login/Logout and Attendance Tracking';
 $string['web_loginlogoutexplain'] = 'Starts the Leeloo LXP time tracker when a user
 logs in and stops the tracker when the user logs out.';
@@ -42,12 +42,12 @@ $string['web_teamnio_license_we'] = 'Leeloo LXP License ID';
 $string['logout_time_on_activity_help_we'] = "Leeloo LXP will first show the idle time
 pop-up if no activity is registered, according to Leeloo LXP backend settings.";
 $string['lable_logout_time_on_activity_we'] = "Idle time auto-logout (in minutes):";
-$string['yes'] = "Yes";
-$string['no'] = "No";
+$string['yes'] = "Oui";
+$string['no'] = "Non";
 $string['ok'] = "Ok";
-$string['still_learning'] = 'Êtes-vous toujours connecté ?';
-$string['still_learning_yes'] = 'Yes!';
-$string['still_learning_no'] = "No, I'm not";
+$string['still_learning'] = 'Êtes-vous toujours en train d\'apprendre ?';
+$string['still_learning_yes'] = 'Oui!';
+$string['still_learning_no'] = "Non, j'ai fini";
 
 $string['privacy:metadata'] = 'In order to integrate with Leeloo LXP, some user
 data need to be sent to the Leeloo LXP client application (remote system).';
