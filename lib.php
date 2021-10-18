@@ -599,6 +599,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
     $baseurl = $CFG->wwwroot;
     $sesskey = $USER->sesskey;
+    $starttimestatus = '';
+    $endtimestatus = '';
 
     $logoutsettimemin = $configweblogintrack->logout_time_on_activity;
     $logouturl = $baseurl . "/login/logout.php?sesskey=" . $sesskey;
@@ -946,10 +948,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                     function loadDoc_once(userid,time) {
                         var xhttp = new XMLHttpRequest();
+                        starttimestatus =  "<?= $starttimestatus ?>";
+                        endtimestatus =  "<?= $endtimestatus ?>";
+
                         xhttp.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {}
                         };
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid, false);
+                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid+"&starttimestatus="+starttimestatus+"&endtimestatus="+endtimestatus, false);
                         xhttp.send();
                     }
 
@@ -1072,9 +1077,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             </script>
             <?php
-            if ($PAGE->pagetype != 'mod-leeloolxpvc-conference'
-            || $PAGE->pagetype != 'mod-leeloolxpvc-view' || $PAGE->pagetype != 'mod-resource-view'
-            || $PAGE->pagetype != 'mod-leeloolxpvimeo-view' || $PAGE->pagetype != 'mod-forum-view'
+            if ($PAGE->pagetype != 'mod-wespher-conference'
+            || $PAGE->pagetype != 'mod-wespher-view' || $PAGE->pagetype != 'mod-resource-view'
+            || $PAGE->pagetype != 'mod-regularvideo-view' || $PAGE->pagetype != 'mod-forum-view'
             || $PAGE->pagetype != 'mod-book-view' || $PAGE->pagetype != 'mod-assign-view'
             || $PAGE->pagetype != 'mod-survey-view' || $PAGE->pagetype != 'mod-page-view'
             || $PAGE->pagetype != 'mod-quiz-view' || $PAGE->pagetype != 'mod-quiz-attempt'
