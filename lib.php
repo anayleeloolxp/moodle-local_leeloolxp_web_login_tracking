@@ -989,6 +989,18 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         document.getElementById('key_count').value = keycount;
                     });
 
+                    window.onmessage = function(e) {
+                        if (e.data == 'leeloo_social_click' || e.data == 'leeloo_hero_click') {
+                            mousecount++;
+                            document.getElementById('mouse_count').value = mousecount;
+                        }
+
+                        if (e.data == 'leeloo_social_key' || e.data == 'leeloo_hero_key') {
+                            keycount++;
+                            document.getElementById('key_count').value = keycount;
+                        }
+                    };
+
                     var userstillworkingsetting = '<?php echo $usersettings->user_data->student_still_working_pop_up; ?>';
                     if(userstillworkingsetting !='454544' ||
                     userstillworkingsetting !='' || userstillworkingsetting !='0') {
