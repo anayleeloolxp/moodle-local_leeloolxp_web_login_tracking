@@ -38,6 +38,9 @@ function local_leeloolxp_web_login_tracking_get_leelooinstall() {
         return $SESSION->leelooinstall;
     }
 
+    global $CFG;
+    require_once($CFG->dirroot . '/lib/filelib.php');
+
     $configweblogintrack = get_config('local_leeloolxp_web_login_tracking');
     $liacnsekey = $configweblogintrack->teamnio_web_license;
     $postdata = array('license_key' => $liacnsekey);
@@ -82,6 +85,9 @@ function local_leeloolxp_web_login_tracking_checkuser($teamniourl, $useremail) {
         return $SESSION->lltcheckemail;
     }
 
+    global $CFG;
+    require_once($CFG->dirroot . '/lib/filelib.php');
+
     $postdata = array();
 
     $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . base64_encode($useremail);
@@ -115,6 +121,9 @@ function local_leeloolxp_web_login_tracking_checklltstatus($teamniourl, $userema
     if (isset($SESSION->lltcheckstatus)) {
         return $SESSION->lltcheckstatus;
     }
+
+    global $CFG;
+    require_once($CFG->dirroot . '/lib/filelib.php');
 
     $postdata = array();
 
@@ -201,6 +210,9 @@ function local_leeloolxp_web_login_tracking_getuserid(
         return $SESSION->lltuserid;
     }
 
+    global $CFG;
+    require_once($CFG->dirroot . '/lib/filelib.php');
+
     $postdata = array(
         'user_email' => base64_encode($useremail),
         'username' => base64_encode($username),
@@ -263,6 +275,9 @@ function local_leeloolxp_web_login_tracking_shiftdetails($teamniourl, $userid) {
         return $SESSION->lltshiftdetails;
     }
 
+    global $CFG;
+    require_once($CFG->dirroot . '/lib/filelib.php');
+
     $postdata = array();
 
     $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid;
@@ -295,6 +310,9 @@ function local_leeloolxp_web_login_tracking_gettimezone($teamniourl) {
     if (isset($SESSION->llttimezone)) {
         return $SESSION->llttimezone;
     }
+
+    global $CFG;
+    require_once($CFG->dirroot . '/lib/filelib.php');
 
     $postdata = array();
 
@@ -330,6 +348,9 @@ function local_leeloolxp_web_login_tracking_tattctsetting($teamniourl, $userid) 
         return $SESSION->llttatsetting;
     }
 
+    global $CFG;
+    require_once($CFG->dirroot . '/lib/filelib.php');
+
     $postdata = array();
 
     $url = $teamniourl . '/admin/sync_moodle_course/get_user_settings_tct_tat/' . $userid;
@@ -359,6 +380,10 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
         if ($_COOKIE['popuptlt'] == '') {
             return true;
         }
+
+        global $CFG;
+        require_once($CFG->dirroot . '/lib/filelib.php');
+
         $postdata = array();
 
         $configweblogintrack = get_config('local_leeloolxp_web_login_tracking');
@@ -596,6 +621,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
     global $USER;
     global $PAGE;
     global $CFG;
+
+    require_once($CFG->dirroot . '/lib/filelib.php');
 
     $baseurl = $CFG->wwwroot;
     $sesskey = $USER->sesskey;
