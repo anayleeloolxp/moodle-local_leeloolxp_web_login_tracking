@@ -370,6 +370,56 @@ function local_leeloolxp_web_login_tracking_tattctsetting($teamniourl, $userid) 
 }
 
 /**
+ * Function to get_attendance_info
+ *
+ * @param string $teamniourl the teamniourl
+ * @param string $userid the userid
+ *
+ * @return mixed output
+ */
+function local_leeloolxp_web_login_tracking_get_attendance_info($teamniourl, $userid) {
+
+    global $CFG;
+    require_once($CFG->dirroot . '/lib/filelib.php');
+
+    $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid;
+
+    $curl = new curl;
+    $options = array(
+        'CURLOPT_RETURNTRANSFER' => true,
+        'CURLOPT_HEADER' => false,
+        'CURLOPT_POST' => count($postdata),
+    );
+    $output = $curl->post($url, $postdata, $options);
+    return $output;
+}
+
+/**
+ * Function to update_attendance_status
+ *
+ * @param string $teamniourl the teamniourl
+ * @param array $postdata the postdata
+ *
+ * @return mixed output
+ */
+function local_leeloolxp_web_login_tracking_update_attendance_status($teamniourl, $postdata) {
+
+    global $CFG;
+    require_once($CFG->dirroot . '/lib/filelib.php');
+
+    $postdata = array('user_id' => $userid, 'start_status' => $starttimestatus, 'end_status' => $endtimestatus);
+    $url = $teamniourl . '/admin/sync_moodle_course/update_attendance_status/';
+    $curl = new curl;
+    $options = array(
+        'CURLOPT_RETURNTRANSFER' => true,
+        'CURLOPT_HEADER' => false,
+        'CURLOPT_POST' => count($postdata),
+    );
+    $output = $curl->post($url, $postdata, $options);
+    return $output;
+}
+
+/**
  * Function if user logs out
  *
  * @return mixed true or html echo
@@ -540,9 +590,9 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
             function btn_yes_clockin_logout_hide() {
                 document.getElementById('dialog-modal-clockin-logout').style.display = 'none';
             }
-            var userid = localStorage.getItem("login_userid", userid);
+            var userid = sessionStorage.getItem("login_userid", userid);
             var teamniourl = '<?php echo $teamniourl; ?>';
-            var ca = localStorage.getItem("tracked");
+            var ca = sessionStorage.getItem("tracked");
             if(ca=="1") {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
@@ -578,9 +628,9 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
                 xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+userid, false);
                  xhttp.send();
             }
-            localStorage.setItem("tracked",'0');
-            localStorage.setItem("tracked_cancel",'null');
-            localStorage.setItem("tracking_activity_id", "null");
+            sessionStorage.setItem("tracked",'0');
+            sessionStorage.setItem("tracked_cancel",'null');
+            sessionStorage.setItem("tracking_activity_id", "null");
 
             var d = new Date();
             var cname = "popuptlt";
@@ -873,16 +923,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         }
         date_default_timezone_set($outputtimezone);
 
-        $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid;
-        $curl = new curl;
-        $options = array(
-            'CURLOPT_RETURNTRANSFER' => true,
-            'CURLOPT_HEADER' => false,
-            'CURLOPT_POST' => count($postdata),
-        );
-        $output = $curl->post($url, $postdata, $options);
-
-        $starttime = $output;
+        $starttime = local_leeloolxp_web_login_tracking_get_attendance_info( $teamniourl, $userid );
+        
         if ($sdetail->status == 'true') {
             if (isset($sdetail->data->start)) {
                 @$shiftstarttime = strtotime($sdetail->data->start);
@@ -916,14 +958,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     }
                 }
                 $postdata = array('user_id' => $userid, 'start_status' => $starttimestatus, 'end_status' => $endtimestatus);
-                $url = $teamniourl . '/admin/sync_moodle_course/update_attendance_status/';
-                $curl = new curl;
-                $options = array(
-                    'CURLOPT_RETURNTRANSFER' => true,
-                    'CURLOPT_HEADER' => false,
-                    'CURLOPT_POST' => count($postdata),
-                );
-                $curl->post($url, $postdata, $options);
+                local_leeloolxp_web_login_tracking_update_attendance_status($teamniourl, $postdata);
             }
         }
         $output = local_leeloolxp_web_login_tracking_tattctsetting($teamniourl, $userid);
@@ -935,10 +970,10 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         ?>
         <script>
                 function btn_yes_clockin_start() {
-                    localStorage.setItem("tracked", "1");
+                    sessionStorage.setItem("tracked", "1");
                     document.getElementById('dialog-modal-clockin-start').style.display = 'none';
                     setTimeout(function(){
-                        var trackingon = localStorage.getItem("tracked");
+                        var trackingon = sessionStorage.getItem("tracked");
                         if(trackingon=='1') {
                             loadDoc_once(userid,60*1000);
                             setInterval(function() {
@@ -959,15 +994,15 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     }, 2000);
                 }
                 function btn_no_clockin_start() {
-                    localStorage.setItem("tracked", "0");
-                    localStorage.setItem("tracked_cancel",'1');
+                    sessionStorage.setItem("tracked", "0");
+                    sessionStorage.setItem("tracked_cancel",'1');
                     document.getElementById('dialog-modal-clockin-start').style.display = 'none';
                 }
                 var userid = '<?php echo $userid; ?>';
-                localStorage.setItem("login_userid", userid);
+                sessionStorage.setItem("login_userid", userid);
                 var teamniourl = '<?php echo $teamniourl; ?>';
-                var checkfirst =  localStorage.getItem("tracked");
-                var forpopup = localStorage.getItem('tracked_cancel');
+                var checkfirst =  sessionStorage.getItem("tracked");
+                var forpopup = sessionStorage.getItem('tracked_cancel');
                 var ispopup = '<?php echo $popupison; ?>';
 
 
@@ -997,9 +1032,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     }
 
                     var mousekeycounttime = setInterval(function() {
-                        var  forpopupcanceledsetagain  = localStorage.getItem('tracked_cancel');
+                        var  forpopupcanceledsetagain  = sessionStorage.getItem('tracked_cancel');
                         if(forpopupcanceledsetagain=='1') {
-                            localStorage.setItem("tracked_cancel",'1');
+                            sessionStorage.setItem("tracked_cancel",'1');
                         }
                     },  60*1000);
 
@@ -1049,7 +1084,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                     }
 
                     function check_counts(myVar,user_still_working_setting) {
-                        var forpopupcanceled = localStorage.getItem('tracked_cancel');
+                        var forpopupcanceled = sessionStorage.getItem('tracked_cancel');
                         if(forpopupcanceled=='1') {
                             return false;
                         }
@@ -1132,7 +1167,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             || $PAGE->pagetype != 'mod-label-view' || $PAGE->pagetype != 'mod-url-view') {?>
                 <script type="text/javascript">
                     window.onbeforeunload = function (e) {
-                        var tracking_on = localStorage.getItem("tracked");
+                        var tracking_on = sessionStorage.getItem("tracked");
                         if(tracking_on=='1') {
                             var xhttp = new XMLHttpRequest();
                             xhttp.onreadystatechange = function() {
