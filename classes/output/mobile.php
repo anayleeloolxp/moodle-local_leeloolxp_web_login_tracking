@@ -643,7 +643,7 @@ class mobile {
                 const myInterval = setInterval(function() {
                     var thisurl = window.location.href;
                     var checkifmorepage = thisurl.includes("/main/more");
-                    console.log(thisurl);
+                    //console.log(thisurl);
                     if( checkifmorepage ){
                         clearInterval(myInterval);
                         console.log("added addEventListener");
