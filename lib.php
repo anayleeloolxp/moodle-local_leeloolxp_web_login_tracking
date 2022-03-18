@@ -2035,8 +2035,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                         starttimestatus =  "<?= $starttimestatus ?>";
 
-                        endtimestatus =  "<?= $endtimestatus ?>";
-                        alert("<?= $actualstarttime .' < '. $shiftstarttime ?>")
+                        endtimestatus =  "<?= $endtimestatus ?>"; 
 
 
                         xhttp.onreadystatechange = function() {
