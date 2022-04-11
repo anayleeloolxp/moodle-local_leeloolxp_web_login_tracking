@@ -47,7 +47,7 @@ $string['no'] = "No";
 $string['ok'] = "Ok";
 $string['still_learning'] = 'Are you still learning?';
 $string['still_learning_yes'] = 'Yes!';
-$string['still_learning_no'] = "No, I\'m not";
+$string['still_learning_no'] = "No, I'm not";
 
 $string['privacy:metadata'] = 'In order to integrate with Leeloo LXP, some user
 data need to be sent to the Leeloo LXP client application (remote system).';
