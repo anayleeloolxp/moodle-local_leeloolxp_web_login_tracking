@@ -193,6 +193,9 @@ function local_leeloolxp_web_login_tracking_checkuser($teamniourl, $useremail) {
         'CURLOPT_HEADER' => false,
 
         'CURLOPT_POST' => count($postdata),
+        'CURLOPT_HTTPHEADER' => array(
+            'LeelooLXPToken: '.get_config('local_leeloolxpapi')->leelooapitoken.''
+        )
 
     );
 
@@ -267,6 +270,9 @@ function local_leeloolxp_web_login_tracking_checklltstatus($teamniourl, $userema
         'CURLOPT_HEADER' => false,
 
         'CURLOPT_POST' => count($postdata),
+        'CURLOPT_HTTPHEADER' => array(
+            'LeelooLXPToken: '.get_config('local_leeloolxpapi')->leelooapitoken.''
+        )
 
     );
 
@@ -499,6 +505,9 @@ function local_leeloolxp_web_login_tracking_getuserid(
         'CURLOPT_HEADER' => false,
 
         'CURLOPT_POST' => count($postdata),
+        'CURLOPT_HTTPHEADER' => array(
+            'LeelooLXPToken: '.get_config('local_leeloolxpapi')->leelooapitoken.''
+        )
 
     );
 
@@ -645,6 +654,9 @@ function local_leeloolxp_web_login_tracking_gettimezone($teamniourl) {
         'CURLOPT_HEADER' => false,
 
         'CURLOPT_POST' => count($postdata),
+        'CURLOPT_HTTPHEADER' => array(
+            'LeelooLXPToken: '.get_config('local_leeloolxpapi')->leelooapitoken.''
+        )
 
     );
 
@@ -719,6 +731,9 @@ function local_leeloolxp_web_login_tracking_tattctsetting($teamniourl, $userid) 
         'CURLOPT_HEADER' => false,
 
         'CURLOPT_POST' => count($postdata),
+        'CURLOPT_HTTPHEADER' => array(
+            'LeelooLXPToken: '.get_config('local_leeloolxpapi')->leelooapitoken.''
+        )
 
     );
 
@@ -779,6 +794,9 @@ function local_leeloolxp_web_login_tracking_get_attendance_info($teamniourl, $us
         'CURLOPT_HEADER' => false,
 
         'CURLOPT_POST' => count($postdata),
+        'CURLOPT_HTTPHEADER' => array(
+            'LeelooLXPToken: '.get_config('local_leeloolxpapi')->leelooapitoken.''
+        )
 
     );
 
@@ -829,6 +847,9 @@ function local_leeloolxp_web_login_tracking_update_attendance_status($teamniourl
         'CURLOPT_HEADER' => false,
 
         'CURLOPT_POST' => count($postdata),
+        'CURLOPT_HTTPHEADER' => array(
+            'LeelooLXPToken: '.get_config('local_leeloolxpapi')->leelooapitoken.''
+        )
 
     );
 
@@ -921,6 +942,9 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
             'CURLOPT_HEADER' => false,
 
             'CURLOPT_POST' => count($postdata),
+            'CURLOPT_HTTPHEADER' => array(
+                'LeelooLXPToken: '.get_config('local_leeloolxpapi')->leelooapitoken.''
+            )
 
         );
 
@@ -1022,6 +1046,9 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
                     'CURLOPT_HEADER' => false,
 
                     'CURLOPT_POST' => count($postdata),
+                    'CURLOPT_HTTPHEADER' => array(
+                        'LeelooLXPToken: '.get_config('local_leeloolxpapi')->leelooapitoken.''
+                    )
 
                 );
 
@@ -1259,7 +1286,7 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
 
                 };
 
-                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+userid, false);
+                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+userid+"&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>", false);
 
                  xhttp.send();
 
@@ -1991,7 +2018,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                             };
 
-                            xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/get_breacks/"+userid, true);
+                            xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/get_breacks/"+userid+"&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>", true);
 
                             xhttp.send();
 
@@ -2044,7 +2071,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                         };
 
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid+"&starttimestatus="+starttimestatus+"&endtimestatus="+endtimestatus, false);
+                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid+"&starttimestatus="+starttimestatus+"&endtimestatus="+endtimestatus+"&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>", false);
 
                         xhttp.send();
 
@@ -2066,7 +2093,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                         "/admin/sync_moodle_course/update_clockin_every_m/?user_id="+
 
-                        userid, true);
+                        userid+"&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>", true);
 
                         xhttp.send();
 
@@ -2364,7 +2391,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                             var newurl = teamniourl;
 
-                            newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/"+userid;
+                            newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/"+userid+"&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>";
 
                             xhttp.open("GET",newurl,true);
 

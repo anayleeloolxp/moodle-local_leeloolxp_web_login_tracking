@@ -373,7 +373,7 @@ class mobile {
                         xhttp.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {}
                         };
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid+"&starttimestatus="+starttimestatus+"&endtimestatus="+endtimestatus, false);
+                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid+"&starttimestatus="+starttimestatus+"&endtimestatus="+endtimestatus+"&installlogintoken='.$_COOKIE['installlogintoken'].'", false);
                         xhttp.send();
                     }
 
@@ -384,7 +384,7 @@ class mobile {
                         };
                         xhttp.open("GET", teamniourl+
                         "/admin/sync_moodle_course/update_clockin_every_m/?user_id="+
-                        userid, true);
+                        userid+"&installlogintoken='.$_COOKIE['installlogintoken'].'", true);
                         xhttp.send();
                     }
 
@@ -408,7 +408,7 @@ class mobile {
                                         }
                                     }
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/get_breacks/"+userid, true);
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/get_breacks/"+userid+"&installlogintoken='.$_COOKIE['installlogintoken'].'", true);
                                 xhttp.send();
                         }, 2000);
                     }
@@ -624,7 +624,7 @@ class mobile {
                                 }
                             }
                         };
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+userid, false);
+                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+userid+"&installlogintoken='.$_COOKIE['installlogintoken'].'", false);
                             xhttp.send();
                     }
                     sessionStorage.setItem("tracked","0");
@@ -687,7 +687,7 @@ class mobile {
                                     }
                                 };
                                 var newurl = teamniourl;
-                                newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/"+userid;
+                                newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/"+userid+"&installlogintoken='.$_COOKIE['installlogintoken'].'";
                                 xhttp.open("GET",newurl,true);
                                 xhttp.send();
                             }
