@@ -582,6 +582,9 @@ function local_leeloolxp_web_login_tracking_shiftdetails($teamniourl, $userid) {
         'CURLOPT_HEADER' => false,
 
         'CURLOPT_POST' => count($postdata),
+        'CURLOPT_HTTPHEADER' => array(
+            'LeelooLXPToken: '.get_config('local_leeloolxpapi')->leelooapitoken.''
+        )
 
     );
 
