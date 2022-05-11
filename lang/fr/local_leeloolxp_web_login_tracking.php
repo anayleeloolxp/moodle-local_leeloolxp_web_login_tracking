@@ -75,3 +75,4 @@ $string['privacy:metadata:description'] = 'General details about this user.';
 $string['privacy:metadata:imagealt'] = 'Alternative text for the user\'s image.';
 $string['privacy:metadata:alternatename'] = 'An alternative name for the user.';
 $string['privacy:metadata:url'] = 'A URL related to this user.';
+$string['hello'] = '';
