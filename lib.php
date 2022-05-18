@@ -782,7 +782,7 @@ function local_leeloolxp_web_login_tracking_get_attendance_info($teamniourl, $us
 
     require_once($CFG->dirroot . '/lib/filelib.php');
 
-
+    $postdata = array();
 
     $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid;
 
