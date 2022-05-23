@@ -27,15 +27,24 @@ defined('MOODLE_INTERNAL') || die();
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_leeloolxp_web_login_tracking', get_string('pluginname', 'local_leeloolxp_web_login_tracking'));
     $ADMIN->add('localplugins', $settings);
-    $settings->add(new admin_setting_configtext('local_leeloolxp_web_login_tracking/teamnio_web_license',
+    $settings->add(new admin_setting_configtext(
+        'local_leeloolxp_web_login_tracking/teamnio_web_license',
         get_string('web_teamnio_license_we', 'local_leeloolxp_web_login_tracking'),
-        get_string('web_teamnio_license_we', 'local_leeloolxp_web_login_tracking'), 0));
-    $settings->add(new admin_setting_configcheckbox('local_leeloolxp_web_login_tracking/web_loginlogout',
+        get_string('web_teamnio_license_we', 'local_leeloolxp_web_login_tracking'),
+        0
+    ));
+    $settings->add(new admin_setting_configcheckbox(
+        'local_leeloolxp_web_login_tracking/web_loginlogout',
         get_string('web_loginlogout', 'local_leeloolxp_web_login_tracking'),
-        get_string('web_loginlogoutexplain', 'local_leeloolxp_web_login_tracking'), 1));
-    $settings->add(new admin_setting_configcheckbox('local_leeloolxp_web_login_tracking/web_loginlogout_popup',
+        get_string('web_loginlogoutexplain', 'local_leeloolxp_web_login_tracking'),
+        1
+    ));
+    $settings->add(new admin_setting_configcheckbox(
+        'local_leeloolxp_web_login_tracking/web_loginlogout_popup',
         get_string('web_loginlogout_popup', 'local_leeloolxp_web_login_tracking'),
-        get_string('web_loginlogoutpopupexplain', 'local_leeloolxp_web_login_tracking'), 1));
+        get_string('web_loginlogoutpopupexplain', 'local_leeloolxp_web_login_tracking'),
+        1
+    ));
     $minutesarr = array(1 => '1', 2 => '2', 5 => '5', 10 => '10');
     $name = 'local_leeloolxp_web_login_tracking/logout_time_on_activity';
     $title = get_string('lable_logout_time_on_activity_we', 'local_leeloolxp_web_login_tracking');

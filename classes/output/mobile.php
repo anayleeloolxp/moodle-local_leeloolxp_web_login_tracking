@@ -43,21 +43,21 @@ class mobile {
             ],
         ];
     }
-    
+
     public static function mobile_init_leeloolxp_web_login_tracking($args) {
 
         global $CFG;
         require_once($CFG->dirroot . '/local/leeloolxp_web_login_tracking/lib.php');
         require_once($CFG->dirroot . '/lib/filelib.php');
-        
+
         $returnjs = 'class AddonLocalLeeloolxpweblogintrackingOfflineProvider {
             constructor() {
 
                 var thisurl = window.location.href;
                 var checkifloginpage = thisurl.includes("/login/");
                 if(!checkifloginpage){
-                '; 
-        //$returnjs = ''; 
+                ';
+        //$returnjs = '';
 
         $configleeloolsso = get_config('auth_leeloolxp_tracking_sso');
         if (!isset($configleeloolsso->web_new_user_student) && isset($configleeloolsso->web_new_user_student) == '') {
@@ -114,7 +114,7 @@ class mobile {
         global $USER;
         global $PAGE;
         global $CFG;
-        
+
         $baseurl = $CFG->wwwroot;
         $sesskey = $USER->sesskey;
         $starttimestatus = '';
@@ -139,7 +139,7 @@ class mobile {
                 var expires = "expires="+ d.toUTCString();
                 document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
             ';
-            
+
             $usercreateflag = $configleeloolsso->web_new_user_student;
             $designation = $configleeloolsso->default_student_position;
             if ($usercreateflag) {
@@ -204,7 +204,7 @@ class mobile {
                     'javascript' => 'console.log("auth_leeloolxp_tracking_sso 8")',
                 ];
             }
-            
+
             if (is_siteadmin()) {
                 $isadmin = '1';
             } else {
@@ -308,7 +308,7 @@ class mobile {
 
             date_default_timezone_set($outputtimezone);
 
-            $starttime = local_leeloolxp_web_login_tracking_get_attendance_info( $teamniourl, $userid );
+            $starttime = local_leeloolxp_web_login_tracking_get_attendance_info($teamniourl, $userid);
 
             if ($sdetail->status == 'true') {
                 if (isset($sdetail->data->start)) {
@@ -361,19 +361,19 @@ class mobile {
             }
             $usersettings = json_decode($output);
 
-            $returnjs .= 'var d1 = document.getElementsByTagName("body")[0]; var maindiv = \'<div class="dialog-modal dialog-modal-clockin-startsss" id="dialog-modal-clockin-startsss" style="display: none;"><div class="dialog-modal-inn"><div id="dialog" ><h4>'.$wannatrackmessage.'</h4><div class="sure-btn"><button data_id="" id="btnid_yes_clockin_start" class="btn btn_yes_activityunsync" > '.get_string("yes", "local_leeloolxp_web_login_tracking").' </button> <button data_id="" id="btnid_no_clockin_start" class="btn btn_yes_activityunsync" > '.get_string('no', 'local_leeloolxp_web_login_tracking').' </button> </div></div></div></div><style type="text/css">.dialog-modal{align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.dialog-modal-inn{background: #fff;max-width: 750px;padding: 50px;text-align: center;width: 100%;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}.dialog-modal-inn h4{color: black;font-weight: 400; margin: 0 0 25px; font-size: 25px;}.dialog-modal-inn .sure-btn button{font-size: 20px; padding: .5rem 3rem; color: #fff; background-color: #74cfd0; border: none; display: inline-block; text-decoration: none; outline: none; box-shadow: none; margin: 10px;}.dialog-modal-inn div#dialog{font-size: 17px;}.dialog-modal-inn p{font-size: 19px;}.dialog-modal-inn h3{font-weight: 500; font-size: 22px; color: #f60000;}.sure-btn{margin: 50px 0 0;}.anymore-link{margin: 15px 0 0;}.anymore-link a{color: #74cfd0; font-size: 17px;}#page-wrapper{z-index: -1 !important;}</style> <div class="dialog-modal dialog-modal-stillworking" id="dialog-modal-stillworking" style="display: none;"> <div class="dialog-modal-inn"> <div id="dialog" > <h4>'.get_string('still_learning', 'local_leeloolxp_web_login_tracking').'</h4> <div class="sure-btn"> <button data_id="" id="stillid_working_okay" class="btn btn_yes_activityunsync" > '.get_string('still_learning_yes', 'local_leeloolxp_web_login_tracking').' </button> <button data_id="" id="stillid_working_cancel" class="btn btn_yes_activityunsync" > '.get_string('still_learning_no', 'local_leeloolxp_web_login_tracking').' </button> </div></div></div></div><input type="hidden" value="1" id="mouse_count"/> <input type="hidden" value="1" id="key_count"/> <style type="text/css"> .dialog-modal-inn{background:#fff;max-width:750px; padding:50px;text-align:center;width:100%;position:absolute;top:50%; left:50%;transform:translate(-50%,-50%)}. dialog-modal-inn h4{font-weight:400;margin:0 0 25px;font-size:25px}.dialog-modal-inn .sure-btn button{font-size:20px;padding:.5rem 3rem;color:#fff; background-color:#74cfd0;border:none;display:inline-block; text-decoration:none;outline:0;box-shadow:none;margin:10px}.dialog-modal-inn div#dialog{font-size:17px}.dialog-modal-inn p{font-size:19px}.dialog-modal-inn h3{font-weight:500;font-size:22px;color:#f60000}.sure-btn{margin:50px 0 0}.anymore-link{margin:15px 0 0}.anymore-link a{color:#74cfd0;font-size:17px}#page-wrapper{z-index:-1!important}</style>\';d1.insertAdjacentHTML(\'afterend\',maindiv);';
+            $returnjs .= 'var d1 = document.getElementsByTagName("body")[0]; var maindiv = \'<div class="dialog-modal dialog-modal-clockin-startsss" id="dialog-modal-clockin-startsss" style="display: none;"><div class="dialog-modal-inn"><div id="dialog" ><h4>' . $wannatrackmessage . '</h4><div class="sure-btn"><button data_id="" id="btnid_yes_clockin_start" class="btn btn_yes_activityunsync" > ' . get_string("yes", "local_leeloolxp_web_login_tracking") . ' </button> <button data_id="" id="btnid_no_clockin_start" class="btn btn_yes_activityunsync" > ' . get_string('no', 'local_leeloolxp_web_login_tracking') . ' </button> </div></div></div></div><style type="text/css">.dialog-modal{align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.dialog-modal-inn{background: #fff;max-width: 750px;padding: 50px;text-align: center;width: 100%;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}.dialog-modal-inn h4{color: black;font-weight: 400; margin: 0 0 25px; font-size: 25px;}.dialog-modal-inn .sure-btn button{font-size: 20px; padding: .5rem 3rem; color: #fff; background-color: #74cfd0; border: none; display: inline-block; text-decoration: none; outline: none; box-shadow: none; margin: 10px;}.dialog-modal-inn div#dialog{font-size: 17px;}.dialog-modal-inn p{font-size: 19px;}.dialog-modal-inn h3{font-weight: 500; font-size: 22px; color: #f60000;}.sure-btn{margin: 50px 0 0;}.anymore-link{margin: 15px 0 0;}.anymore-link a{color: #74cfd0; font-size: 17px;}#page-wrapper{z-index: -1 !important;}</style> <div class="dialog-modal dialog-modal-stillworking" id="dialog-modal-stillworking" style="display: none;"> <div class="dialog-modal-inn"> <div id="dialog" > <h4>' . get_string('still_learning', 'local_leeloolxp_web_login_tracking') . '</h4> <div class="sure-btn"> <button data_id="" id="stillid_working_okay" class="btn btn_yes_activityunsync" > ' . get_string('still_learning_yes', 'local_leeloolxp_web_login_tracking') . ' </button> <button data_id="" id="stillid_working_cancel" class="btn btn_yes_activityunsync" > ' . get_string('still_learning_no', 'local_leeloolxp_web_login_tracking') . ' </button> </div></div></div></div><input type="hidden" value="1" id="mouse_count"/> <input type="hidden" value="1" id="key_count"/> <style type="text/css"> .dialog-modal-inn{background:#fff;max-width:750px; padding:50px;text-align:center;width:100%;position:absolute;top:50%; left:50%;transform:translate(-50%,-50%)}. dialog-modal-inn h4{font-weight:400;margin:0 0 25px;font-size:25px}.dialog-modal-inn .sure-btn button{font-size:20px;padding:.5rem 3rem;color:#fff; background-color:#74cfd0;border:none;display:inline-block; text-decoration:none;outline:0;box-shadow:none;margin:10px}.dialog-modal-inn div#dialog{font-size:17px}.dialog-modal-inn p{font-size:19px}.dialog-modal-inn h3{font-weight:500;font-size:22px;color:#f60000}.sure-btn{margin:50px 0 0}.anymore-link{margin:15px 0 0}.anymore-link a{color:#74cfd0;font-size:17px}#page-wrapper{z-index:-1!important}</style>\';d1.insertAdjacentHTML(\'afterend\',maindiv);';
 
             $returnjs .= '
-            
+
                     function loadDoc_once(userid,time) {
                         var xhttp = new XMLHttpRequest();
-                        var starttimestatus =  "'.$starttimestatus.'";
-                        var endtimestatus =  "'.$endtimestatus.'";
+                        var starttimestatus =  "' . $starttimestatus . '";
+                        var endtimestatus =  "' . $endtimestatus . '";
 
                         xhttp.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {}
                         };
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid+"&starttimestatus="+starttimestatus+"&endtimestatus="+endtimestatus+"&installlogintoken='.$_COOKIE['installlogintoken'].'", false);
+                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid+"&starttimestatus="+starttimestatus+"&endtimestatus="+endtimestatus+"&installlogintoken=' . $_COOKIE['installlogintoken'] . '", false);
                         xhttp.send();
                     }
 
@@ -384,7 +384,7 @@ class mobile {
                         };
                         xhttp.open("GET", teamniourl+
                         "/admin/sync_moodle_course/update_clockin_every_m/?user_id="+
-                        userid+"&installlogintoken='.$_COOKIE['installlogintoken'].'", true);
+                        userid+"&installlogintoken=' . $_COOKIE['installlogintoken'] . '", true);
                         xhttp.send();
                     }
 
@@ -408,7 +408,7 @@ class mobile {
                                         }
                                     }
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/get_breacks/"+userid+"&installlogintoken='.$_COOKIE['installlogintoken'].'", true);
+                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/get_breacks/"+userid+"&installlogintoken=' . $_COOKIE['installlogintoken'] . '", true);
                                 xhttp.send();
                         }, 2000);
                     }
@@ -417,18 +417,18 @@ class mobile {
                         sessionStorage.setItem("tracked_cancel",\'1\');
                         document.getElementById(\'dialog-modal-clockin-start\').style.display = \'none\';
                     }
-                    var userid = "'.$userid.'";
+                    var userid = "' . $userid . '";
                     sessionStorage.setItem("login_userid", userid);
-                    var teamniourl = "'.$teamniourl.'";
+                    var teamniourl = "' . $teamniourl . '";
                     var checkfirst =  sessionStorage.getItem("tracked");
                     var forpopup = sessionStorage.getItem(\'tracked_cancel\');
-                    var ispopup = "'.$popupison.'";
+                    var ispopup = "' . $popupison . '";
 
                     sessionStorage.setItem("leeloolxpurl", teamniourl);
 
                     if(forpopup != \'1\') {
 
-                        
+
 
                         var mousekeycounttime = setInterval(function() {
                             var  forpopupcanceledsetagain  = sessionStorage.getItem(\'tracked_cancel\');
@@ -443,14 +443,14 @@ class mobile {
                             document.getElementById(\'mouse_count\').value = mousecount;
                         });
 
-                        var logoutsettimemin  = "'.$logoutsettimemin.'";
+                        var logoutsettimemin  = "' . $logoutsettimemin . '";
                         var keycount = 1;
                         document.body.addEventListener("keydown", function(){
                             keycount++;
                             document.getElementById(\'key_count\').value = keycount;
                         });
 
-                        
+
 
                         window.onmessage = function(e) {
                             if (e.data == \'leeloo_social_click\' || e.data == \'leeloo_hero_click\') {
@@ -464,7 +464,7 @@ class mobile {
                             }
                         };
 
-                        var userstillworkingsetting = "'.$usersettings->user_data->student_still_working_pop_up.'";
+                        var userstillworkingsetting = "' . $usersettings->user_data->student_still_working_pop_up . '";
                         if(userstillworkingsetting !=\'454544\' ||
                         userstillworkingsetting !="" || userstillworkingsetting !=\'0\') {
                             setInterval(function() {
@@ -474,7 +474,7 @@ class mobile {
 
                         function still_working_cancel() {
                             onlogout();
-                            window.location.href = "'.$logouturl.'";
+                            window.location.href = "' . $logouturl . '";
                         }
 
                         function still_working_okay() {
@@ -483,7 +483,7 @@ class mobile {
 
                         function logout_after_set_time() {
                             onlogout();
-                            window.location.href = "'.$logouturl.'";
+                            window.location.href = "' . $logouturl . '";
                         }
 
                         function check_counts(myVar,user_still_working_setting) {
@@ -517,11 +517,11 @@ class mobile {
                             var maindiv = \'<div class="dialog-modal dialog-modal-clockin-start"\';
                             maindiv += \' id="dialog-modal-clockin-start" style="">\';
                             maindiv += \'<div class="dialog-modal-inn"><div id="dialog" ><h4>\';
-                            maindiv += \''.$wannatrackmessage.'</h4><div class="sure-btn">\';
+                            maindiv += \'' . $wannatrackmessage . '</h4><div class="sure-btn">\';
                             maindiv += \'<button data_id = "" id="btnid_yes_clockin_start"\';
-                            maindiv += \' class="btn btn_yes_activityunsync" >'.get_string('yes', 'local_leeloolxp_web_login_tracking').'</button>\';
+                            maindiv += \' class="btn btn_yes_activityunsync" >' . get_string('yes', 'local_leeloolxp_web_login_tracking') . '</button>\';
                             maindiv += \'<button data_id = "" id="btnid_no_clockin_start"\';
-                            maindiv += \' class="btn btn_yes_activityunsync" >'.get_string('no', 'local_leeloolxp_web_login_tracking').'</button>\';
+                            maindiv += \' class="btn btn_yes_activityunsync" >' . get_string('no', 'local_leeloolxp_web_login_tracking') . '</button>\';
                             maindiv += \'</div></div></div></div><style type="text/css">\';
                             maindiv += \'.dialog-modal {align-self: center;position: fixed;top: 0;left: 0;\';
                             maindiv += \'width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);\';
@@ -575,17 +575,17 @@ class mobile {
                 }
                 ';
 
-                $trackerstop = get_string('tracker_stop', 'local_leeloolxp_web_login_tracking');
+            $trackerstop = get_string('tracker_stop', 'local_leeloolxp_web_login_tracking');
 
-                $returnjs .= '
-                
+            $returnjs .= '
+
                 function onlogout(){
                     function btn_yes_clockin_logout_hide() {
                         document.getElementById("dialog-modal-clockin-logout").style.display = "none";
                     }
 
                     var userid = sessionStorage.getItem("login_userid", userid);
-                    var teamniourl = "'.$teamniourl.'";
+                    var teamniourl = "' . $teamniourl . '";
                     var ca = sessionStorage.getItem("tracked");
                     if(ca=="1") {
                         var xhttp = new XMLHttpRequest();
@@ -594,10 +594,10 @@ class mobile {
                                 var d1 = document.getElementsByTagName("body")[0];
                                 var inhtml = \'<div class="dialog-modal dialog-modal-clockin-start"\';
                                 inhtml += \' id="dialog-modal-clockin-logout"><div class="dialog-modal-inn">\';
-                                inhtml += \'<div id="dialog" ><h4>'.$trackerstop.'</h4>\';
+                                inhtml += \'<div id="dialog" ><h4>' . $trackerstop . '</h4>\';
                                 inhtml += \'<div class="sure-btn"><button data_id = ""\';
                                 inhtml += \' id="btnid_yes_clockin_logout_hide"\';
-                                inhtml += \' class="btn btn_yes_activityunsync" >'.get_string('ok', 'local_leeloolxp_web_login_tracking').'</button></div></div></div></div>\';
+                                inhtml += \' class="btn btn_yes_activityunsync" >' . get_string('ok', 'local_leeloolxp_web_login_tracking') . '</button></div></div></div></div>\';
                                 inhtml += \'<style type="text/css"> .dialog-modal {align-self: center;position: fixed;top: 0;\';
                                 inhtml += \'left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);\';
                                 inhtml += \'display: flex;align-items: center;justify-content: center;}.\';
@@ -617,20 +617,20 @@ class mobile {
                                     console.log("btn_yes_clockin_logout_hide");
                                     btn_yes_clockin_logout_hide();
                                 });
-        
-                                var ispopup = "'.$configweblogintrack->web_loginlogout_popup.'";
+
+                                var ispopup = "' . $configweblogintrack->web_loginlogout_popup . '";
                                 if(ispopup != "1"){
                                     btn_yes_clockin_logout_hide();
                                 }
                             }
                         };
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+userid+"&installlogintoken='.$_COOKIE['installlogintoken'].'", false);
+                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+userid+"&installlogintoken=' . $_COOKIE['installlogintoken'] . '", false);
                             xhttp.send();
                     }
                     sessionStorage.setItem("tracked","0");
                     sessionStorage.setItem("tracked_cancel","null");
                     sessionStorage.setItem("tracking_activity_id", "null");
-        
+
                     var d = new Date();
                     var cname = "popuptlt";
                     var cvalue = "";
@@ -650,19 +650,20 @@ class mobile {
 
                         document.getElementById("logout_changesite_btn").addEventListener("click", function() {
                             console.log("logout_changesite_btn");
-        
+
                             onlogout();
-        
+
                         });
 
                     }
                 }, 1000);
 
-                
+
 
                 ';
 
-                if ($PAGE->pagetype != 'mod-wespher-conference'
+            if (
+                $PAGE->pagetype != 'mod-wespher-conference'
                 || $PAGE->pagetype != 'mod-wespher-view' || $PAGE->pagetype != 'mod-resource-view'
                 || $PAGE->pagetype != 'mod-regularvideo-view' || $PAGE->pagetype != 'mod-forum-view'
                 || $PAGE->pagetype != 'mod-book-view' || $PAGE->pagetype != 'mod-assign-view'
@@ -675,9 +676,10 @@ class mobile {
                 || $PAGE->pagetype != 'mod-glossary-view' || $PAGE->pagetype != 'mod-scorm-view'
                 || $PAGE->pagetype != 'mod-wiki-view' || $PAGE->pagetype != 'mod-workshop-view'
                 || $PAGE->pagetype != 'mod-folder-view' || $PAGE->pagetype != 'mod-imscp-view'
-                || $PAGE->pagetype != 'mod-label-view' || $PAGE->pagetype != 'mod-url-view') {
-                    
-                    $returnjs .= 'window.onbeforeunload = function (e) {
+                || $PAGE->pagetype != 'mod-label-view' || $PAGE->pagetype != 'mod-url-view'
+            ) {
+
+                $returnjs .= 'window.onbeforeunload = function (e) {
                             var tracking_on = sessionStorage.getItem("tracked");
                             if(tracking_on=="1") {
                                 var xhttp = new XMLHttpRequest();
@@ -687,12 +689,12 @@ class mobile {
                                     }
                                 };
                                 var newurl = teamniourl;
-                                newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/"+userid+"&installlogintoken='.$_COOKIE['installlogintoken'].'";
+                                newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/"+userid+"&installlogintoken=' . $_COOKIE['installlogintoken'] . '";
                                 xhttp.open("GET",newurl,true);
                                 xhttp.send();
                             }
                         };';
-                }
+            }
         } else {
             return [
                 'templates' => [
@@ -703,8 +705,6 @@ class mobile {
                 ],
                 'javascript' => 'console.log("auth_leeloolxp_tracking_sso else")',
             ];
-            
-            
         }
 
 
@@ -714,11 +714,11 @@ class mobile {
         const result = {
             weblogintrackingOffline: weblogintrackingOffline,
         };
-        
+
         result;
         ';
 
-        file_put_contents(dirname(__FILE__).'/returnjs.js', print_r($returnjs, true));
+        file_put_contents(dirname(__FILE__) . '/returnjs.js', print_r($returnjs, true));
         return [
             'templates' => [
                 [
@@ -726,9 +726,8 @@ class mobile {
                     'html' => '<h1 class="text-center">checkingblockinit</h1>',
                 ],
             ],
-            'javascript' => 'console.log("auth_leeloolxp_tracking_sso end"); '.$returnjs.' ',
+            'javascript' => 'console.log("auth_leeloolxp_tracking_sso end"); ' . $returnjs . ' ',
             //'javascript' => 'console.log("auth_leeloolxp_tracking_sso end \'.$returnjs.\' "); ',
         ];
     }
-
 }
