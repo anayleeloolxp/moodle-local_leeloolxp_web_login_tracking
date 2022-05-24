@@ -150,7 +150,7 @@ function local_leeloolxp_web_login_tracking_checkuser($teamniourl, $useremail) {
 
         'CURLOPT_POST' => count($postdata),
         'CURLOPT_HTTPHEADER' => array(
-            'LeelooLXPToken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
+            'Leeloolxptoken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
         )
 
     );
@@ -214,7 +214,7 @@ function local_leeloolxp_web_login_tracking_checklltstatus($teamniourl, $userema
 
         'CURLOPT_POST' => count($postdata),
         'CURLOPT_HTTPHEADER' => array(
-            'LeelooLXPToken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
+            'Leeloolxptoken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
         )
 
     );
@@ -434,7 +434,7 @@ function local_leeloolxp_web_login_tracking_getuserid(
 
         'CURLOPT_POST' => count($postdata),
         'CURLOPT_HTTPHEADER' => array(
-            'LeelooLXPToken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
+            'Leeloolxptoken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
         )
 
     );
@@ -498,7 +498,7 @@ function local_leeloolxp_web_login_tracking_shiftdetails($teamniourl, $userid) {
 
         'CURLOPT_POST' => count($postdata),
         'CURLOPT_HTTPHEADER' => array(
-            'LeelooLXPToken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
+            'Leeloolxptoken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
         )
 
     );
@@ -560,7 +560,7 @@ function local_leeloolxp_web_login_tracking_gettimezone($teamniourl) {
 
         'CURLOPT_POST' => count($postdata),
         'CURLOPT_HTTPHEADER' => array(
-            'LeelooLXPToken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
+            'Leeloolxptoken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
         )
 
     );
@@ -624,7 +624,7 @@ function local_leeloolxp_web_login_tracking_tattctsetting($teamniourl, $userid) 
 
         'CURLOPT_POST' => count($postdata),
         'CURLOPT_HTTPHEADER' => array(
-            'LeelooLXPToken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
+            'Leeloolxptoken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
         )
 
     );
@@ -681,7 +681,7 @@ function local_leeloolxp_web_login_tracking_get_attendance_info($teamniourl, $us
 
         'CURLOPT_POST' => count($postdata),
         'CURLOPT_HTTPHEADER' => array(
-            'LeelooLXPToken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
+            'Leeloolxptoken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
         )
 
     );
@@ -729,7 +729,7 @@ function local_leeloolxp_web_login_tracking_update_attendance_status($teamniourl
 
         'CURLOPT_POST' => count($postdata),
         'CURLOPT_HTTPHEADER' => array(
-            'LeelooLXPToken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
+            'Leeloolxptoken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
         )
 
     );
@@ -800,7 +800,7 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
 
             'CURLOPT_POST' => count($postdata),
             'CURLOPT_HTTPHEADER' => array(
-                'LeelooLXPToken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
+                'Leeloolxptoken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
             )
 
         );
@@ -886,7 +886,7 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
 
                     'CURLOPT_POST' => count($postdata),
                     'CURLOPT_HTTPHEADER' => array(
-                        'LeelooLXPToken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
+                        'Leeloolxptoken: ' . get_config('local_leeloolxpapi')->leelooapitoken . ''
                     )
 
                 );
