@@ -22,7 +22,7 @@
  * @author Leeloo LXP <info@leeloolxp.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+
 /**
  * Plugin to sync user's attendence and tracking to LeelooLXP account of the Moodle Admin
  */

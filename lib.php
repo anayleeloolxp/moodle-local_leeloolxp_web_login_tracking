@@ -1,31 +1,17 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
-
 //
-
 // Moodle is free software: you can redistribute it and/or modify
-
 // it under the terms of the GNU General Public License as published by
-
 // the Free Software Foundation, either version 3 of the License, or
-
 // (at your option) any later version.
-
 //
-
 // Moodle is distributed in the hope that it will be useful,
-
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
 // GNU General Public License for more details.
-
 //
-
 // You should have received a copy of the GNU General Public License
-
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -64,24 +50,16 @@ require_once(dirname(dirname(__DIR__)) . '/config.php');
 
 function local_leeloolxp_web_login_tracking_get_leelooinstall() {
 
-
-
     global $SESSION;
-
-
 
     if (isset($SESSION->leelooinstall)) {
 
         return $SESSION->leelooinstall;
     }
 
-
-
     global $CFG;
 
     require_once($CFG->dirroot . '/lib/filelib.php');
-
-
 
     $configweblogintrack = get_config('local_leeloolxp_web_login_tracking');
 
@@ -103,16 +81,12 @@ function local_leeloolxp_web_login_tracking_get_leelooinstall() {
 
     );
 
-
-
     if (!$output = $curl->post($url, $postdata, $options)) {
 
         $leelooinstallurl = 'no';
 
         $SESSION->leelooinstall = $leelooinstallurl;
     }
-
-
 
     $infoteamnio = json_decode($output);
 
@@ -127,8 +101,6 @@ function local_leeloolxp_web_login_tracking_get_leelooinstall() {
 
         $SESSION->leelooinstall = $leelooinstallurl;
     }
-
-
 
     return $leelooinstallurl;
 }
@@ -153,28 +125,18 @@ function local_leeloolxp_web_login_tracking_get_leelooinstall() {
 
 function local_leeloolxp_web_login_tracking_checkuser($teamniourl, $useremail) {
 
-
-
     global $SESSION;
-
-
 
     if (isset($SESSION->lltcheckemail)) {
 
         return $SESSION->lltcheckemail;
     }
 
-
-
     global $CFG;
 
     require_once($CFG->dirroot . '/lib/filelib.php');
 
-
-
     $postdata = array();
-
-
 
     $url = $teamniourl . '/admin/sync_moodle_course/check_user_by_email/' . base64_encode($useremail);
 
@@ -227,28 +189,18 @@ function local_leeloolxp_web_login_tracking_checkuser($teamniourl, $useremail) {
 
 function local_leeloolxp_web_login_tracking_checklltstatus($teamniourl, $useremail) {
 
-
-
     global $SESSION;
-
-
 
     if (isset($SESSION->lltcheckstatus)) {
 
         return $SESSION->lltcheckstatus;
     }
 
-
-
     global $CFG;
 
     require_once($CFG->dirroot . '/lib/filelib.php');
 
-
-
     $postdata = array();
-
-
 
     $url = $teamniourl . '/admin/sync_moodle_course/check_user_llt_status_by_email/' . base64_encode($useremail);
 
@@ -403,24 +355,16 @@ function local_leeloolxp_web_login_tracking_getuserid(
 
 ) {
 
-
-
     global $SESSION;
-
-
 
     if (isset($SESSION->lltuserid)) {
 
         return $SESSION->lltuserid;
     }
 
-
-
     global $CFG;
 
     require_once($CFG->dirroot . '/lib/filelib.php');
-
-
 
     $postdata = array(
 
@@ -476,11 +420,7 @@ function local_leeloolxp_web_login_tracking_getuserid(
 
         'web_page' => $webpage,
 
-
-
     );
-
-
 
     $url = $teamniourl . '/admin/sync_moodle_course/get_create_user/';
 
@@ -533,28 +473,18 @@ function local_leeloolxp_web_login_tracking_getuserid(
 
 function local_leeloolxp_web_login_tracking_shiftdetails($teamniourl, $userid) {
 
-
-
     global $SESSION;
-
-
 
     if (isset($SESSION->lltshiftdetails)) {
 
         return $SESSION->lltshiftdetails;
     }
 
-
-
     global $CFG;
 
     require_once($CFG->dirroot . '/lib/filelib.php');
 
-
-
     $postdata = array();
-
-
 
     $url = $teamniourl . '/login_api/get_shift_details_api/' . $userid;
 
@@ -605,28 +535,18 @@ function local_leeloolxp_web_login_tracking_shiftdetails($teamniourl, $userid) {
 
 function local_leeloolxp_web_login_tracking_gettimezone($teamniourl) {
 
-
-
     global $SESSION;
-
-
 
     if (isset($SESSION->llttimezone)) {
 
         return $SESSION->llttimezone;
     }
 
-
-
     global $CFG;
 
     require_once($CFG->dirroot . '/lib/filelib.php');
 
-
-
     $postdata = array();
-
-
 
     $url = $teamniourl . '/admin/sync_moodle_course/get_timezone/';
 
@@ -679,28 +599,18 @@ function local_leeloolxp_web_login_tracking_gettimezone($teamniourl) {
 
 function local_leeloolxp_web_login_tracking_tattctsetting($teamniourl, $userid) {
 
-
-
     global $SESSION;
-
-
 
     if (isset($SESSION->llttatsetting)) {
 
         return $SESSION->llttatsetting;
     }
 
-
-
     global $CFG;
 
     require_once($CFG->dirroot . '/lib/filelib.php');
 
-
-
     $postdata = array();
-
-
 
     $url = $teamniourl . '/admin/sync_moodle_course/get_user_settings_tct_tat/' . $userid;
 
@@ -753,8 +663,6 @@ function local_leeloolxp_web_login_tracking_tattctsetting($teamniourl, $userid) 
 
 function local_leeloolxp_web_login_tracking_get_attendance_info($teamniourl, $userid) {
 
-
-
     global $CFG;
 
     require_once($CFG->dirroot . '/lib/filelib.php');
@@ -762,8 +670,6 @@ function local_leeloolxp_web_login_tracking_get_attendance_info($teamniourl, $us
     $postdata = array();
 
     $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid;
-
-
 
     $curl = new curl;
 
@@ -805,13 +711,9 @@ function local_leeloolxp_web_login_tracking_get_attendance_info($teamniourl, $us
 
 function local_leeloolxp_web_login_tracking_update_attendance_status($teamniourl, $postdata) {
 
-
-
     global $CFG;
 
     require_once($CFG->dirroot . '/lib/filelib.php');
-
-
 
     $postdata = array('user_id' => $userid, 'start_status' => $starttimestatus, 'end_status' => $endtimestatus);
 
@@ -851,8 +753,6 @@ function local_leeloolxp_web_login_tracking_update_attendance_status($teamniourl
 
 function local_leeloolxp_web_login_tracking_onlogoutpage() {
 
-
-
     if (isset($_COOKIE['popuptlt']) && isset($_COOKIE['popuptlt']) != '') {
 
         if ($_COOKIE['popuptlt'] == '') {
@@ -860,36 +760,22 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
             return true;
         }
 
-
-
         global $CFG;
 
         require_once($CFG->dirroot . '/lib/filelib.php');
 
-
-
         $postdata = array();
-
-
 
         $configweblogintrack = get_config('local_leeloolxp_web_login_tracking');
 
-
-
         $useremail = $_COOKIE['popuptlt'];
 
-
-
         $teamniourl = local_leeloolxp_web_login_tracking_get_leelooinstall();
-
-
 
         if ($teamniourl == 'no') {
 
             return true;
         }
-
-
 
         $outputtimezone = local_leeloolxp_web_login_tracking_gettimezone($teamniourl);
 
@@ -900,11 +786,7 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
 
         date_default_timezone_set($outputtimezone);
 
-
-
         $userid = local_leeloolxp_web_login_tracking_checkuser($teamniourl, $useremail);
-
-
 
         $url = $teamniourl . '/admin/sync_moodle_course/get_attendance_info/' . $userid;
 
@@ -925,16 +807,12 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
 
         $starttime = $curl->post($url, $postdata, $options);
 
-
-
         $shiftdetails = local_leeloolxp_web_login_tracking_shiftdetails($teamniourl, $userid);
 
         if ($shiftdetails == 'no') {
 
             return true;
         }
-
-
 
         $lgsdetail = json_decode($shiftdetails);
 
@@ -953,7 +831,6 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
 
                 if ($starttime == '0') {
 
-                    //$starttime = date("Y-m-d h:i:s");
                     $actualstarttime = strtotime("now");
                 } else {
                     $actualstarttime = strtotime(date('h:i A', strtotime($starttime)));
@@ -1030,7 +907,9 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
 
                     <div class="sure-btn">
 
-                        <button data_id="" onclick="btn_yes_clockin_logout_hide();" class="btn btn_yes_activityunsync"><?php echo get_string('ok', 'local_leeloolxp_web_login_tracking'); ?></button>
+                        <button data_id="" onclick="btn_yes_clockin_logout_hide();" class="btn btn_yes_activityunsync">
+                            <?php echo get_string('ok', 'local_leeloolxp_web_login_tracking'); ?>
+                        </button>
 
                     </div>
 
@@ -1201,7 +1080,9 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
 
                         inhtml += ' onclick="btn_yes_clockin_logout_hide();"';
 
-                        inhtml += ' class="btn btn_yes_activityunsync" ><?php echo get_string('ok', 'local_leeloolxp_web_login_tracking'); ?></button></div></div></div></div>';
+                        inhtml += ' class="btn btn_yes_activityunsync"><?php
+                                                                        echo get_string('ok', 'local_leeloolxp_web_login_tracking');
+                                                                        ?></button > < /div > < /div > < /div > < /div > ';
 
                         inhtml += '<style type="text/css"> .dialog-modal {align-self: center;position: fixed;top: 0;';
 
@@ -1245,7 +1126,9 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
 
                 };
 
-                xhttp.open("GET", teamniourl + "/admin/sync_moodle_course/stop_clockin/?user_id=" + userid + "&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>", false);
+                xhttp.open("GET", teamniourl + "/admin/sync_moodle_course/stop_clockin/?user_id=" +
+                    userid + "&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>",
+                    false);
 
                 xhttp.send();
 
@@ -1298,14 +1181,10 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
     $configweblogintrack = get_config('local_leeloolxp_web_login_tracking');
 
-
-
     if (!isset($configweblogintrack->logout_time_on_activity) && isset($configweblogintrack->logout_time_on_activity) == '') {
 
         return true;
     }
-
-
 
     $loginlogout = $configweblogintrack->web_loginlogout;
 
@@ -1314,8 +1193,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         return true;
     }
 
-
-
     $teamniourl = local_leeloolxp_web_login_tracking_get_leelooinstall();
 
     if ($teamniourl == 'no') {
@@ -1323,19 +1200,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         return true;
     }
 
-
-
     global $USER;
 
     global $PAGE;
 
     global $CFG;
 
-
-
     require_once($CFG->dirroot . '/lib/filelib.php');
-
-
 
     $baseurl = $CFG->wwwroot;
 
@@ -1345,13 +1216,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
     $endtimestatus = '';
 
-
-
     $logoutsettimemin = $configweblogintrack->logout_time_on_activity;
 
     $logouturl = $baseurl . "/login/logout.php?sesskey=" . $sesskey;
-
-
 
     if (!isset($USER->email) && isset($USER->email) == '') {
 
@@ -1360,8 +1227,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
         $useremail = $USER->email;
     }
-
-
 
     if ($useremail != '' && $useremail != 'root@localhost') {
 
@@ -1407,16 +1272,12 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
         $postdata = array('license_key' => $liacnsekey);
 
-
-
         $output = local_leeloolxp_web_login_tracking_checkuser($teamniourl, $useremail);
 
         if ($output == 'no') {
 
             return true;
         }
-
-
 
         if ($output == '0') {
 
@@ -1425,8 +1286,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 return true;
             }
         }
-
-
 
         $userstatusonteamnio = local_leeloolxp_web_login_tracking_checklltstatus($teamniourl, $useremail);
 
@@ -1655,7 +1514,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 transform: translate(-50%, -50%)
             }
 
-            . dialog-modal-inn h4 {
+            .dialog-modal-inn h4 {
                 font-weight: 400;
                 margin: 0 0 25px;
                 font-size: 25px
@@ -1770,8 +1629,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
         $webpage = $USER->url;
 
-
-
         $userid = local_leeloolxp_web_login_tracking_getuserid(
 
             $teamniourl,
@@ -1828,14 +1685,10 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
         );
 
-
-
         if ($userid == 'no') {
 
             return true;
         }
-
-
 
         $shiftdetails = local_leeloolxp_web_login_tracking_shiftdetails($teamniourl, $userid);
 
@@ -1843,8 +1696,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
             return true;
         }
-
-
 
         $sdetail = json_decode($shiftdetails);
 
@@ -1857,11 +1708,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
         date_default_timezone_set($outputtimezone);
 
-
-
         $starttime = local_leeloolxp_web_login_tracking_get_attendance_info($teamniourl, $userid);
-
-
 
         if ($sdetail->status == 'true') {
 
@@ -1871,18 +1718,12 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                 @$shiftendtime = strtotime($sdetail->data->end);
 
-
-
                 if ($starttime == '0') {
 
-                    //$starttime = date("Y-m-d h:i:s");
                     $actualstarttime = strtotime("now");
                 } else {
                     $actualstarttime = strtotime(date('h:i A', strtotime($starttime)));
                 }
-
-
-                //$actualstarttime = strtotime('01:52 PM');
 
                 $actualendtime = strtotime("now");
 
@@ -1935,8 +1776,6 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
         $usersettings = json_decode($output);
 
-
-
         ?>
 
         <script>
@@ -1980,7 +1819,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                     };
 
-                    xhttp.open("GET", teamniourl + "/admin/sync_moodle_course/get_breacks/" + userid + "&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>", true);
+                    xhttp.open("GET", teamniourl + "/admin/sync_moodle_course/get_breacks/" +
+                        userid + "&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>", true);
 
                     xhttp.send();
 
@@ -2022,9 +1862,9 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                     var xhttp = new XMLHttpRequest();
 
-                    starttimestatus = "<?= $starttimestatus ?>";
+                    starttimestatus = "<?php echo $starttimestatus ?>";
 
-                    endtimestatus = "<?= $endtimestatus ?>";
+                    endtimestatus = "<?php echo $endtimestatus ?>";
 
 
                     xhttp.onreadystatechange = function() {
@@ -2033,7 +1873,10 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                     };
 
-                    xhttp.open("GET", teamniourl + "/admin/sync_moodle_course/update_clockin/?user_id=" + userid + "&starttimestatus=" + starttimestatus + "&endtimestatus=" + endtimestatus + "&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>", false);
+                    xhttp.open("GET", teamniourl + "/admin/sync_moodle_course/update_clockin/?user_id=" +
+                        userid + "&starttimestatus=" + starttimestatus + "&endtimestatus=" +
+                        endtimestatus + "&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>",
+                        false);
 
                     xhttp.send();
 
@@ -2229,11 +2072,15 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                     maindiv += '<button data_id = "" onclick="btn_yes_clockin_start();"';
 
-                    maindiv += ' class="btn btn_yes_activityunsync" ><?php echo get_string('yes', 'local_leeloolxp_web_login_tracking'); ?></button>';
+                    maindiv += ' class="btn btn_yes_activityunsync"><?php
+                                                                    echo get_string('yes', 'local_leeloolxp_web_login_tracking');
+                                                                    ?></button>';
 
                     maindiv += '<button data_id = "" onclick="btn_no_clockin_start();"';
 
-                    maindiv += ' class="btn btn_yes_activityunsync" ><?php echo get_string('no', 'local_leeloolxp_web_login_tracking'); ?></button>';
+                    maindiv += ' class="btn btn_yes_activityunsync"><?php
+                                                                    echo get_string('no', 'local_leeloolxp_web_login_tracking');
+                                                                    ?></button>';
 
                     maindiv += '</div></div></div></div><style type="text/css">';
 
@@ -2347,7 +2194,8 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
                         var newurl = teamniourl;
 
-                        newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/" + userid + "&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>";
+                        newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/" +
+                            userid + "&installlogintoken=<?php echo $_COOKIE['installlogintoken']; ?>";
 
                         xhttp.open("GET", newurl, true);
 

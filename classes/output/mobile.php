@@ -25,8 +25,6 @@
 
 namespace local_leeloolxp_web_login_tracking\output;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Provider implementation for local_leeloolxp_web_login_tracking.
  *
@@ -57,7 +55,6 @@ class mobile {
                 var checkifloginpage = thisurl.includes("/login/");
                 if(!checkifloginpage){
                 ';
-        //$returnjs = '';
 
         $configleeloolsso = get_config('auth_leeloolxp_tracking_sso');
         if (!isset($configleeloolsso->web_new_user_student) && isset($configleeloolsso->web_new_user_student) == '') {
@@ -121,7 +118,7 @@ class mobile {
         $endtimestatus = '';
 
         $logoutsettimemin = $configweblogintrack->logout_time_on_activity;
-        //$logouturl = $baseurl . "/login/logout.php?sesskey=" . $sesskey;
+        /* $logouturl = $baseurl . "/login/logout.php?sesskey=" . $sesskey;. */
         $logouturl = '/login/sites';
 
         if (!isset($USER->email) && isset($USER->email) == '') {
@@ -361,7 +358,51 @@ class mobile {
             }
             $usersettings = json_decode($output);
 
-            $returnjs .= 'var d1 = document.getElementsByTagName("body")[0]; var maindiv = \'<div class="dialog-modal dialog-modal-clockin-startsss" id="dialog-modal-clockin-startsss" style="display: none;"><div class="dialog-modal-inn"><div id="dialog" ><h4>' . $wannatrackmessage . '</h4><div class="sure-btn"><button data_id="" id="btnid_yes_clockin_start" class="btn btn_yes_activityunsync" > ' . get_string("yes", "local_leeloolxp_web_login_tracking") . ' </button> <button data_id="" id="btnid_no_clockin_start" class="btn btn_yes_activityunsync" > ' . get_string('no', 'local_leeloolxp_web_login_tracking') . ' </button> </div></div></div></div><style type="text/css">.dialog-modal{align-self: center;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);display: flex;align-items: center;justify-content: center;}.dialog-modal-inn{background: #fff;max-width: 750px;padding: 50px;text-align: center;width: 100%;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}.dialog-modal-inn h4{color: black;font-weight: 400; margin: 0 0 25px; font-size: 25px;}.dialog-modal-inn .sure-btn button{font-size: 20px; padding: .5rem 3rem; color: #fff; background-color: #74cfd0; border: none; display: inline-block; text-decoration: none; outline: none; box-shadow: none; margin: 10px;}.dialog-modal-inn div#dialog{font-size: 17px;}.dialog-modal-inn p{font-size: 19px;}.dialog-modal-inn h3{font-weight: 500; font-size: 22px; color: #f60000;}.sure-btn{margin: 50px 0 0;}.anymore-link{margin: 15px 0 0;}.anymore-link a{color: #74cfd0; font-size: 17px;}#page-wrapper{z-index: -1 !important;}</style> <div class="dialog-modal dialog-modal-stillworking" id="dialog-modal-stillworking" style="display: none;"> <div class="dialog-modal-inn"> <div id="dialog" > <h4>' . get_string('still_learning', 'local_leeloolxp_web_login_tracking') . '</h4> <div class="sure-btn"> <button data_id="" id="stillid_working_okay" class="btn btn_yes_activityunsync" > ' . get_string('still_learning_yes', 'local_leeloolxp_web_login_tracking') . ' </button> <button data_id="" id="stillid_working_cancel" class="btn btn_yes_activityunsync" > ' . get_string('still_learning_no', 'local_leeloolxp_web_login_tracking') . ' </button> </div></div></div></div><input type="hidden" value="1" id="mouse_count"/> <input type="hidden" value="1" id="key_count"/> <style type="text/css"> .dialog-modal-inn{background:#fff;max-width:750px; padding:50px;text-align:center;width:100%;position:absolute;top:50%; left:50%;transform:translate(-50%,-50%)}. dialog-modal-inn h4{font-weight:400;margin:0 0 25px;font-size:25px}.dialog-modal-inn .sure-btn button{font-size:20px;padding:.5rem 3rem;color:#fff; background-color:#74cfd0;border:none;display:inline-block; text-decoration:none;outline:0;box-shadow:none;margin:10px}.dialog-modal-inn div#dialog{font-size:17px}.dialog-modal-inn p{font-size:19px}.dialog-modal-inn h3{font-weight:500;font-size:22px;color:#f60000}.sure-btn{margin:50px 0 0}.anymore-link{margin:15px 0 0}.anymore-link a{color:#74cfd0;font-size:17px}#page-wrapper{z-index:-1!important}</style>\';d1.insertAdjacentHTML(\'afterend\',maindiv);';
+            $returnjs .= 'var d1 = document.getElementsByTagName("body")[0];
+            var maindiv = \'<div class="dialog-modal dialog-modal-clockin-startsss"
+            id="dialog-modal-clockin-startsss" style="display: none;">
+            <div class="dialog-modal-inn"><div id="dialog" >
+            <h4>' . $wannatrackmessage . '</h4>
+            <div class="sure-btn">
+            <button data_id="" id="btnid_yes_clockin_start" class="btn btn_yes_activityunsync" >
+             ' . get_string("yes", "local_leeloolxp_web_login_tracking") . ' </button>
+            <button data_id="" id="btnid_no_clockin_start" class="btn btn_yes_activityunsync" >
+            ' . get_string('no', 'local_leeloolxp_web_login_tracking') . ' </button>
+            </div></div></div></div>
+            <style type="text/css">.dialog-modal{align-self: center;position: fixed;top: 0;
+                left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);
+                display: flex;align-items: center;justify-content: center;
+                }.dialog-modal-inn{background: #fff;max-width: 750px;padding: 50px;text-align: center;
+                width: 100%;position: absolute; top: 50%; left: 50%;
+                transform: translate(-50%, -50%);}.dialog-modal-inn h4{color: black;
+                font-weight: 400; margin: 0 0 25px; font-size: 25px;}.dialog-modal-inn
+                .sure-btn button{font-size: 20px; padding: .5rem 3rem; color: #fff;
+                background-color: #74cfd0; border: none; display: inline-block;
+                text-decoration: none; outline: none; box-shadow: none; margin: 10px;
+            }.dialog-modal-inn div#dialog{font-size: 17px;}.dialog-modal-inn
+            p{font-size: 19px;}.dialog-modal-inn h3{font-weight: 500; font-size: 22px;
+            color: #f60000;}.sure-btn{margin: 50px 0 0;}.anymore-link{margin: 15px 0 0;}.anymore-link
+            a{color: #74cfd0; font-size: 17px;}#page-wrapper{z-index: -1 !important;}</style>
+            <div class="dialog-modal dialog-modal-stillworking" id="dialog-modal-stillworking"
+            style="display: none;"> <div class="dialog-modal-inn"> <div id="dialog" >
+            <h4>' . get_string('still_learning', 'local_leeloolxp_web_login_tracking') . '</h4>
+            <div class="sure-btn"> <button data_id="" id="stillid_working_okay"
+            class="btn btn_yes_activityunsync" >
+            ' . get_string('still_learning_yes', 'local_leeloolxp_web_login_tracking') . ' </button>
+            <button data_id="" id="stillid_working_cancel" class="btn btn_yes_activityunsync" >
+            ' . get_string('still_learning_no', 'local_leeloolxp_web_login_tracking') . ' </button>
+            </div></div></div></div><input type="hidden" value="1" id="mouse_count"/>
+            <input type="hidden" value="1" id="key_count"/> <style type="text/css">
+            .dialog-modal-inn{background:#fff;max-width:750px; padding:50px;text-align:center;
+                width:100%;position:absolute;top:50%; left:50%;transform:translate(-50%,-50%)}.
+                dialog-modal-inn h4{font-weight:400;margin:0 0 25px;font-size:25px}.dialog-modal-inn
+                .sure-btn button{font-size:20px;padding:.5rem 3rem;color:#fff;
+                background-color:#74cfd0;border:none;display:inline-block;
+                text-decoration:none;outline:0;box-shadow:none;margin:10px}.dialog-modal-inn
+                div#dialog{font-size:17px}.dialog-modal-inn p{font-size:19px}.dialog-modal-inn
+                h3{font-weight:500;font-size:22px;color:#f60000}.sure-btn{margin:50px 0 0}
+                .anymore-link{margin:15px 0 0}.anymore-link a{color:#74cfd0;font-size:17px}
+                #page-wrapper{z-index:-1!important}</style>\';d1.insertAdjacentHTML(\'afterend\',maindiv);';
 
             $returnjs .= '
 
@@ -373,7 +414,10 @@ class mobile {
                         xhttp.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {}
                         };
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid+"&starttimestatus="+starttimestatus+"&endtimestatus="+endtimestatus+"&installlogintoken=' . $_COOKIE['installlogintoken'] . '", false);
+                        xhttp.open("GET",
+                        teamniourl+"/admin/sync_moodle_course/update_clockin/?user_id="+userid+"&starttimestatus="+starttimestatus+"
+                        &endtimestatus="+endtimestatus+"
+                        &installlogintoken=' . $_COOKIE['installlogintoken'] . '", false);
                         xhttp.send();
                     }
 
@@ -408,7 +452,9 @@ class mobile {
                                         }
                                     }
                                 };
-                                xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/get_breacks/"+userid+"&installlogintoken=' . $_COOKIE['installlogintoken'] . '", true);
+                                xhttp.open("GET",
+                                teamniourl+"/admin/sync_moodle_course/get_breacks/"+userid+"
+                                &installlogintoken=' . $_COOKIE['installlogintoken'] . '", true);
                                 xhttp.send();
                         }, 2000);
                     }
@@ -519,9 +565,13 @@ class mobile {
                             maindiv += \'<div class="dialog-modal-inn"><div id="dialog" ><h4>\';
                             maindiv += \'' . $wannatrackmessage . '</h4><div class="sure-btn">\';
                             maindiv += \'<button data_id = "" id="btnid_yes_clockin_start"\';
-                            maindiv += \' class="btn btn_yes_activityunsync" >' . get_string('yes', 'local_leeloolxp_web_login_tracking') . '</button>\';
+                            maindiv += \' class="btn btn_yes_activityunsync" >
+                            ' . get_string('yes', 'local_leeloolxp_web_login_tracking') . '
+                            </button>\';
                             maindiv += \'<button data_id = "" id="btnid_no_clockin_start"\';
-                            maindiv += \' class="btn btn_yes_activityunsync" >' . get_string('no', 'local_leeloolxp_web_login_tracking') . '</button>\';
+                            maindiv += \' class="btn btn_yes_activityunsync" >
+                            ' . get_string('no', 'local_leeloolxp_web_login_tracking') . '
+                            </button>\';
                             maindiv += \'</div></div></div></div><style type="text/css">\';
                             maindiv += \'.dialog-modal {align-self: center;position: fixed;top: 0;left: 0;\';
                             maindiv += \'width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);\';
@@ -597,13 +647,16 @@ class mobile {
                                 inhtml += \'<div id="dialog" ><h4>' . $trackerstop . '</h4>\';
                                 inhtml += \'<div class="sure-btn"><button data_id = ""\';
                                 inhtml += \' id="btnid_yes_clockin_logout_hide"\';
-                                inhtml += \' class="btn btn_yes_activityunsync" >' . get_string('ok', 'local_leeloolxp_web_login_tracking') . '</button></div></div></div></div>\';
+                                inhtml += \' class="btn btn_yes_activityunsync" >
+                                ' . get_string('ok', 'local_leeloolxp_web_login_tracking') . '
+                                </button></div></div></div></div>\';
                                 inhtml += \'<style type="text/css"> .dialog-modal {align-self: center;position: fixed;top: 0;\';
                                 inhtml += \'left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.7);\';
                                 inhtml += \'display: flex;align-items: center;justify-content: center;}.\';
                                 inhtml += \'dialog-modal-inn {background: #fff;max-width: 750px;padding:50px;text-align: center;\';
                                 inhtml += \'width: 100%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}\';
-                                inhtml += \'.dialog-modal-inn h4 {color: black;font-weight: 400;margin: 0 0 25px;font-size: 25px;}\';
+                                inhtml += \'.dialog-modal-inn h4
+                                {color: black;font-weight: 400;margin: 0 0 25px;font-size: 25px;}\';
                                 inhtml += \'dialog-modal-inn .sure-btn button {font-size: 20px;padding: .5rem 3rem;color: #fff;\';
                                 inhtml += \'background-color: #74cfd0;border: none;display: inline-block;text-decoration: none;\';
                                 inhtml += \'outline: none;box-shadow: none;margin: 10px 0;}.dialog-modal-inn div#dialog\';
@@ -624,7 +677,9 @@ class mobile {
                                 }
                             }
                         };
-                        xhttp.open("GET", teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+userid+"&installlogintoken=' . $_COOKIE['installlogintoken'] . '", false);
+                        xhttp.open("GET",
+                        teamniourl+"/admin/sync_moodle_course/stop_clockin/?user_id="+userid+"
+                        &installlogintoken=' . $_COOKIE['installlogintoken'] . '", false);
                             xhttp.send();
                     }
                     sessionStorage.setItem("tracked","0");
@@ -689,7 +744,8 @@ class mobile {
                                     }
                                 };
                                 var newurl = teamniourl;
-                                newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/"+userid+"&installlogintoken=' . $_COOKIE['installlogintoken'] . '";
+                                newurl += "/admin/sync_moodle_course/update_clockin_on_task_update/"+userid+"
+                                &installlogintoken=' . $_COOKIE['installlogintoken'] . '";
                                 xhttp.open("GET",newurl,true);
                                 xhttp.send();
                             }
@@ -707,7 +763,6 @@ class mobile {
             ];
         }
 
-
         $returnjs .= '} }
 
         const weblogintrackingOffline = new AddonLocalLeeloolxpweblogintrackingOfflineProvider();
@@ -718,7 +773,6 @@ class mobile {
         result;
         ';
 
-        file_put_contents(dirname(__FILE__) . '/returnjs.js', print_r($returnjs, true));
         return [
             'templates' => [
                 [
@@ -727,7 +781,6 @@ class mobile {
                 ],
             ],
             'javascript' => 'console.log("auth_leeloolxp_tracking_sso end"); ' . $returnjs . ' ',
-            //'javascript' => 'console.log("auth_leeloolxp_tracking_sso end \'.$returnjs.\' "); ',
         ];
     }
 }

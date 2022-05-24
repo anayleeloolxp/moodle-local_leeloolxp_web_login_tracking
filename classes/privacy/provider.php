@@ -27,8 +27,6 @@ namespace local_leeloolxp_web_login_tracking\privacy;
 
 use core_privacy\local\metadata\collection;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Provider implementation for local_leeloolxp_web_login_tracking.
  *
@@ -72,7 +70,11 @@ class provider implements
 
         ];
 
-        $collection->add_external_location_link('leeloolxp_web_login_tracking_client', $externalfields, 'privacy:metadata:leeloolxp_web_login_tracking');
+        $collection->add_external_location_link(
+            'leeloolxp_web_login_tracking_client',
+            $externalfields,
+            'privacy:metadata:leeloolxp_web_login_tracking'
+        );
 
         return $collection;
     }

@@ -25,7 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 if ($hassiteconfig) {
-    $settings = new admin_settingpage('local_leeloolxp_web_login_tracking', get_string('pluginname', 'local_leeloolxp_web_login_tracking'));
+    $settings = new admin_settingpage(
+        'local_leeloolxp_web_login_tracking',
+        get_string('pluginname', 'local_leeloolxp_web_login_tracking')
+    );
     $ADMIN->add('localplugins', $settings);
     $settings->add(new admin_setting_configtext(
         'local_leeloolxp_web_login_tracking/teamnio_web_license',
