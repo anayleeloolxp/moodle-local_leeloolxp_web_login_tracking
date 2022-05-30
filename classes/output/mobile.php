@@ -31,6 +31,11 @@ namespace local_leeloolxp_web_login_tracking\output;
  */
 class mobile {
 
+    /**
+     * View for tracking plugin
+     *
+     * @return void
+     */
     public static function view_leeloolxp_web_login_tracking() {
         return [
             'templates' => [
@@ -42,6 +47,12 @@ class mobile {
         ];
     }
 
+    /**
+     * Init tracking plugin
+     *
+     * @param array $args arguments
+     * @return void
+     */
     public static function mobile_init_leeloolxp_web_login_tracking($args) {
 
         global $CFG;
