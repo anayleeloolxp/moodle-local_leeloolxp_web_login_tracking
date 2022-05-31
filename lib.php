@@ -387,7 +387,6 @@ function local_leeloolxp_web_login_tracking_get_attendance_info($teamniourl, $us
 function local_leeloolxp_web_login_tracking_update_attendance_status($teamniourl, $postdata) {
     global $CFG;
     require_once($CFG->dirroot . '/lib/filelib.php');
-    $postdata = array('user_id' => $userid, 'start_status' => $starttimestatus, 'end_status' => $endtimestatus);
     $url = $teamniourl . '/admin/sync_moodle_course/update_attendance_status/';
     $curl = new curl;
     $options = array(
