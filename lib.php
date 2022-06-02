@@ -1133,7 +1133,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
 
 
                 function logout_after_set_time() {
-                    window.location.href = "' . $logoutur . '";
+                    window.location.href = "' . $logouturl . '";
                 }
 
 
