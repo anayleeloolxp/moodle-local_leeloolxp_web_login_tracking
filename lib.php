@@ -631,6 +631,7 @@ function local_leeloolxp_web_login_tracking_onlogoutpage() {
             sessionStorage.setItem("tracked", \'0\');
             sessionStorage.setItem("tracked_cancel", \'null\');
             sessionStorage.setItem("tracking_activity_id", "null");
+            sessionStorage.setItem("still_working_yes_no", "0");
 
 
             var d = new Date();
@@ -1122,18 +1123,26 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                 }
 
 
+                var intTempId = "";
                 function still_working_cancel() {
                     window.location.href = "' . $logouturl . '";
                 }
 
 
                 function still_working_okay() {
-                    location.reload(true);
+                    // Location.reload(true);
+                    document.getElementById("dialog-modal-stillworking").style.display = "none";
+                    sessionStorage.setItem("still_working_yes_no", "1");
+                    clearInterval(intTempId)
                 }
 
 
                 function logout_after_set_time() {
-                    window.location.href = "' . $logouturl . '";
+                    var still_working_yes_no = sessionStorage.getItem("still_working_yes_no");
+                    if(still_working_yes_no == "0")
+                    {
+                        window.location.href = "' . $logouturl . '";
+                    }
                 }
 
 
@@ -1147,11 +1156,13 @@ function local_leeloolxp_web_login_tracking_before_footer() {
                         var mousecountss = parseInt(document.getElementById("mouse_count").value);
                         if (keycountss <= 1 && mousecountss <= 1) {
                             clearInterval(myVar);
+                            sessionStorage.setItem("still_working_yes_no", "0");
                             document.getElementById("dialog-modal-stillworking").style.display = "block";
-                            setInterval(function() {
+                            intTempId = setInterval(function() {
                                 if (forpopupcanceled == "1") {} else {
                                     logout_after_set_time();
                                 }
+
                             }, (60 * 1000) * logoutsettimemin);
                         } else {
                             document.getElementById("key_count").value = "1";
