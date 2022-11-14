@@ -717,7 +717,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
             return true;
         }
         if ($userstatusonteamnio == 0) {
-            return true;
+            // return true;
         }
 
         echo '<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
