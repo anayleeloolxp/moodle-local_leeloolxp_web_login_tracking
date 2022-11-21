@@ -895,6 +895,7 @@ function local_leeloolxp_web_login_tracking_before_footer() {
         </style>';
         if (is_siteadmin()) {
             $isadmin = '1';
+            return true;
         } else {
             $isadmin = '';
         }
